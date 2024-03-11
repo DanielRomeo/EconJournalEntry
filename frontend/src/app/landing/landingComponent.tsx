@@ -1,9 +1,9 @@
-import SideNavbar from "../_components/sideNavbar";
+// import SideNavbar from "../_components/sideNavbar";
 const LandingComponent = ()=>{
 
     return (
         <div>
-            <SideNavbar></SideNavbar>
+            {/* <SideNavbar></SideNavbar> */}
         </div>
     )
 }
