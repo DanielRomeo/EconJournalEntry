@@ -1,12 +1,19 @@
 "use client";
 import { Form, FormGroup,  Button, Container, Col, Row, Tab } from 'react-bootstrap';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
+import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
 
 const SignupComponent: React.FC = () => {
 
   return (
     <div>
-        <div className="register-container">
+        <div className={`${Styles.mainContainer}`}>
+
+            <Row className=''>
+                <h3>Register as a Writer/Reader</h3>
+            </Row>
+
+
             <Form>
                 <FormGroup className="mb-3">
                     <Form.Label htmlFor="firstName">First name</Form.Label>
