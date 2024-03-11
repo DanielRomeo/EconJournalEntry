@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@react-firebase/firestore": "^0.5.5",
+    "react-pro-sidebar": "^1.1.0",
     "bootstrap": "^5.3.3",
     "dompurify": "^3.0.9",
     "firebase": "^10.8.1",
