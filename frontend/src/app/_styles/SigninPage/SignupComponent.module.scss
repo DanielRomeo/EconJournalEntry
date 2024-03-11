@@ -2,82 +2,31 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    // padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 4px;
-    // width: 400px;
     margin: 50px auto;
 
-
     // background-color: green;
+    .createButton{
+      width: inherit;
+    }
 
-  }
+    .SocialButtonsRow{
+      // background-color: green;
+      border: 1px solid green;
+      width: 100%;
+
+      .Col{
+        border: 1px solid red;
+        width: 100%;
+      }
+      .GoogleButton{
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .LinkedinButton{
+        width: 100%;
+      }
+
+    }
+}
   
-  .header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-  }
-  
-  .register-text,
-  .login-text {
-    font-weight: bold;
-    font-size: 20px;
-  }
-  
-  .title {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .name-inputs,
-  .email-input,
-  .password-inputs {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 15px;
-  }
-  
-  .name-inputs label,
-  .email-input label,
-  .password-inputs label {
-    margin-bottom: 5px;
-  }
-  
-  .writer-radio {
-    margin-bottom: 15px;
-  }
-  
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .buttons button {
-    padding: 10px 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    cursor: pointer;
-  }
-  
-  .create-account {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  .google-signup,
-  .linkedin-signup {
-    display: flex;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-  }
-  
-  .google-signup img,
-  .linkedin-signup img {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-  }

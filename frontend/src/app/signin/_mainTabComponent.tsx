@@ -9,7 +9,7 @@ import SigninComponent from "./_signinComponent";
 const MainComponent = ()=>{
 
     return (
-        <Col lg="6" md="6" sm="12">
+        <Col className={`${Styles.mainCol}`} lg="6" md="6" sm="12">
             <Container className={`${Styles.container}`}>
                 <Tabs
                     defaultActiveKey="register"

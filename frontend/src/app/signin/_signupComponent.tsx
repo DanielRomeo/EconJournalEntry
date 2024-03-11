@@ -6,7 +6,6 @@ import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
 const SignupComponent: React.FC = () => {
 
   return (
-    <div>
         <div className={`${Styles.mainContainer}`}>
 
             <Row className=''>
@@ -15,52 +14,71 @@ const SignupComponent: React.FC = () => {
 
 
             <Form>
-                <FormGroup className="mb-3">
-                    <Form.Label htmlFor="firstName">First name</Form.Label>
-                    <input className={`form-control`} type="text" id="firstName" placeholder="John" />
-                </FormGroup>
-
-                <FormGroup className="mb-3">
-                    <Form.Label htmlFor="lastName">Last name</Form.Label>
-                    <input className={`form-control`} type="text" id="lastName" placeholder="Doe" />
-                </FormGroup>
-
-
-                <FormGroup className="mb-3">
-                    <Form.Label htmlFor="email">Email address</Form.Label>
-                    <input className={`form-control`} type="email" id="email" placeholder="johndoe@gmail.com" />
+                <Row>
+                    <Col lg="6" md="6" sm="12">
+                        <FormGroup className="mb-3">
+                            <Form.Label htmlFor="firstName">First name</Form.Label>
+                            <input className={`form-control`} type="text" id="firstName" placeholder="John" />
+                        </FormGroup>
+                    </Col>
+                   
+                    <Col lg="6" md="6" sm="12">
+                        <FormGroup className="mb-3">
+                            <Form.Label htmlFor="lastName">Last name</Form.Label>
+                            <input className={`form-control`} type="text" id="lastName" placeholder="Doe" />
+                        </FormGroup>
+                    </Col>
+                    
+                </Row>
                 
-                </FormGroup>
+                <Row>
+                    <FormGroup className="mb-3">
+                        <Form.Label htmlFor="email">Email address</Form.Label>
+                        <input className={`form-control`} type="email" id="email" placeholder="johndoe@gmail.com" />
+                    
+                    </FormGroup>
 
 
-                <FormGroup className="mb-3">
-                <Form.Label htmlFor="password">Password</Form.Label>
-                <input className={`form-control`} type="password" id="password" />
+                    <FormGroup className="mb-3">
+                    <Form.Label htmlFor="password">Password</Form.Label>
+                    <input className={`form-control`} type="password" id="password" />
+                    
+                    </FormGroup>
+
+                    <FormGroup className="mb-3">
+                    <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
+                    <input className={`form-control`} type="password" id="confirmPassword" />
+                    
+                    </FormGroup>
+
+                    <FormGroup className="mb-3">
+                        <Button className={`${Styles.createButton}`} variant="primary" type="submit">
+                        Create Account
+                        </Button>
+                    </FormGroup>
+                    
+                </Row>
+
                 
-                </FormGroup>
-                <FormGroup className="mb-3">
-                <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
-                <input className={`form-control`} type="password" id="confirmPassword" />
-                
-                </FormGroup>
-                <Button variant="primary" type="submit">
-                Create Account
-                </Button>
             </Form>
 
+            <Row className={`${Styles.SocialButtonsRow}`}>
+                {/* <Col className={`${Styles.Col}`} lg="12" md="12" sm="12"> */}
+                    <Button variant="primary" className={`${Styles.GoogleButton}`}>
+                    Sign up with Google
+                    </Button>
+                {/* </Col> */}
 
-            <div className="social-signup">
-                <Button variant="primary" className="google-signup">
-                
-                Sign up with Google
-                </Button>
-                <Button variant="primary   " className="linkedin-signup">
-                
-                Sign up with LinkedIn
-                </Button>
-            </div>
-            </div>
-    </div>
+                {/* <Col lg="12" md="12" sm="12"> */}
+                    <Button variant="primary" className={`${Styles.LinkedinButton}`}>
+                    Sign up with LinkedIn
+                    </Button>
+                {/* </Col> */}
+
+
+            </Row>
+            
+        </div>
 
 
     
