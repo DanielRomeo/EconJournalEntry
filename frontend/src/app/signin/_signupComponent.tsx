@@ -4,7 +4,6 @@ import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
 
 const SignupComponent: React.FC = () => {
-
   return (
         <div className={`${Styles.mainContainer}`}>
 
@@ -56,10 +55,7 @@ const SignupComponent: React.FC = () => {
                         Create Account
                         </Button>
                     </FormGroup>
-                    
                 </Row>
-
-                
             </Form>
 
             <Row className={`${Styles.SocialButtonsRow}`}>
@@ -74,14 +70,9 @@ const SignupComponent: React.FC = () => {
                     Sign up with LinkedIn
                     </Button>
                 {/* </Col> */}
-
-
             </Row>
-            
         </div>
 
-
-    
   );
 };
 

@@ -1,0 +1,18 @@
+.mainCol{
+    // background-color: green;
+    // background-image: url("../../../../public/signinimageLarge.jpg");
+    background-size: cover; /* Fills the container */
+    background-position: center; /* Centers the image */
+    display: flex; /* Enable flexbox for positioning text */
+    flex-direction: column; /* Stack content vertically */
+    justify-content: center; /* Align content vertically in the center */
+    align-items: center; /* Align content horizontally in the center */
+    color: white; /* Set text color */
+    text-align: center; /* Center text alignment */
+    position: relative; /* Important for positioning text on top of the image */
+
+    // add the image and a background blacked out color:
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,
+     url(../../../../public/signinimageLarge.jpg);
+}
+
