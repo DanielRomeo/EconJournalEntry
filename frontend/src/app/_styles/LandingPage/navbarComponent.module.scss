@@ -1,0 +1,28 @@
+.navBar{
+    .navbarContainer{
+        .navbarBrand{
+            // color: brown;
+        }
+        
+        .navbarLink{
+            text-decoration: none;
+            color: #543EE0;
+            font-weight: bold;
+        }
+
+        .loginButton{
+            border: 1px solid #543EE0;
+            background-color: inherit;
+            color: black;
+            margin: 5px;
+        }
+        .signupButton{
+            margin: 5px;
+            border: 1px solid #543EE0;
+            background-color: #543EE0;
+            color: white;
+        }
+    }
+    
+}
+
