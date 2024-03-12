@@ -1,0 +1,56 @@
+.mainCol{
+    height: 100vh;
+
+    .firstArea{
+        // height: 10hv;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 10vh;
+    }
+
+    .container{
+        display: flex;
+        flex-direction: column;
+        // align-items: center;
+        justify-content: center;
+        // padding: 50px;
+        border: 1px solid blue;
+        height: 90vh;
+
+        // .firstArea{
+        //     align-self:flex-start ;
+        // }
+
+        *{
+            margin: 5px; 
+        }
+
+        .informationRow, .boxesRow, .buttonsRow{
+            // flex:1; 
+            // align-self: center;
+        }
+        .informationRow{
+            :nth-child(2){
+                color: #626262;
+            }
+        }
+
+        .backButtonRow{
+            // justify-content: ;
+            // border: 1px solid red;
+            .backButton{
+                width: 80px;
+            }
+            
+        }
+
+        
+        .buttonsRow{
+            .createAccountButton{
+                background-color: #543EE0;
+                border: 1px solid #543EE0;
+            }
+        }
+    }
+}

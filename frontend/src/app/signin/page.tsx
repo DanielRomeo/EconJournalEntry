@@ -4,11 +4,11 @@ import { Row} from "react-bootstrap";
 import MainComponent from "./_mainTabComponent";
 import ImageComponent from "./_imageComponent";
 
-const SigninPage = ()=>{
-
+const SigninPage = ()  =>{
     return (
         <Row>
             <ImageComponent></ImageComponent>
+
             <MainComponent></MainComponent>
          </Row>
     )

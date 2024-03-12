@@ -2,8 +2,18 @@
 import { Form, FormGroup,  Button, Container, Col, Row, Tab } from 'react-bootstrap';
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
+import { useRouter } from 'next/navigation'
 
 const SignupComponent: React.FC = () => {
+
+    const router = useRouter();
+
+    // signup function:
+    const signupSubmit = ()=>{
+        router.push('/confirmation')
+        // setDisplay('ConfirmationComponent');
+    }
+
   return (
         <div className={`${Styles.mainContainer}`}>
 
@@ -51,7 +61,9 @@ const SignupComponent: React.FC = () => {
                     </FormGroup>
 
                     <FormGroup className="mb-3">
-                        <Button className={`${Styles.createButton}`} variant="primary" type="submit">
+                        {/* <Link href='/confirmation'>
+                        </Link> */}
+                        <Button className={`${Styles.createButton}`} onClick={signupSubmit} variant="primary" >
                         Create Account
                         </Button>
                     </FormGroup>
