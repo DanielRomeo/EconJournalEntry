@@ -7,6 +7,9 @@ const inputStyle = {
     'height': '60px',
     'borderRadius': '5%'
 }
+const containerStyle ={
+    'display': 'inline' // resetting the display-flex
+}
 
 function PinCodeInput() {
     const [otp, setOtp] = useState('');
@@ -20,6 +23,7 @@ function PinCodeInput() {
         renderSeparator={<span> &nbsp;&nbsp;</span>}
         renderInput={(props) => <input {...props} />}
         inputStyle={inputStyle}
+        containerStyle={containerStyle}
         />
     );
   }

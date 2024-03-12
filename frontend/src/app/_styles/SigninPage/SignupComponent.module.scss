@@ -8,15 +8,17 @@
     // background-color: green;
     .createButton{
       width: inherit;
+      background-color: #543EE0;
+      border: 1px solid #543EE0;
     }
 
     .SocialButtonsRow{
       // background-color: green;
-      border: 1px solid green;
+      // border: 1px solid green;
       width: 100%;
 
       .Col{
-        border: 1px solid red;
+        // border: 1px solid red;
         width: 100%;
       }
       .GoogleButton{
