@@ -1,0 +1,28 @@
+
+.landingSection{
+    // background-image: url('../../../../public/landingImage.jpg');
+    background-size: cover; /* Resize the image to cover the container */
+    background-position: center; /* Center the image horizontally and vertically */
+    height: 100vh; /* Set the height of the container */
+    display: flex; /* Enable flexbox for positioning text */
+    flex-direction: row; /* Stack content vertically */
+    justify-content: center; /* Align content vertically in the center */
+    // align-items: center; /* Align content horizontally in the center */
+    color: white; /* Set text color */
+    text-align: center; /* Center text alignment */
+    position: relative; /* Important for positioning text on top of the image */
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,
+     url(../../../../public/landingImage.jpg);
+
+    // mobile screen size
+    // Automate the height of the landing section
+    @media(max-width: 766px){
+        height: auto;
+    }
+
+}
+
+.aboutSection{
+    //
+}

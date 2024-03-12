@@ -9,11 +9,7 @@ import LandingComponent from "./landing/landingComponent";
 export default function Home() {
   return (
    	<div>
-		<Container>
-			<LandingComponent></LandingComponent>
-			<Link href='/signin'>signin</Link>
-			</Container>
-			
+		<LandingComponent></LandingComponent>	
     </div>
   );
 }
