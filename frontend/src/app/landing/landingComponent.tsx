@@ -118,7 +118,7 @@ const LandingComponent = ()=>{
 
                         <Col className={`${Styles.col2}`} lg='8' md='6' sm='12'>
                             <p>
-                                "Chatter has become an integral part of my online experience. As a user of this incredible blogging platform, I have discovered a vibrant community of individuals who are passionate about sharing their ideas and engaging in thoughtful discussions.”
+                            &quot;Chatter has become an integral part of my online experience. As a user of this incredible blogging platform, I have discovered a vibrant community of individuals who are passionate about sharing their ideas and engaging in thoughtful discussions.&quot;
                             </p>
 
                             <h6>Adebobola Muhydeen, <small>Software developer at Apple</small> </h6>
