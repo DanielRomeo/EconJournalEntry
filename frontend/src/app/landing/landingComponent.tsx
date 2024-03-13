@@ -2,6 +2,7 @@ import LandingNavbar from "./navbarComponent";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import Styles from '../_styles/LandingPage/LandingComponent.module.scss'
 import Image from "next/image";
+import {Image as ImageReact} from "react-bootstrap";
 
 const LandingComponent = ()=>{
 
@@ -131,6 +132,52 @@ const LandingComponent = ()=>{
             </div>
 
             {/* write, read, connect section */}
+            <div className={`${Styles.writeSection}`}>
+                <Container className={`${Styles.writeSectionContainer}`}>
+                    <Row className={`${Styles.writeSectionRow}`}>
+                        <Col className={`${Styles.col1}`} lg='5' md='5' sm='12'>
+                            <Row className={`${Styles.imageDivisionRow}`}>
+                                <Col className={`${Styles.imageDivisionRowCol1}`}>
+                                    <Row className={`${Styles.imageRow}`}>
+                                            <Image
+                                                className={`${Styles.image}`}
+                                                src="/writeSectionImage1.jpg"
+                                                width={200}
+                                                height={230}
+                                                alt="Picture of the author"
+                                            /> 
+                                    </Row>
+                                    <Row className={`${Styles.imageRow}`}>
+                                        <Image
+                                            className={`${Styles.image}`}
+                                            src="/writeSectionImage2.jpg"
+                                            width={200}
+                                            height={230}
+                                            alt="Picture of the author"
+                                        /> 
+                                    </Row>
+                                </Col>
+
+                                <Col className={`${Styles.imageDivisionRowCol2}`}>
+                                <Image
+                                    className={`${Styles.image}`}
+                                    src="/writeSectionImage3.jpg"
+                                    width={200}
+                                    height={200}
+                                    alt="Picture of the author"
+                                /> 
+                                </Col>
+                            </Row>
+                        </Col>
+
+                        <Col className={`${Styles.col2}`} lg='7' md='7' sm='12'>
+                            <h1>Write, read and connect with great minds on chatter</h1>
+                            <p>Share people your great ideas, and also read write-ups based on your interests. connect with people of same interests and goals  </p>
+                            <Button className={`${Styles.getStartedButton}`}>Get started</Button>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
             {/* footer */}
         </div>
