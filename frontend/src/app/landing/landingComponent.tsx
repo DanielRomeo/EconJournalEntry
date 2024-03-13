@@ -104,25 +104,26 @@ const LandingComponent = ()=>{
 
             {/* Person section */}
             <div className={`${Styles.personSection}`}>
-                <Container>
-                    <Row>
-                        <Col lg='4' md='4' sm='12'>
+                <Container className={`${Styles.personSectionContainer}`}>
+                    <Row className={`${Styles.personSectionRow}`}>
+                        <Col className={`${Styles.col1}`} lg='4' md='6' sm='12'>
                             <Image
-                                src="/personSectionImage.jpg"
-                                width={400}
-                                height={400}
+                                className={`${Styles.image}`}
+                                src="/personSectionImage.png"
+                                width={250}
+                                height={250}
                                 alt="Picture of the author"
                             />
                         </Col>
 
-                        <Col lg='8' md='8' sm='12'>
+                        <Col className={`${Styles.col2}`} lg='8' md='6' sm='12'>
                             <p>
                                 "Chatter has become an integral part of my online experience. As a user of this incredible blogging platform, I have discovered a vibrant community of individuals who are passionate about sharing their ideas and engaging in thoughtful discussions.”
                             </p>
 
                             <h6>Adebobola Muhydeen, <small>Software developer at Apple</small> </h6>
 
-                            <Button>Join chatter</Button>
+                            <Button className={`${Styles.joinButton}`}>Join chatter</Button>
                         </Col>
                     </Row>
                 </Container>

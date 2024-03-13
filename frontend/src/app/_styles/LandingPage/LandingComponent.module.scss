@@ -38,6 +38,9 @@
 
 .aboutSection{
     padding-top: 50px;
+    // background-color: #FFF5E5;
+    padding-top: 50px;
+    padding-bottom: 100px;
 }
 
 .whyJoinSection{
@@ -70,7 +73,51 @@
 }
 
 .personSection{
+    min-height: 600px;
     background-color: #FFF5E5;
+    display: flex;
+    align-items: center;
+
+    // .image{
+
+    // }
+
+    // .joinButton{
+    //     
+    // }
+
+    .personSectionContainer{
+        // border: 1px solid red;
+
+        .personSectionRow{
+
+            .col1{
+                .image{
+                    border-radius: 50%;
+                    overflow: hidden;
+                }
+            }
+
+            .col2{
+                h6{
+                    margin-top: 40px;
+                    font-weight: bold;
+
+                    small{
+                        font-weight: lighter;
+                    }
+                }
+                .joinButton{
+                    margin-top: 40px;
+                    border: 1px solid red;  
+                    background-color: #543EE0;
+                    border: 1px solid #543EE0;
+                }
+            }
+        }
+    }
+
+    
 }
 
 .writeSection{
@@ -131,8 +178,3 @@
 
 }
 
-.aboutSection{
-    background-color: #FFF5E5;
-    padding-top: 50px;
-    padding-bottom: 100px;
-}
