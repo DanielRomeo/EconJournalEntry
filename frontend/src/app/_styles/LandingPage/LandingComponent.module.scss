@@ -43,11 +43,30 @@
 .whyJoinSection{
     padding-top: 50px;
     padding-bottom: 50px;
-    // background-color: blue;
 
-    .whyJoinSectionContainer{
-        border: 1px solid blue;
+    *{
+        padding: 5px;
     }
+    
+    .whyJoinSectionContainer{
+        padding-left: 70px;
+        padding-right: 70px;
+    }
+
+    .headerRow{
+        text-align: center;
+    }
+    .cardsRow{
+        .card{
+            margin: 10px;
+            padding: 20px;
+        }
+    }
+
+    .cardTitle{
+        font-weight: bold;
+    }
+
 }
 
 .personSection{

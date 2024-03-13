@@ -3,6 +3,9 @@ import { Button, Container, Row, Col, Card } from "react-bootstrap";
 import Styles from '../_styles/LandingPage/LandingComponent.module.scss'
 import Image from "next/image";
 import {Image as ImageReact} from "react-bootstrap";
+import { FaChartLine } from "react-icons/fa";
+import { MdGroups } from "react-icons/md";
+import { IoNewspaperOutline } from "react-icons/io5";
 
 const LandingComponent = ()=>{
 
@@ -57,47 +60,41 @@ const LandingComponent = ()=>{
                     </Row>
 
                     <Row className={`${Styles.cardsRow}`}>
-                        <Col lg='4' md='4' sm='12'>
-                            <Card style={{ width: '18rem' }}>
+                        <Col lg='4' md='6' sm='12'>
+                            <Card className={`${Styles.card}`} >
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Title ><FaChartLine size={60} /></Card.Title>
+                                    <Card.Title className={`${Styles.cardTitle}`}>Analytics</Card.Title>
                                     <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
+                                    Analytics to track the number of views, likes and comment and also analyze the performance of your articles over a period of time
                                     </Card.Text>
-                                    <Card.Link href="#">Card Link</Card.Link>
-                                    <Card.Link href="#">Another Link</Card.Link>
+                                    
                                 </Card.Body>
                             </Card>
                         </Col>
 
-                        <Col lg='4' md='4' sm='12'>
-                            <Card style={{ width: '18rem' }}>
+                        <Col lg='4' md='6' sm='12'>
+                            <Card className={`${Styles.card}`} >
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Title ><MdGroups  size={60}/></Card.Title>
+                                    <Card.Title className={`${Styles.cardTitle}`}>Social interactions</Card.Title>
                                     <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
+                                    Users on the platform can interact with posts they like, comment and engage in discussions
                                     </Card.Text>
-                                    <Card.Link href="#">Card Link</Card.Link>
-                                    <Card.Link href="#">Another Link</Card.Link>
+                                    
                                 </Card.Body>
                             </Card>
                         </Col>
 
-                        <Col lg='4' md='4' sm='12'>
-                            <Card style={{ width: '18rem' }}>
+                        <Col lg='4' md='6' sm='12'>
+                            <Card className={`${Styles.card}`} >
                                 <Card.Body>
-                                    <Card.Title>Card Title</Card.Title>
-                                    <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+                                    <Card.Title><IoNewspaperOutline size={60}/></Card.Title>
+                                    <Card.Title className={`${Styles.cardTitle}`}>Content creation</Card.Title>
                                     <Card.Text>
-                                    Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.
+                                    Write nice and appealing with our in-built markdown, a rich text editor
                                     </Card.Text>
-                                    <Card.Link href="#">Card Link</Card.Link>
-                                    <Card.Link href="#">Another Link</Card.Link>
+                                    
                                 </Card.Body>
                             </Card>
                         </Col>
