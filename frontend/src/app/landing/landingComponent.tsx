@@ -39,8 +39,8 @@ const LandingComponent = ()=>{
                         <Col lg='5' md='5' sm='12'>
                             <Image
                                 src="/aboutSectionImage.jpg"
-                                width={500}
-                                height={500}
+                                width={400}
+                                height={400}
                                 alt="Picture of the author"
                             />
                         </Col>
@@ -181,7 +181,7 @@ const LandingComponent = ()=>{
             </div>
 
             {/* footer */}
-            <div className={`${Styles.aboutSection}`}>
+            <div className={`${Styles.footer}`}>
                 <Container>
                     <Row>
                         <Col lg='3' md='3' sm='12'>
