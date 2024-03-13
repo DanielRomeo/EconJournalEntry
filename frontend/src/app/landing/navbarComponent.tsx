@@ -21,11 +21,13 @@ const LandingNavbar = () =>{
 
                 <Nav className="mr-auto">
                     <NavItem>
-                        <Button className={`${Styles.loginButton}`}>Log in</Button>
+                        <Link href='/signin'><Button className={`${Styles.loginButton}`}>Log in</Button></Link>
+                        
                     </NavItem> 
                     
                     <NavItem>
-                        <Button className={`${Styles.signupButton}`}>Sign up</Button>
+                    <Link href='/signin'><Button className={`${Styles.signupButton}`}>Sign up</Button></Link>
+                        
                     </NavItem>
                 </Nav>
 

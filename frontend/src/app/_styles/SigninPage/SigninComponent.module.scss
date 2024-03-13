@@ -1,1 +1,24 @@
- 
+
+.mainDiv{
+    .header{
+        text-align: center;
+        padding-bottom: 60px;
+        padding-top: 60px;
+
+        h3{
+            font-weight: bold;
+            
+        }
+    }
+
+    .signinRow{
+        
+        .loginButton{
+            background-color: #543EE0;
+            border: 1px solid #543EE0;
+            width: 100%;
+    
+        }
+    }
+
+}
