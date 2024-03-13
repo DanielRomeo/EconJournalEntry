@@ -159,13 +159,16 @@ const LandingComponent = ()=>{
                                 </Col>
 
                                 <Col className={`${Styles.imageDivisionRowCol2}`}>
-                                <Image
-                                    className={`${Styles.image}`}
-                                    src="/writeSectionImage3.jpg"
-                                    width={200}
-                                    height={200}
-                                    alt="Picture of the author"
-                                /> 
+                                    <Row className={`${Styles.imageRow}`}>
+                                        <Image
+                                            className={`${Styles.image}`}
+                                            src="/writeSectionImage3.jpg"
+                                            width={200}
+                                            height={200}
+                                            alt="Picture of the author"
+                                        /> 
+                                    </Row>
+                                
                                 </Col>
                             </Row>
                         </Col>
@@ -180,6 +183,36 @@ const LandingComponent = ()=>{
             </div>
 
             {/* footer */}
+            <div className={`${Styles.aboutSection}`}>
+                <Container>
+                    <Row>
+                        <Col lg='3' md='3' sm='12'>
+                        <h4>Chatter</h4>
+
+                        </Col>
+
+                        <Col lg='3' md='3' sm='12'>                            
+                            <h4>Explore</h4>
+                            <p>Community</p>
+                            <p>Trending Blogs</p>
+                            <p>Chatter for teams</p>
+                        </Col>
+
+                        <Col lg='3' md='3' sm='12'>
+                            <h4>Support</h4>
+                            <p>Suppor docs</p>
+                            <p>Join slack</p>
+                            <p>Contact</p>
+                        </Col>
+
+                        <Col lg='3' md='3' sm='12'>
+                            <h4>Official blog</h4>
+                            <p>Official blog</p>
+                            <p>Engineering blog</p>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
         </div>
     )
 }
