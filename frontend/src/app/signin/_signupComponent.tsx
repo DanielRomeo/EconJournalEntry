@@ -3,6 +3,8 @@ import { Form, FormGroup,  Button, Container, Col, Row, Tab } from 'react-bootst
 import { FaUser, FaEnvelope, FaLock } from 'react-icons/fa';
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
 import { useRouter } from 'next/navigation'
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookF } from "react-icons/fa";
 
 const SignupComponent: React.FC = () => {
 
@@ -72,14 +74,16 @@ const SignupComponent: React.FC = () => {
 
             <Row className={`${Styles.SocialButtonsRow}`}>
                 {/* <Col className={`${Styles.Col}`} lg="12" md="12" sm="12"> */}
-                    <Button variant="primary" className={`${Styles.GoogleButton}`}>
-                    Sign up with Google
+                    <Button  className={`${Styles.GoogleButton}`}>
+                    <FcGoogle />
+                    &nbsp; Sign up with Google
                     </Button>
                 {/* </Col> */}
 
                 {/* <Col lg="12" md="12" sm="12"> */}
-                    <Button variant="primary" className={`${Styles.LinkedinButton}`}>
-                    Sign up with LinkedIn
+                    <Button className={`${Styles.FacbookButton}`}>
+                    <FaFacebookF />
+                        &nbsp; Sign up with Facebook
                     </Button>
                 {/* </Col> */}
             </Row>

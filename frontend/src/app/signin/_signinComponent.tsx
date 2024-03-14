@@ -7,6 +7,9 @@ import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useState, useEffect } from 'react';
 import isAuthenticated from '../_components/isAuthenticated';
 import { GetLocalStorage, SetLocalStorage } from '../_components/localStorage';
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookF } from "react-icons/fa";
+
 
 interface User {
     displayName: string | null;
@@ -72,8 +75,22 @@ const SigninComponent = ()=>{
                 </FormGroup>
 
                 <FormGroup className="mb-3">
-                    <Button className={`${Styles.loginButton}`} onClick={handleLogin} variant="primary" >
+                    <Button className={`${Styles.loginButton}`}>
                     Login
+                    </Button>
+                </FormGroup>
+
+                <FormGroup className="mb-3">
+                    <Button className={`${Styles.GoogleButton}`} onClick={handleLogin}>
+                        <FcGoogle></FcGoogle>
+                        &nbsp; Login with Google
+                    </Button>
+                </FormGroup>
+
+                <FormGroup className="mb-3">
+                    <Button className={`${Styles.FacbookButton}`} >
+                        <FaFacebookF></FaFacebookF>
+                        &nbsp; Login with Facebook
                     </Button>
                 </FormGroup>
             </Row>

@@ -42,7 +42,7 @@ const CreatePostComponent = () =>{
 
             <Row className={`${Styles.row1}`}>
                 <Col className={`${Styles.col}`} lg='12' md='12' sm='12'>
-                <Button className={`${Styles.publishButton}`}>Publish</Button>
+                <Button onClick={createPost} className={`${Styles.publishButton}`}>Publish</Button>
                 </Col>
                 
             </Row>
