@@ -18,6 +18,7 @@ interface User {
   }
   
 const SigninComponent = ()=>{
+    const router = useRouter()
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
     // const provider = new GoogleAuthProvider();
@@ -45,6 +46,8 @@ const SigninComponent = ()=>{
 
 
 			setUser(user); // Update user state
+            router.push('/feed');
+
 		} catch (error) {
 			console.error('Login error:', error);
 		}
