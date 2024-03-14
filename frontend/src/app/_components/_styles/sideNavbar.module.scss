@@ -3,3 +3,32 @@
     background-color: white;
     padding: 10px;
 }
+
+.list{
+
+    .chatter{
+        *{
+            font-weight: bold;
+            font-size: 30px;
+            color: #543EE0;
+        }
+    }
+
+    .personalItem{
+        *{
+            font-weight: bold;
+        }
+       
+    }
+
+    .trendingItem{
+        *{
+            font-weight: bolder;
+        }
+    }
+
+    .logoutbutton{
+        // background-color: red;
+        color: red;
+    }
+}

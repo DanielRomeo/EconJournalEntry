@@ -15,6 +15,16 @@ import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
 import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
 
+// icons:
+import { IoPersonOutline } from "react-icons/io5";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { CgFeed } from "react-icons/cg";
+import { IoBookmarksOutline } from "react-icons/io5";
+import { AiOutlineTeam } from "react-icons/ai";
+import { FaRegEnvelopeOpen } from "react-icons/fa6";
+import { MdInsertChartOutlined } from "react-icons/md";
+import { GrLineChart } from "react-icons/gr";
+
 // styles:
 import Styles from './_styles/sideNavbar.module.scss'
 
@@ -43,7 +53,7 @@ const SideNavbar = () => {
             onClick={toggleDrawer(anchor, false)}
             onKeyDown={toggleDrawer(anchor, false)}
         >
-            <List>
+            <List className={`${Styles.list}`}>
                 {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
                     <ListItem key={text} disablePadding>
                         <ListItemButton>
@@ -57,37 +67,105 @@ const SideNavbar = () => {
 
                 <ListItem disablePadding>
                     <ListItemButton >
-                        <ListItemIcon>
-                            <HomeIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Home"} />
+                        &emsp;&emsp;
+                        <ListItemText className={`${Styles.chatter}`} primary={"CHATTER"} />
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton >
+                        &emsp;&emsp;
+                        <ListItemText primary={"Overview"} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton>
-                        <ListItemIcon>
-                            <InfoIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"About"} />
+                    &emsp;&emsp;&emsp;
+                        <CgFeed></CgFeed>
+                        &nbsp;&nbsp;
+                        <ListItemText primary={"Feed"} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton>
-                        <ListItemIcon>
-                            <PermContactCalendarIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Contact"} />
+                    &emsp;&emsp;&emsp;
+                        <IoBookmarksOutline></IoBookmarksOutline>
+                        &nbsp;&nbsp;
+                        <ListItemText primary={"Bookmarks"} />
                     </ListItemButton>
                 </ListItem>
-            </List>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;&emsp;
+                        <AiOutlineTeam></AiOutlineTeam>
+                        &nbsp;&nbsp;
+                        <ListItemText primary={"Team blogs"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;&emsp;
+                    <FaRegEnvelopeOpen></FaRegEnvelopeOpen>
+                    &nbsp;&nbsp;
+                        <ListItemText primary={"Drafts"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;&emsp;
+                        <MdInsertChartOutlined></MdInsertChartOutlined>
+                        &nbsp;&nbsp;
+
+                        <ListItemText primary={"Analytics"} />
+                    </ListItemButton>
+                </ListItem>
+            
             <Divider />
-            <List>
+            <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;
+                        <ListItemText className={`${Styles.trendingItem}`} primary={"Trending Tags"} />
+                        &nbsp;&nbsp;
+                        <GrLineChart></GrLineChart>
+                    </ListItemButton>
+                </ListItem>
                 <ListItem disablePadding>
                     <ListItemButton>
-                        <ListItemIcon>
-                            <InboxIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"inbox"} />
+                    &emsp;&emsp; &emsp;
+                        <ListItemText primary={"Programming"} />
+                    </ListItemButton>
+                </ListItem>
+            <Divider />
+            <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;
+                        <ListItemText className={`${Styles.personalItem}`} primary={"Personal"} />
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;&emsp;
+                            <IoPersonOutline></IoPersonOutline>
+                        &nbsp;&nbsp;
+                        <ListItemText primary={"Account"} />
+                    </ListItemButton>
+                </ListItem>
+
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;&emsp;
+                        <IoIosNotificationsOutline></IoIosNotificationsOutline>
+                        &nbsp;&nbsp;
+                        <ListItemText primary={"Notifications"} />
+                    </ListItemButton>
+                </ListItem>
+            <Divider />
+            
+                <ListItem disablePadding>
+                    <ListItemButton>
+                    &emsp;&emsp;
+                        <ListItemText className={`${Styles.logoutbutton}`} primary={"Logout"} />
                     </ListItemButton>
                 </ListItem>
             </List>
