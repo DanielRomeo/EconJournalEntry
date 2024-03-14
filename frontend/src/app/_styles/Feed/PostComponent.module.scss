@@ -1,4 +1,5 @@
 .card{
+    width: 100%;
 
     .cardBodyUserinfo{
         display: flex;
@@ -22,5 +23,8 @@
 
     .cardBodyPostDetails{
 
+        .cardBodyPostDetailsTitle{
+            font-weight: bold;
+        }
     }
 }
