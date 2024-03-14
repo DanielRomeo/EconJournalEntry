@@ -1,0 +1,21 @@
+.main{
+    margin-top: 40px;
+    .container{
+
+
+        .row1{
+            
+
+           .col{
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+
+            .publishButton{
+                background-color: #543EE0;
+                border: 1px solid #543EE0;
+            }
+           }
+        }
+    }
+}
