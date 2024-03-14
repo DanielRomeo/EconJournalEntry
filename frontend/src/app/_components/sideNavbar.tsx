@@ -1,41 +1,131 @@
-import React, { useState } from 'react';
-import { Navbar, Nav, Container, Collapse, Button } from 'react-bootstrap';
-import { AiOutlineMenuUnfold, AiOutlineMenuFold } from 'react-icons/ai';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
+
+// styles:
 import Styles from './_styles/sideNavbar.module.scss'
-import { DeleteLocalStorage } from './localStorage';
-import { useRouter } from 'next/navigation'; // Import from next/navigation
 
-const SideNavbar = ()=>{
-	const router = useRouter()
+const SideNavbar = () => {
+
+    const [state, setState] = React.useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+
+    const toggleDrawer = (anchor:any, open:any) => (event:any) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
 
 
-	const logout  = () =>{
-		DeleteLocalStorage();
-		router.push('/signin');
-	}
-	const [toggled, setToggled] = React.useState(false);
+    const list = (anchor:any) => (
+        <Box
+            sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                {/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                    <ListItem key={text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                            </ListItemIcon>
+                            <ListItemText primary={text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))} */}
 
-  return (
-    <div style={{ display: 'flex', height: '100%', minHeight: '400px' }}>
-      <Sidebar onBackdropClick={() => setToggled(false)} toggled={toggled} breakPoint="always">
-          <button className="sb-button" onClick={() => setToggled(!toggled)}>
-            Toggle
-          </button>
-        <Menu>
-          <MenuItem> Documentation</MenuItem>
-          <MenuItem> Calendar</MenuItem>
-          <MenuItem> E-commerce</MenuItem>
-          <MenuItem> Examples</MenuItem>
+                <ListItem disablePadding>
+                    <ListItemButton >
+                        <ListItemIcon>
+                            <HomeIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Home"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <InfoIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"About"} />
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <PermContactCalendarIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"Contact"} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem disablePadding>
+                    <ListItemButton>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
+                        <ListItemText primary={"inbox"} />
+                    </ListItemButton>
+                </ListItem>
+            </List>
+        </Box>
+    );
 
-          <MenuItem> <Button variant='danger' onClick={logout} className={`${Styles.SideNavbar}`}>Logout</Button></MenuItem>
-        </Menu>
-      </Sidebar>
-      
-          
-        
-    </div>
-  )
+    return (
+        <div className={`${Styles.navbar}`}>
+            {/* {['left', 'right', 'top', 'bottom'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                    >
+                        {list(anchor)}
+                    </Drawer>
+                </React.Fragment>
+            ))} */}
+
+
+            <MenuIcon
+                onClick={
+                    toggleDrawer("left", true)
+                }
+            />
+
+            <Drawer
+                anchor={"left"}
+                open={state["left"]}
+                onClose={toggleDrawer("left", false)}
+            >
+                {list("left")}
+            </Drawer>
+
+        </div>
+    )
 }
 
-export default SideNavbar;
+export default SideNavbar

@@ -3,17 +3,13 @@ import { Row, Container, Col, Button, Tabs, Tab} from "react-bootstrap";
 import Styles from '../_styles/Feed/FeedComponent.module.scss'
 import { FaPen } from "react-icons/fa";
 import PostComponent from "./postComponent";
-import SideNavbar from "../_components/sideNavbar";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
+import SideNavbar from "../_components/sideNavbar";
 
 const FeedComponent = ()  =>{
-    // const router = useRouter();
-
 
     return (
         <div>
-
             <SideNavbar></SideNavbar>
                 <Container className={`${Styles.nainContainer}`}>
                     <Row className={`${Styles.headerRow}`}>
