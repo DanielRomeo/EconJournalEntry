@@ -17,7 +17,7 @@ interface User {
 const SigninComponent = ()=>{
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [user, setUser] = useState<User | null>(null);
-    const provider = new GoogleAuthProvider();
+    // const provider = new GoogleAuthProvider();
 
 	// useEffect:
     useEffect(() => {
@@ -32,7 +32,7 @@ const SigninComponent = ()=>{
 	const handleLogin = async () => {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			const credential = GoogleAuthProvider.credentialFromResult(result);
+			const credential = provider.credentialFromResult(result);
 			const user = result.user;
 
 			// set the local storage

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import MarkdownEditor from './markdownEditor'; // Assuming the path is correct
 import Styles from '../_styles/CreatePost/CreatePostComponent.module.scss'
 import { addDoc } from "firebase/firestore";
+import { db } from "../_components/firebaseConfig";
 
 interface Post {
   title: string;
@@ -22,9 +23,16 @@ const CreatePostComponent = () =>{
       setPost({ ...post, content: event.target.value });
     };
 
-    // create post function:
+    // create post function: also make use of the firestor collection function
+    // we use our own reference name...
+    const postsCollectionRef = collection(db, "posts");
     const createPost = async () =>{
-        
+        await addDoc(postsCollectionRef, {
+            title: post.title,
+            post: post.content,
+            author: {name: , id},
+            created: 
+        });
     }
   
     return (
