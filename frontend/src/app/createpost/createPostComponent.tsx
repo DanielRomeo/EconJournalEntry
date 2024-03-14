@@ -4,6 +4,7 @@ import SideNavbar from "../_components/sideNavbar"
 import React, { useState } from 'react';
 import MarkdownEditor from './markdownEditor'; // Assuming the path is correct
 import Styles from '../_styles/CreatePost/CreatePostComponent.module.scss'
+import { addDoc } from "firebase/firestore";
 
 interface Post {
   title: string;
@@ -13,9 +14,18 @@ interface Post {
 const CreatePostComponent = () =>{
     const [post, setPost] = useState<Post>({ title: '', content: '' });
 
+    const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setPost({ ...post, title: event.target.value });
+      };
+
     const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
       setPost({ ...post, content: event.target.value });
     };
+
+    // create post function:
+    const createPost = async () =>{
+        
+    }
   
     return (
         
@@ -31,7 +41,15 @@ const CreatePostComponent = () =>{
 
             <Row className={`${Styles.row2}`}>
                 {/* Display post title (replace with your logic) */}
-                    <h1>{post.title}</h1>
+
+                {/* Title input field */}
+                <input
+                    type="text"
+                    value={post.title}
+                    onChange={handleTitleChange}
+                    placeholder="Enter Post Title"
+                />
+                    
             
                 {/* Textfield or textarea for markdown input */}
                 <textarea value={post.content} onChange={handleChange} />
