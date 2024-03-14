@@ -4,8 +4,13 @@ import Styles from '../_styles/Feed/FeedComponent.module.scss'
 import { FaPen } from "react-icons/fa";
 import PostComponent from "./postComponent";
 import SideNavbar from "../_components/sideNavbar";
+import Link from "next/link";
+// import { useRouter } from "next/navigation";
 
 const FeedComponent = ()  =>{
+    // const router = useRouter();
+
+
     return (
         <div>
 
@@ -18,7 +23,10 @@ const FeedComponent = ()  =>{
                         </Col>
 
                         <Col lg='4' md='4' sm='6'>
+                            <Link href="/createpost">
                             <Button className={`${Styles.postButton}`}><FaPen /> Post a content</Button>
+                            </Link>
+                            
                         </Col>
                     </Row>
 
