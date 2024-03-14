@@ -4,8 +4,8 @@ import SideNavbar from "../_components/sideNavbar"
 import React, { useState } from 'react';
 import MarkdownEditor from './markdownEditor'; // Assuming the path is correct
 import Styles from '../_styles/CreatePost/CreatePostComponent.module.scss'
-import { addDoc } from "firebase/firestore";
-import { db } from "../_components/firebaseConfig";
+import { addDoc, collection } from "firebase/firestore";
+import { db , auth} from "../_components/firebaseConfig";
 
 interface Post {
   title: string;
@@ -30,8 +30,8 @@ const CreatePostComponent = () =>{
         await addDoc(postsCollectionRef, {
             title: post.title,
             post: post.content,
-            author: {name: , id},
-            created: 
+            author: {name: auth.currentUser?.displayName, id: auth.currentUser?.uid},
+            created: new Date().toDateString()
         });
     }
   

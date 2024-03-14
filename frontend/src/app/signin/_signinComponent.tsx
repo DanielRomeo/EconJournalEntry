@@ -32,7 +32,7 @@ const SigninComponent = ()=>{
 	const handleLogin = async () => {
 		try {
 			const result = await signInWithPopup(auth, provider);
-			const credential = provider.credentialFromResult(result);
+			const credential = GoogleAuthProvider.credentialFromResult(result);
 			const user = result.user;
 
 			// set the local storage
