@@ -1,22 +1,19 @@
-.nainContainer{
-    border: 1px solid lightgrey;
-    padding: 30px;
+.nainContainer {
+	border: 1px solid lightgrey;
+	padding: 30px;
 
+	.headerRow {
+		.postButton {
+			background-color: #543ee0;
+			border: 1px solid #543ee0;
+		}
+	}
 
-    .headerRow{
+	.mainRow {
+		margin-top: 30px;
+		border: 1px solid lightgrey;
 
-        .postButton{
-            background-color: #543EE0;
-            border: 1px solid #543EE0;
-        }
-    }
-
-    .mainRow{
-        margin-top: 30px;
-        border: 1px solid lightgrey;
-
-        .tabs{
-           
-        }
-    }
+		.tabs {
+		}
+	}
 }

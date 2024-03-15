@@ -1,43 +1,40 @@
 .mainContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 4px;
-    margin: 50px auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border-radius: 4px;
+	margin: 50px auto;
 
-    // background-color: green;
-    .createButton{
-      width: inherit;
-      background-color: #543EE0;
-      border: 1px solid #543EE0;
-    }
+	// background-color: green;
+	.createButton {
+		width: inherit;
+		background-color: #543ee0;
+		border: 1px solid #543ee0;
+	}
 
-    .SocialButtonsRow{
-      // background-color: green;
-      // border: 1px solid green;
-      width: 100%;
+	.SocialButtonsRow {
+		// background-color: green;
+		// border: 1px solid green;
+		width: 100%;
 
-      .Col{
-        // border: 1px solid red;
-        width: 100%;
-      }
-      .GoogleButton{
-        width: 100%;
-        margin-bottom: 10px;
-        background-color: white;
-        color: black;
-        border: 1px solid lightgrey;
-
-      }
-      .FacbookButton{
-        width: 100%;
-        margin-bottom: 10px;
-        background-color: white;
-        color: black;
-        border: 1px solid lightgrey;
-        width: 100%;
-      }
-
-    }
+		.Col {
+			// border: 1px solid red;
+			width: 100%;
+		}
+		.GoogleButton {
+			width: 100%;
+			margin-bottom: 10px;
+			background-color: white;
+			color: black;
+			border: 1px solid lightgrey;
+		}
+		.FacbookButton {
+			width: 100%;
+			margin-bottom: 10px;
+			background-color: white;
+			color: black;
+			border: 1px solid lightgrey;
+			width: 100%;
+		}
+	}
 }
-  

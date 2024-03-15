@@ -1,184 +1,169 @@
-.landingSection{
-    background-size: cover; 
-    background-position: center; 
-    height: 100vh; 
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: flex-start; 
-    color: white; 
-    text-align: center; 
-    position: relative; 
+.landingSection {
+	background-size: cover;
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	color: white;
+	text-align: center;
+	position: relative;
 
-    background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,
-    url(../../../../public/landingImage.jpg);
+	background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.5)),
+		url(../../../../public/landingImage.jpg);
 
-    // mobile screen size
-    @media(max-width: 766px){
-        height: 100vh;
-    }
+	// mobile screen size
+	@media (max-width: 766px) {
+		height: 100vh;
+	}
 
-    .landingSectionContainer{
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
+	.landingSectionContainer {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
 
-        *{
-            margin: 10px;
-        }
+		* {
+			margin: 10px;
+		}
 
-        .landingButton{
-            background-color: #543EE0;
-            border: 1px solid #543EE0;
-        }
-    }
-
+		.landingButton {
+			background-color: #543ee0;
+			border: 1px solid #543ee0;
+		}
+	}
 }
 
-.aboutSection{
-    padding-top: 50px;
-    // background-color: #FFF5E5;
-    padding-bottom: 50px;
+.aboutSection {
+	padding-top: 50px;
+	// background-color: #FFF5E5;
+	padding-bottom: 50px;
 }
 
-.whyJoinSection{
-    padding-top: 50px;
-    padding-bottom: 50px;
+.whyJoinSection {
+	padding-top: 50px;
+	padding-bottom: 50px;
 
-    *{
-        padding: 5px;
-    }
-    
-    .whyJoinSectionContainer{
-        padding-left: 70px;
-        padding-right: 70px;
-    }
+	* {
+		padding: 5px;
+	}
 
-    .headerRow{
-        text-align: center;
-    }
-    .cardsRow{
-        .card{
-            margin: 10px;
-            padding: 20px;
-        }
-    }
+	.whyJoinSectionContainer {
+		padding-left: 70px;
+		padding-right: 70px;
+	}
 
-    .cardTitle{
-        font-weight: bold;
-    }
+	.headerRow {
+		text-align: center;
+	}
+	.cardsRow {
+		.card {
+			margin: 10px;
+			padding: 20px;
+		}
+	}
 
+	.cardTitle {
+		font-weight: bold;
+	}
 }
 
-.personSection{
-    min-height: 600px;
-    background-color: #FFF5E5;
-    display: flex;
-    align-items: center;
+.personSection {
+	min-height: 600px;
+	background-color: #fff5e5;
+	display: flex;
+	align-items: center;
 
-    // .image{
+	// .image{
 
-    // }
+	// }
 
-    // .joinButton{
-    //     
-    // }
+	// .joinButton{
+	//
+	// }
 
-    .personSectionContainer{
-        // border: 1px solid red;
+	.personSectionContainer {
+		// border: 1px solid red;
 
-        .personSectionRow{
+		.personSectionRow {
+			.col1 {
+				.image {
+					border-radius: 50%;
+					overflow: hidden;
+				}
+			}
 
-            .col1{
-                .image{
-                    border-radius: 50%;
-                    overflow: hidden;
-                }
-            }
+			.col2 {
+				h6 {
+					margin-top: 40px;
+					font-weight: bold;
 
-            .col2{
-                h6{
-                    margin-top: 40px;
-                    font-weight: bold;
-
-                    small{
-                        font-weight: lighter;
-                    }
-                }
-                .joinButton{
-                    margin-top: 40px;
-                    border: 1px solid red;  
-                    background-color: #543EE0;
-                    border: 1px solid #543EE0;
-                }
-            }
-        }
-    }
-
-    
+					small {
+						font-weight: lighter;
+					}
+				}
+				.joinButton {
+					margin-top: 40px;
+					border: 1px solid red;
+					background-color: #543ee0;
+					border: 1px solid #543ee0;
+				}
+			}
+		}
+	}
 }
 
-.writeSection{
-    
-    padding-top: 50px;
-    padding-bottom: 50px;
+.writeSection {
+	padding-top: 50px;
+	padding-bottom: 50px;
 
-    .writeSectionContainer{
+	.writeSectionContainer {
+		.writeSectionRow {
+			.col1 {
+				.imageDivisionRow {
+					.imageDivisionRowCol1 {
+						.imageRow {
+							.image {
+								border-radius: 50%;
+								overflow: hidden;
+								padding: 30px;
+							}
+						}
+					}
+					.imageDivisionRowCol2 {
+						.imageRow {
+							width: 100%;
+							height: 100%;
+							display: flex;
+							align-items: center;
+							flex-direction: column;
+							justify-content: center;
 
-        .writeSectionRow{
-            .col1{
-                .imageDivisionRow{
+							.image {
+								border-radius: 50%;
+							}
+						}
+					}
+				}
+			}
 
-                    .imageDivisionRowCol1{
-                        .imageRow{
-                            .image{
-                                border-radius: 50%;
-                                overflow: hidden;
-                                padding: 30px;
-                                
-                            }
-                        }
-                        
-                    }
-                    .imageDivisionRowCol2{
-                        .imageRow{
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            align-items: center;
-                            flex-direction: column;
-                            justify-content: center;
+			.col2 {
+				* {
+					margin: 30px;
+				}
 
-                            .image{
-                                border-radius: 50%;
-                            }
-                        }
-                        
-                    }
-                }
-            }
-    
-            .col2{
-                *{
-                    margin: 30px;
-                }
-    
-                button{
-                    background-color: #543EE0;
-                    border: 1px solid #543EE0;
-                    color: white;
-                }
-            }
-    
-    
-        }
-    }
-
+				button {
+					background-color: #543ee0;
+					border: 1px solid #543ee0;
+					color: white;
+				}
+			}
+		}
+	}
 }
 
-.footer{
-    padding-top: 50px;
-    padding-bottom: 100px;
-    background-color: #FFF5E5;
+.footer {
+	padding-top: 50px;
+	padding-bottom: 100px;
+	background-color: #fff5e5;
 }
-

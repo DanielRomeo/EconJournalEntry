@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": " cd src && cd app && prettier --use-tabs --tab-width 4 --write ."
+    "format": " cd src && cd app && prettier --use-tabs --tab-width 4 --write ."
   },
   "pre-commit": [
     "prettier"
@@ -27,6 +27,7 @@
     "firebase": "^10.8.1",
     "framer": "^2.4.1",
     "framer-motion": "^11.0.8",
+    "husky": "^9.0.11",
     "next": "14.1.3",
     "prettier": "^3.2.5",
     "react": "^18",

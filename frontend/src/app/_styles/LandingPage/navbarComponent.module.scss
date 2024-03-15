@@ -1,28 +1,26 @@
-.navBar{
-    .navbarContainer{
-        .navbarBrand{
-            // color: brown;
-        }
-        
-        .navbarLink{
-            text-decoration: none;
-            color: #543EE0;
-            font-weight: bold;
-        }
+.navBar {
+	.navbarContainer {
+		.navbarBrand {
+			// color: brown;
+		}
 
-        .loginButton{
-            border: 1px solid #543EE0;
-            background-color: inherit;
-            color: black;
-            margin: 5px;
-        }
-        .signupButton{
-            margin: 5px;
-            border: 1px solid #543EE0;
-            background-color: #543EE0;
-            color: white;
-        }
-    }
-    
+		.navbarLink {
+			text-decoration: none;
+			color: #543ee0;
+			font-weight: bold;
+		}
+
+		.loginButton {
+			border: 1px solid #543ee0;
+			background-color: inherit;
+			color: black;
+			margin: 5px;
+		}
+		.signupButton {
+			margin: 5px;
+			border: 1px solid #543ee0;
+			background-color: #543ee0;
+			color: white;
+		}
+	}
 }
-

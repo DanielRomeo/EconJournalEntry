@@ -1,30 +1,26 @@
-.card{
-    width: 100%;
+.card {
+	width: 100%;
 
-    .cardBodyUserinfo{
-        display: flex;
-        flex-direction: row;
+	.cardBodyUserinfo {
+		display: flex;
+		flex-direction: row;
 
+		.imageDiv {
+			.image {
+				border-radius: 50%;
+			}
+		}
+		.detailsDiv {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin-left: 20px;
+		}
+	}
 
-        .imageDiv{
-            .image{
-                border-radius: 50%;
-            }
-        }
-        .detailsDiv{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            margin-left: 20px;
-        }
-        
-        
-    }
-
-    .cardBodyPostDetails{
-
-        .cardBodyPostDetailsTitle{
-            font-weight: bold;
-        }
-    }
+	.cardBodyPostDetails {
+		.cardBodyPostDetailsTitle {
+			font-weight: bold;
+		}
+	}
 }

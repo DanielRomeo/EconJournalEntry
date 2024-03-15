@@ -40,10 +40,10 @@ const SetLocalStorage = (key: string = "isAuth", info: any) => {
 	}
 };
 
-const DeleteLocalStorage = (key: string = 'isAuth') => {
+const DeleteLocalStorage = (key: string = "isAuth") => {
 	if (typeof window !== "undefined") {
 		localStorage.removeItem(key);
 	}
 };
 
-export {GetLocalStorage, SetLocalStorage, DeleteLocalStorage};
+export { GetLocalStorage, SetLocalStorage, DeleteLocalStorage };

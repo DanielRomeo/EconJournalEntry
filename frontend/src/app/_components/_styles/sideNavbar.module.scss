@@ -1,34 +1,32 @@
-.Navbar{
-    display: flex;
-    background-color: white;
-    padding: 10px;
+.Navbar {
+	display: flex;
+	background-color: white;
+	padding: 10px;
 }
 
-.list{
+.list {
+	.chatter {
+		* {
+			font-weight: bold;
+			font-size: 30px;
+			color: #543ee0;
+		}
+	}
 
-    .chatter{
-        *{
-            font-weight: bold;
-            font-size: 30px;
-            color: #543EE0;
-        }
-    }
+	.personalItem {
+		* {
+			font-weight: bold;
+		}
+	}
 
-    .personalItem{
-        *{
-            font-weight: bold;
-        }
-       
-    }
+	.trendingItem {
+		* {
+			font-weight: bolder;
+		}
+	}
 
-    .trendingItem{
-        *{
-            font-weight: bolder;
-        }
-    }
-
-    .logoutbutton{
-        // background-color: red;
-        color: red;
-    }
+	.logoutbutton {
+		// background-color: red;
+		color: red;
+	}
 }
