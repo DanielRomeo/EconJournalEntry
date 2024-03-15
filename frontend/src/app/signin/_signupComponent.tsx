@@ -20,7 +20,7 @@ const schema = yup.object().shape({
       .string()
       .min(6, 'Password must be at least 6 characters long')
       .required('Password is required'),
-    firstname: yup.string().required('Firstname is required'),
+    firstname: yup.string().required('First name is required'),
     lastname: yup.string().required('Last name is required'),
     joiningas: yup.string().required('Who do you want to join as'),
     confirmpassword: yup.string().required('Please confirm your password')
@@ -61,15 +61,17 @@ const SignupComponent: React.FC = () => {
                     <Col lg="6" md="6" sm="12">
                         <FormGroup className="mb-3">
                             <Form.Label htmlFor="firstName">First name</Form.Label>
-                            <input className={`form-control`} type="text" id="firstName" />
-                            {/* {errors.email && <span>{errors.email.message}</span>} */}
+                            <input {...register('firstname')} className={`form-control`} type="text" id="firstName" />
+                            {errors.firstname && <span style={{'color':'red'}}>{errors.firstname.message}</span>}
                         </FormGroup>
                     </Col>
                     
                     <Col lg="6" md="6" sm="12">
                         <FormGroup className="mb-3">
                             <Form.Label htmlFor="lastName">Last name</Form.Label>
-                            <input className={`form-control`} type="text" id="lastName" />
+                            <input {...register('lastname')} className={`form-control`} type="text" id="lastName" />
+                            {errors.lastname && <span style={{'color':'red'}}>{errors.lastname.message}</span>}
+
                         </FormGroup>
                     </Col>
                     
@@ -81,31 +83,31 @@ const SignupComponent: React.FC = () => {
                             <option value="reader">Reader</option>
                             <option value='writer'>Writer</option>
                         </select>
-                        {errors.joiningas && <span>{errors.joiningas.message}</span>}
+                        {errors.joiningas && <span style={{'color':'red'}}>{errors.joiningas.message}</span>}
                     </FormGroup>
 
                     <FormGroup className="mb-3">
                         <Form.Label htmlFor="email">Email address</Form.Label>
                         <input {...register('email')} className={`form-control`} type="email" id="email"  />
-                        {errors.email && <span>{errors.email.message}</span>}
+                        {errors.email && <span style={{'color':'red'}}>{errors.email.message}</span>}
                     </FormGroup>
 
 
                     <FormGroup className="mb-3">
                         <Form.Label htmlFor="password">Password</Form.Label>
                         <input {...register('password')} className={`form-control`} type="password" id="password" />
-                        {errors.password && <span>{errors.password.message}</span>}
+                        {errors.password && <span style={{'color':'red'}}>{errors.password.message}</span>}
                     </FormGroup>
 
                     <FormGroup className="mb-3">
                         <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
                         <input {...register('confirmpassword')} className={`form-control`} type="password" id="confirmPassword" />
-                        {errors.confirmpassword && <span>{errors.confirmpassword.message}</span>}
+                        {errors.confirmpassword && <span style={{'color':'red'}}>{errors.confirmpassword.message}</span>}
                     </FormGroup>
 
                     <FormGroup className="mb-3">
-                        <Button className={`${Styles.createButton}`}  variant="primary" >
-                        Create Account
+                        <Button type='submit' className={`${Styles.createButton}`}  disabled={isLoading} >
+                        {isLoading ? 'Loading...' : 'Create Account'}
                         </Button>
                     </FormGroup>
                 </Row>
