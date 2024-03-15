@@ -37,12 +37,6 @@ const SignupComponent: React.FC = () => {
     } = useForm({ resolver: yupResolver(schema) });
 
     const router = useRouter();
-
-    // signup function:
-    // const signupSubmit = ()=>{
-    //     router.push('/confirmation');\
-    //}
-    //
  
     // Submission function:
     const onSubmit = ()=>{
