@@ -9,7 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@hookform/resolvers": "^3.3.4",
+    "@mui/icons-material": "^5.15.4",
+    "@mui/material": "^5.15.4",
     "@react-firebase/firestore": "^0.5.5",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
     "dompurify": "^3.0.9",
     "firebase": "^10.8.1",
@@ -27,13 +35,7 @@
     "react-otp-input": "^3.1.1",
     "react-pro-sidebar": "^1.1.0",
     "sass": "^1.71.1",
-    "@emotion/react": "^11.11.3",
-    "@emotion/styled": "^11.11.0",
-    "@mui/icons-material": "^5.15.4",
-    "@mui/material": "^5.15.4",
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0"
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "@types/node": "^20",

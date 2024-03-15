@@ -5,38 +5,71 @@ import Styles from "../_styles/SigninPage/SignupComponent.module.scss"
 import { useRouter } from 'next/navigation'
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
+import { useState } from 'react';
+
+// validator libs
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+
+
+const schema = yup.object().shape({
+    email: yup.string().email('Invalid email').required('Email is required'),
+    password: yup
+      .string()
+      .min(6, 'Password must be at least 6 characters long')
+      .required('Password is required'),
+    firstname: yup.string().required('Firstname is required'),
+    lastname: yup.string().required('Last name is required'),
+    joiningas: yup.string().required('Who do you want to join as'),
+    confirmpassword: yup.string().required('Please confirm your password')
+}); // end of schema
 
 const SignupComponent: React.FC = () => {
+
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
+    const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
 
     const router = useRouter();
 
     // signup function:
-    const signupSubmit = ()=>{
-        router.push('/confirmation')
-        // setDisplay('ConfirmationComponent');
+    // const signupSubmit = ()=>{
+    //     router.push('/confirmation');\
+    //}
+    //
+ 
+    // Submission function:
+    const onSubmit = ()=>{
+        //
     }
 
-  return (
+    return (
         <div className={`${Styles.mainContainer}`}>
 
             <Row className=''>
                 <h3>Register as a Writer/Reader</h3>
             </Row>
 
-
-            <Form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <Row>
                     <Col lg="6" md="6" sm="12">
                         <FormGroup className="mb-3">
                             <Form.Label htmlFor="firstName">First name</Form.Label>
-                            <input className={`form-control`} type="text" id="firstName" placeholder="John" />
+                            <input className={`form-control`} type="text" id="firstName" />
+                            {/* {errors.email && <span>{errors.email.message}</span>} */}
                         </FormGroup>
                     </Col>
-                   
+                    
                     <Col lg="6" md="6" sm="12">
                         <FormGroup className="mb-3">
                             <Form.Label htmlFor="lastName">Last name</Form.Label>
-                            <input className={`form-control`} type="text" id="lastName" placeholder="Doe" />
+                            <input className={`form-control`} type="text" id="lastName" />
                         </FormGroup>
                     </Col>
                     
@@ -44,48 +77,50 @@ const SignupComponent: React.FC = () => {
                 
                 <Row>
                     <FormGroup className="mb-3">
+                        <select {...register('joiningas')} className="form-select" aria-label="Default select example">
+                            <option value="reader">Reader</option>
+                            <option value='writer'>Writer</option>
+                        </select>
+                        {errors.joiningas && <span>{errors.joiningas.message}</span>}
+                    </FormGroup>
+
+                    <FormGroup className="mb-3">
                         <Form.Label htmlFor="email">Email address</Form.Label>
-                        <input className={`form-control`} type="email" id="email" placeholder="johndoe@gmail.com" />
-                    
+                        <input {...register('email')} className={`form-control`} type="email" id="email"  />
+                        {errors.email && <span>{errors.email.message}</span>}
                     </FormGroup>
 
 
                     <FormGroup className="mb-3">
-                    <Form.Label htmlFor="password">Password</Form.Label>
-                    <input className={`form-control`} type="password" id="password" />
-                    
+                        <Form.Label htmlFor="password">Password</Form.Label>
+                        <input {...register('password')} className={`form-control`} type="password" id="password" />
+                        {errors.password && <span>{errors.password.message}</span>}
                     </FormGroup>
 
                     <FormGroup className="mb-3">
-                    <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
-                    <input className={`form-control`} type="password" id="confirmPassword" />
-                    
+                        <Form.Label htmlFor="confirmPassword">Confirm password</Form.Label>
+                        <input {...register('confirmpassword')} className={`form-control`} type="password" id="confirmPassword" />
+                        {errors.confirmpassword && <span>{errors.confirmpassword.message}</span>}
                     </FormGroup>
 
                     <FormGroup className="mb-3">
-                        {/* <Link href='/confirmation'>
-                        </Link> */}
-                        <Button className={`${Styles.createButton}`} onClick={signupSubmit} variant="primary" >
+                        <Button className={`${Styles.createButton}`}  variant="primary" >
                         Create Account
                         </Button>
                     </FormGroup>
                 </Row>
-            </Form>
+            </form>
 
             <Row className={`${Styles.SocialButtonsRow}`}>
-                {/* <Col className={`${Styles.Col}`} lg="12" md="12" sm="12"> */}
                     <Button  className={`${Styles.GoogleButton}`}>
                     <FcGoogle />
                     &nbsp; Sign up with Google
                     </Button>
-                {/* </Col> */}
 
-                {/* <Col lg="12" md="12" sm="12"> */}
                     <Button className={`${Styles.FacbookButton}`}>
                     <FaFacebookF />
                         &nbsp; Sign up with Facebook
                     </Button>
-                {/* </Col> */}
             </Row>
         </div>
 
