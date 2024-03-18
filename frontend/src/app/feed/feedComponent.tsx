@@ -10,7 +10,7 @@ const FeedComponent = () => {
 	return (
 		<div>
 			<SideNavbar></SideNavbar>
-			<Container className={`${Styles.nainContainer}`}>
+			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>
 					<Col lg="8" md="8" sm="6">
 						<h1>FEED</h1>
