@@ -8,6 +8,8 @@ import { FaChartLine } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
 
+
+
 const LandingComponent = () => {
 
 	const [height, setHeight] = useState<number>(0); // State to store calculated height
@@ -16,7 +18,11 @@ const LandingComponent = () => {
 		const newHeight =
 			img.naturalHeight * (img.clientWidth / img.naturalWidth);
 		setHeight(newHeight);
+
+		
 	};
+
+	
 
 	return (
 		<div>
@@ -37,15 +43,15 @@ const LandingComponent = () => {
 			</div>
 			{/* About secttion */}
 			<div className={`${Styles.aboutSection}`}>
-				<Container>
-					<Row>
-						<Col lg="7" md="7" sm="12">
+				<Container className={`${Styles.aboutSectionContainer}`}>
+					<Row className={`${Styles.aboutSectionRow}`}>
+						<Col className={`${Styles.aboutSectionCol1}`} lg="6" md="6" sm="12">
 							<h1>About Chatter</h1>
 
 							<p>
 								Chatter is a multi-functional platform where
 								authors and readers can have access to their own
-								content. It aims to be a traditional bookworm’s
+								content. It aims to be a traditional bookworms
 								heaven and a blog to get access to more text
 								based content. Our vision is to foster an
 								inclusive and vibrant community where diversity
@@ -56,14 +62,20 @@ const LandingComponent = () => {
 							</p>
 						</Col>
 
-						<Col lg="5" md="5" sm="12">
-							<Image
+						<Col className={`${Styles.aboutSectionCol2}`} lg="6" md="6" sm="12">
+							{/* <Image
+								className={`${Styles.image}`}
+								// style={{'border':'1px solid red'}}
 								src="/aboutSectionImage.jpg"
-								width={400}
-								height={height}
-								onLoadingComplete={handleLoadComplete}
+								// width={100}
+								// height={height}
+								// onLoadingComplete={handleLoadComplete}
+								layout="fill"
 								alt="Picture of a group of asian individuals in a library."
-							/>
+							/> */}
+							<Card className="mb-3">
+								<Card.Img variant="top" className="dynamic-image" src="/aboutSectionImage.jpg" />
+							</Card>
 						</Col>
 					</Row>
 				</Container>
