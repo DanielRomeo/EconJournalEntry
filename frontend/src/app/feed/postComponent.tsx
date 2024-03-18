@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Row, Container, Col, Button, Tabs, Tab, Card } from "react-bootstrap";
 import Styles from "../_styles/Feed/PostComponent.module.scss";
 import { FaPen } from "react-icons/fa";
@@ -17,7 +18,9 @@ const PostComponent = () => {
 	};
 
 	return (
+		
 		<Card className={`${Styles.card}`}>
+			<Link className={`${Styles.link}`} href='/post/1'>
 			<Card.Body className={`${Styles.cardBodyUserinfo}`}>
 				<div className={`${Styles.imageDiv}`}>
 					<Image
@@ -58,7 +61,9 @@ const PostComponent = () => {
 					alt="Picture of the author"
 				/>
 			</Card.Body>
+			</Link>
 		</Card>
+		
 	);
 };
 
