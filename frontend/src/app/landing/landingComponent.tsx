@@ -1,5 +1,6 @@
 import LandingNavbar from "./navbarComponent";
 import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { useState } from "react";
 import Styles from "../_styles/LandingPage/LandingComponent.module.scss";
 import Image from "next/image";
 import { Image as ImageReact } from "react-bootstrap";
@@ -8,6 +9,15 @@ import { MdGroups } from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
 
 const LandingComponent = () => {
+
+	const [height, setHeight] = useState<number>(0); // State to store calculated height
+
+	const handleLoadComplete = (img: any) => {
+		const newHeight =
+			img.naturalHeight * (img.clientWidth / img.naturalWidth);
+		setHeight(newHeight);
+	};
+
 	return (
 		<div>
 			<LandingNavbar></LandingNavbar>
@@ -50,8 +60,9 @@ const LandingComponent = () => {
 							<Image
 								src="/aboutSectionImage.jpg"
 								width={400}
-								height={400}
-								alt="Picture of the author"
+								height={height}
+								onLoadingComplete={handleLoadComplete}
+								alt="Picture of a group of asian individuals in a library."
 							/>
 						</Col>
 					</Row>
@@ -144,12 +155,14 @@ const LandingComponent = () => {
 				<Container className={`${Styles.personSectionContainer}`}>
 					<Row className={`${Styles.personSectionRow}`}>
 						<Col className={`${Styles.col1}`} lg="4" md="6" sm="12">
+							
 							<Image
 								className={`${Styles.image}`}
 								src="/personSectionImage.png"
 								width={250}
 								height={250}
-								alt="Picture of the author"
+								onLoadingComplete={handleLoadComplete}
+								alt="Picture of the author that uses the platform to write journals."
 							/>
 						</Col>
 
@@ -179,48 +192,47 @@ const LandingComponent = () => {
 			<div className={`${Styles.writeSection}`}>
 				<Container className={`${Styles.writeSectionContainer}`}>
 					<Row className={`${Styles.writeSectionRow}`}>
-						<Col className={`${Styles.col1}`} lg="5" md="5" sm="12">
-							<Row className={`${Styles.imageDivisionRow}`}>
-								<Col
-									className={`${Styles.imageDivisionRowCol1}`}
-								>
-									<Row className={`${Styles.imageRow}`}>
-										<Image
-											className={`${Styles.image}`}
-											src="/writeSectionImage1.jpg"
-											width={200}
-											height={230}
-											alt="Picture of the author"
-										/>
-									</Row>
-									<Row className={`${Styles.imageRow}`}>
-										<Image
-											className={`${Styles.image}`}
-											src="/writeSectionImage2.jpg"
-											width={200}
-											height={230}
-											alt="Picture of the author"
-										/>
-									</Row>
-								</Col>
+						<Col className={`${Styles.col1}`} lg="6" md="6" sm="12">
+							<Container>
+								<Row className={`${Styles.imageDivisionRow}`}>
+									<Col lg='6' md='6' sm='6'
+										className={`${Styles.imageDivisionRowCol1}`}
+									>
+											<Image
+												className={`${Styles.image}`}
+												src="/writeSectionImage1.jpg"
+												width={150}
+												height={height}
+												onLoadingComplete={handleLoadComplete}
+												alt="Picture of the author that uses the platform to write journals."
+												/>
+											<Image
+												className={`${Styles.image}`}
+												src="/writeSectionImage2.jpg"
+												width={150}
+												height={height}
+												onLoadingComplete={handleLoadComplete}
+												alt="Picture of the author that uses the platform to write journals."
+												/>
+									</Col>
 
-								<Col
-									className={`${Styles.imageDivisionRowCol2}`}
-								>
-									<Row className={`${Styles.imageRow}`}>
-										<Image
-											className={`${Styles.image}`}
-											src="/writeSectionImage3.jpg"
-											width={200}
-											height={200}
-											alt="Picture of the author"
-										/>
-									</Row>
-								</Col>
-							</Row>
+									<Col lg='6' md='6' sm='6'
+										className={`${Styles.imageDivisionRowCol2}`}
+									>
+											<Image
+												className={`${Styles.image}`}
+												src="/writeSectionImage3.jpg"
+												width={150}
+												height={height}
+												onLoadingComplete={handleLoadComplete}
+												alt="Picture of the author that uses the platform to write journals."
+												/>
+									</Col>
+								</Row>
+							</Container>
 						</Col>
 
-						<Col className={`${Styles.col2}`} lg="7" md="7" sm="12">
+						<Col className={`${Styles.col2}`} lg="6" md="6" sm="12">
 							<h1>
 								Write, read and connect with great minds on
 								chatter

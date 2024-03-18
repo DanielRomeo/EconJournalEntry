@@ -59,8 +59,6 @@ const FeedComponent = () => {
 				</Row>
 			</Container>
 		</div>
-
-		</div>
 	);
 };
 

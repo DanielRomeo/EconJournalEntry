@@ -74,22 +74,21 @@
 	display: flex;
 	align-items: center;
 
-	// .image{
-
-	// }
-
-	// .joinButton{
-	//
-	// }
 
 	.personSectionContainer {
-		// border: 1px solid red;
-
 		.personSectionRow {
+			// border: 1px solid red;
+			min-height: 300px;
 			.col1 {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+
+				// border: 1px solid blue;
 				.image {
 					border-radius: 50%;
-					overflow: hidden;
+					// overflow: hidden;
 				}
 			}
 
@@ -120,29 +119,28 @@
 	.writeSectionContainer {
 		.writeSectionRow {
 			.col1 {
-				.imageDivisionRow {
-					.imageDivisionRowCol1 {
-						.imageRow {
-							.image {
-								border-radius: 50%;
-								overflow: hidden;
-								padding: 30px;
-							}
-						}
-					}
-					.imageDivisionRowCol2 {
-						.imageRow {
-							width: 100%;
-							height: 100%;
-							display: flex;
-							align-items: center;
-							flex-direction: column;
-							justify-content: center;
+				.imageDivisionRowCol1 {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					border: 1px solid tan;
 
-							.image {
-								border-radius: 50%;
-							}
-						}
+					.image {
+						border-radius: 50%;
+						overflow: hidden;
+					}
+				}
+				.imageDivisionRowCol2 {
+					
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					border: 1px solid tan;
+
+					.image {
+						border-radius: 50%;
 					}
 				}
 			}
