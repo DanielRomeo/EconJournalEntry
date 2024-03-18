@@ -1,6 +1,12 @@
-.nainContainer {
+.outerDiv{
+	padding-left: 200px;
+	padding-right: 200px;
+}
+
+.mainContainer {
 	border: 1px solid lightgrey;
 	padding: 30px;
+	
 
 	.headerRow {
 		.postButton {

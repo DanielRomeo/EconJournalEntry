@@ -8,6 +8,14 @@ import {
 	Row,
 	Tab,
 } from "react-bootstrap";
+
+import { auth, provider } from "../_components/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { db } from "../_components/firebaseConfig";
+// import set
+
+
 import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss";
 import { useRouter } from "next/navigation";
@@ -44,8 +52,37 @@ const SignupComponent: React.FC = () => {
 	const router = useRouter();
 
 	// Submission function:
-	const onSubmit = () => {
+	const onSubmit = async (data: any) => {
 		//
+		setIsLoading(false);
+
+		// try {
+		// 	// Use Firebase Authentication to create a new user securely
+		// 	const userCredential = await createUserWithEmailAndPassword(
+		// 		auth,
+		// 	  data.email,
+		// 	  data.password
+		// 	);
+	  
+		// 	// After successful signup, extract user information from the auth object (excluding password)
+		// 	const user = userCredential.user;
+		// 	const userData = {
+		// 	  uid: user.uid,
+		// 	  email: user.email,
+		// 	  name: data.name,
+		// 	};
+	  
+		// 	// Store user data in Firestore with proper security rules
+		// 	const userRef = collection(db, 'users').doc(userData.uid);
+		// 	await userRef.set(userData);
+	  
+		// 	// Handle successful signup (e.g., redirect to another page)
+		//   } catch (error) {
+		// 	console.error('Signup error:', error);
+		// 	// Handle errors appropriately (e.g., display error messages)
+		//   } finally {
+		// 	setIsLoading(false);
+		//   }
 	};
 
 	return (

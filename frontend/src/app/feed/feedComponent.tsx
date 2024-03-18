@@ -9,8 +9,11 @@ import SideNavbar from "../_components/sideNavbar";
 const FeedComponent = () => {
 	return (
 		<div>
-			<SideNavbar></SideNavbar>
-			<Container className={`${Styles.nainContainer}`}>
+				<SideNavbar></SideNavbar>
+		
+		<div className={`${Styles.outerDiv}`}>
+			
+			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>
 					<Col lg="8" md="8" sm="6">
 						<h1>FEED</h1>
@@ -58,6 +61,8 @@ const FeedComponent = () => {
 					</Tabs>
 				</Row>
 			</Container>
+		</div>
+
 		</div>
 	);
 };

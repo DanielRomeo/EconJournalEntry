@@ -58,19 +58,24 @@ const CreatePostComponent = () => {
 
 					{/* Title input field */}
 					<input
+						className={`form-control`}
 						type="text"
 						value={post.title}
 						onChange={handleTitleChange}
 						placeholder="Enter Post Title"
 					/>
-
+					
 					{/* Textfield or textarea for markdown input */}
-					<textarea value={post.content} onChange={handleChange} />
+					<textarea className={`form-control`}
+					placeholder="Enter your content in markdown"
+					value={post.content} 
+					onChange={handleChange} />
 				</Row>
 
 				<hr />
 
 				<Row>
+					<small>Your results will be displayed here...</small>
 					{/* Render the edited markdown content */}
 					<MarkdownEditor value={post.content} />
 				</Row>
