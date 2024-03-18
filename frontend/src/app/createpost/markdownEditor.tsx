@@ -8,7 +8,7 @@ interface MarkdownProps {
 
 const MarkdownEditor: React.FC<MarkdownProps> = ({ value }) => {
 	return (
-		<div className="markdown-container">{<Markdown>{value}</Markdown>}</div>
+		<div className="markdown-container">{<Markdown >{value}</Markdown>}</div>
 	);
 };
 
