@@ -15,6 +15,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@firebase/storage": "^0.12.2",
     "@hookform/resolvers": "^3.3.4",
     "@mui/icons-material": "^5.15.4",
     "@mui/material": "^5.15.4",
@@ -24,7 +25,7 @@
     "@testing-library/user-event": "^13.5.0",
     "bootstrap": "^5.3.3",
     "dompurify": "^3.0.9",
-    "firebase": "^10.8.1",
+    "firebase": "^10.9.0",
     "framer": "^2.4.1",
     "framer-motion": "^11.0.8",
     "husky": "^9.0.11",
@@ -40,6 +41,7 @@
     "react-otp-input": "^3.1.1",
     "react-pro-sidebar": "^1.1.0",
     "sass": "^1.71.1",
+    "uuid": "^9.0.1",
     "yup": "^1.4.0"
   },
   "devDependencies": {
