@@ -201,7 +201,7 @@ const SideNavbar = () => {
                 </React.Fragment>
             ))} */}
 
-			<MenuIcon onClick={toggleDrawer("left", true)} />
+			<MenuIcon className={Styles.menuIcon} onClick={toggleDrawer("left", true)} />
 
 			<Drawer
 				anchor={"left"}

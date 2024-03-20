@@ -25,10 +25,10 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
 	};
 
 	return (
-		<Navbar className={`${Styles.navBar} navbar-expand-sm `} expand="lg">
+		<Navbar className={`${Styles.navBar} navbar-expand-sm `}>
 			<Container className={`${Styles.navbarContainer}`}>
 				
-				<Navbar.Collapse id="basic-navbar-nav">
+				<Navbar.Collapse className={Styles.collapsedNavbar} id="basic-navbar-nav">
 					<Nav className="mx-auto">
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
@@ -38,7 +38,7 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
                         </div>
 					</Nav>
 
-					<Nav className="mr-auto">
+					<Nav className={`${Styles.rightHandNav} "mr-auto"`}>
 						<NavItem className={`${Styles.navLink}`}>
 							<Link href="/signin">
                                 <IoIosNotificationsOutline size={30} />

@@ -9,7 +9,7 @@ import TopNavbar from "../_components/topNavbar";
 
 const FeedComponent = () => {
 	return (
-		<div>
+		<div className={Styles.mainDiv}>
 			
 
 			<SideNavbar></SideNavbar>
