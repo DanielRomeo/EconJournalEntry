@@ -3,19 +3,12 @@ import {
 	Form,
 	FormGroup,
 	Button,
-	Container,
 	Col,
 	Row,
-	Tab,
 } from "react-bootstrap";
-
 import { auth, provider } from "../_components/firebaseConfig";
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import { getFirestore, collection, addDoc , doc, setDoc} from 'firebase/firestore';
 import { db } from "../_components/firebaseConfig";
-// import set
-
-
-import { FaUser, FaEnvelope, FaLock } from "react-icons/fa";
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -41,6 +34,7 @@ const schema = yup.object().shape({
 	confirmpassword: yup.string().required("Please confirm your password"),
 }); // end of schema
 
+// start of main function:
 const SignupComponent: React.FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -54,48 +48,37 @@ const SignupComponent: React.FC = () => {
 
 	// Submission function:
 	const onSubmit = async (data: any) => {
-		//
-		setIsLoading(false);
-		console.log(data);
+		setIsLoading(true);
 
 		createUserWithEmailAndPassword(auth, data.email, data.password)
-		.then((userCredential: any) => {
+		.then( async (userCredential: any) => {
 			// Signed up 
-			const user = userCredential.user;
-			// ...
+
+			try {
+				// After successful signup, extract user information from the auth object (excluding password)
+				const user = userCredential.user;
+				const userData = {
+					uid: user.uid,
+					email: user.email,
+					firstname: data.firstname,
+					lastname: data.lastname,
+					type: data.joiningas
+				};
+
+				const userRef = doc(db, 'users', userData.uid); // Use doc() for a single document
+				await setDoc(userRef, userData);
+				router.push('/feed');
+
+			} catch (error: unknown) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
+
 		}).catch((error: any) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			// ..
 		});
-
-		// try {
-		// 	// Use Firebase Authentication to create a new user securely
-		// 	const userCredential = await createUserWithEmailAndPassword(
-		// 		auth,
-		// 	  data.email,
-		// 	  data.password
-		// 	);
-	  
-		// 	// After successful signup, extract user information from the auth object (excluding password)
-		// 	const user = userCredential.user;
-		// 	const userData = {
-		// 	  uid: user.uid,
-		// 	  email: user.email,
-		// 	  name: data.name,
-		// 	};
-	  
-		// 	// Store user data in Firestore with proper security rules
-		// 	const userRef = collection(db, 'users').doc(userData.uid);
-		// 	await userRef.set(userData);
-	  
-		// 	// Handle successful signup (e.g., redirect to another page)
-		//   } catch (error) {
-		// 	console.error('Signup error:', error);
-		// 	// Handle errors appropriately (e.g., display error messages)
-		//   } finally {
-		// 	setIsLoading(false);
-		//   }
 	};
 
 	return (

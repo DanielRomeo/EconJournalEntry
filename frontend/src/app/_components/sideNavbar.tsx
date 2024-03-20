@@ -17,10 +17,16 @@ import { FaRegEnvelopeOpen } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
 import { GrLineChart } from "react-icons/gr";
 
+// firebase
+import { signOut } from 'firebase/auth'; // Import Firebase Auth functions
+import { auth } from "./firebaseConfig";
+import { useRouter } from "next/navigation";
+
 // styles:
 import Styles from "./_styles/sideNavbar.module.scss";
 
 const SideNavbar = () => {
+	const router = useRouter();
 	const [state, setState] = React.useState({
 		top: false,
 		left: false,
@@ -28,8 +34,14 @@ const SideNavbar = () => {
 		right: false,
 	});
 
-	const handleLogout = () =>{
-		console.log('logout clicked');
+	// logout function:
+	const handleLogout =  async () =>{
+		try {
+			await signOut(auth);
+			router.push('/signin');
+		} catch (error) {
+			console.error('Error signing out:', error);
+		}
 	}
 
 	const toggleDrawer = (anchor: any, open: any) => (event: any) => {

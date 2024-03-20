@@ -10,13 +10,17 @@ import {
 } from "react-bootstrap";
 import Styles from "../_styles/SigninPage/SigninComponent.module.scss";
 import { useRouter } from "next/navigation";
-import { auth, provider } from "../_components/firebaseConfig";
+import { auth, db , provider } from "../_components/firebaseConfig";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useState, useEffect } from "react";
 import isAuthenticated from "../_components/isAuthenticated";
 import { GetLocalStorage, SetLocalStorage } from "../_components/localStorage";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa";
+
+import { collection, doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
+import {  signInWithEmailAndPassword } from "firebase/auth";
+
 
 // validator libs
 import { useForm } from "react-hook-form";
@@ -38,9 +42,7 @@ const SigninComponent = () => {
 	const router = useRouter();
 	const [isAuth, setIsAuth] = useState<boolean>(false);
 	const [user, setUser] = useState<User | null>(null);
-
 	const [isLoading, setIsLoading] = useState<boolean>(false);
-
 	const {
 		register,
 		handleSubmit,
@@ -55,6 +57,7 @@ const SigninComponent = () => {
 		}
 		// I should call the isAuthenticated function here and use its logic instead of creating my own new one
 	}, []);
+
 
 	// Login function: for google functionality
 	const handleLogin = async () => {
@@ -72,8 +75,28 @@ const SigninComponent = () => {
 		}
 	};
 
-	const onSubmit = () => {
-		// on submit function
+	// form submit:
+	const onSubmit = (data: any) => {
+		setIsLoading(true);
+		console.log(data);
+
+		signInWithEmailAndPassword(auth, data.email, data.password)
+		.then( async (userCredential: any) => {
+			// Signed in
+			try {
+				// After successful signup, extract user information from the auth object (excluding password)
+				const user = userCredential.user;
+				router.push('/feed');
+			} catch (error: unknown) {
+				console.log(error);
+			} finally {
+				setIsLoading(false);
+			}
+
+		}).catch((error: any) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+		});
 	};
 
 	return (
@@ -89,6 +112,7 @@ const SigninComponent = () => {
 					<FormGroup className="mb-3">
 						<Form.Label htmlFor="email">Email address</Form.Label>
 						<input
+							{...register('email')}
 							className={`form-control`}
 							type="email"
 							id="email"
@@ -104,6 +128,7 @@ const SigninComponent = () => {
 					<FormGroup className="mb-3">
 						<Form.Label htmlFor="password">Password</Form.Label>
 						<input
+							{...register('password')}
 							className={`form-control`}
 							type="password"
 							id="password"
