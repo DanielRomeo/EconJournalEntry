@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import React, { useState } from "react";
 import MarkdownEditor from "./markdownEditor"; // Assuming the path is correct
@@ -10,7 +11,6 @@ import SideNavbar from "../_components/sideNavbar";
 import { v4 as uuidv4} from 'uuid'
 import {ref, uploadBytes, getDownloadURL, getStorage} from 'firebase/storage'
 
-
 interface Post {
 	title: string;
 	content: string;
@@ -18,8 +18,7 @@ interface Post {
 
 const CreatePostComponent = () => {
 	const [post, setPost] = useState<Post>({ title: "", content: "" });
-	// const [thumbnail, setThumbnail] = useState<ArrayBuffer | Uint16Array | Blob | undefined>();
-	const [thumbnail, setThumbnail] = useState<any>();
+	const [thumbnail, setThumbnail] = useState<any>(undefined); // thumbnail state
 	const [downloadUrl, setDownloadUrl] = useState<any>()
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,21 +29,24 @@ const CreatePostComponent = () => {
 		setPost({ ...post, content: event.target.value });
 	};
 
-	// create post function: also make use of the firestor collection function
-	// we use our own reference name...
-	const postsCollectionRef = collection(db, "posts");
+	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		// const file = event.target.files?.[0];
+		const fileList : any= event.target.files;
 
+		setThumbnail(fileList);
+	};
+
+	
 	// create post function:
 	const createPost = async () => {
-		// Generate a unique filename using uuid
-		//  const filename = `${uuidv4()}.${thumbnail.type.split("/")[1]}`;
-		//  const imgRef = ref(imageDb, `files/${filename}`);
-		const imageRef = ref(imageDb, `files/${uuidv4()}`);
 
-   
-		// Upload the thumbnail to Firebase Storage
-		// const uploadTask = uploadBytes(imageRef, thumbnail);
-		// console.log(uploadTask)
+		if (thumbnail) {
+			const formData = new FormData();
+			// formData.append("image", thumbnail, fileSelected.name);
+		}
+
+
+		const imageRef = ref(imageDb, `files/${uuidv4()}`);
 
 		// 'file' comes from the Blob or File API
 		uploadBytes(imageRef, thumbnail).then( async (snapshot) => {
@@ -71,27 +73,17 @@ const CreatePostComponent = () => {
 						// User canceled the upload
 						break;
 
-						// ...
-
 						case 'storage/unknown':
 						// Unknown error occurred, inspect the server response
 						break;
 					}
-			});
+				}
+			);
 		});
 
-
-		// Get the download URL after successful upload
-		// const snapshot: any = await uploadTask;
-		// const downloadURL: any = await snapshot.ref.getDownloadURL();
-   
-		// Get the download URL
-		
-
-
-
+		// create post function: also make use of the firestor collection function
+		const postsCollectionRef = collection(db, "posts");
 		await addDoc(postsCollectionRef, {
-			// thumbnail: downloadURL,
 			title: post.title,
 			post: post.content,
 			author: {
@@ -120,9 +112,13 @@ const CreatePostComponent = () => {
 				<Row className={`${Styles.row2}`}>
 					{/* Display post title (replace with your logic) */}
 
-					<input type='file' onChange={(e)=>{ setThumbnail(e.target.value[0]) } }></input>
-					<img src={downloadUrl} alt="Image description" />
-					{downloadUrl} && <img src={downloadUrl} alt="Uploaded Image" />
+					<input type='file' onChange={handleInputChange}></input>
+					{/* <img src={downloadUrl} alt="Image description" /> */}
+
+					<hr />
+					{downloadUrl ? <Image src={downloadUrl} width={200} height={200} alt="Uploaded Image"></Image> : <>niks</> }
+					<hr />
+					
 
 					{/* Title input field */}
 					<input

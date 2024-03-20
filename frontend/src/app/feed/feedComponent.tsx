@@ -5,11 +5,19 @@ import { FaPen } from "react-icons/fa";
 import PostComponent from "./postComponent";
 import Link from "next/link";
 import SideNavbar from "../_components/sideNavbar";
+import TopNavbar from "../_components/topNavbar";
 
 const FeedComponent = () => {
 	return (
 		<div>
+			
+
 			<SideNavbar></SideNavbar>
+
+			<Container className={`${Styles.navbarContainer}`}>
+				<TopNavbar></TopNavbar>
+			</Container>
+			
 			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>
 					<Col lg="8" md="8" sm="6">

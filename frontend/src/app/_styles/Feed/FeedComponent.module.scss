@@ -1,5 +1,15 @@
+.navbarContainer{
+	border: 1px solid lightgrey;
+	position: fixed;  /* Remove the div from the normal document flow */
+	top: 0;           /* Position it at the top of the viewport */
+	left: 50px;           /* Position it at the left of the viewport */
+	width: 100%;       /* Make it span the entire width of the viewport */
+	// z-index: 9999;
+	
+}
 
 .mainContainer {
+	margin-top: 80px;
 	border: 1px solid lightgrey;
 	padding: 100px;
 	max-width: 1100px;
