@@ -1,5 +1,5 @@
 .mainDiv{
-	min-height: 100px;
+	// min-height: 100px;
 }
 
 .navbarContainer{
@@ -8,14 +8,14 @@
 	top: 0;           /* Position it at the top of the viewport */
 	left: 50px;           /* Position it at the left of the viewport */
 	width: 100%;       /* Make it span the entire width of the viewport */
-	// z-index: 9999;
+	z-index: 9997;
 	
 }
 
 .mainContainer {
 	margin-top: 60px;
 	border: 1px solid lightgrey;
-	padding: 100px;
+	padding: 50px;
 	max-width: 1100px;
 
 	// when the device is now small:

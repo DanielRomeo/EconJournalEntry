@@ -1,20 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/Home";
-import InfoIcon from "@mui/icons-material/Info";
-import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
-
 // icons:
 import { IoPersonOutline } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
@@ -35,6 +27,10 @@ const SideNavbar = () => {
 		bottom: false,
 		right: false,
 	});
+
+	const handleLogout = () =>{
+		console.log('logout clicked');
+	}
 
 	const toggleDrawer = (anchor: any, open: any) => (event: any) => {
 		if (
@@ -57,17 +53,6 @@ const SideNavbar = () => {
 			onKeyDown={toggleDrawer(anchor, false)}
 		>
 			<List className={`${Styles.list}`}>
-				{/* {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
-                ))} */}
-
 				<ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;
@@ -176,10 +161,13 @@ const SideNavbar = () => {
 				<ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;
-						<ListItemText
-							className={`${Styles.logoutbutton}`}
-							primary={"Logout"}
-						/>
+						{/* <Link> */}
+							<ListItemText onClick={handleLogout}
+								className={`${Styles.logoutbutton}`}
+								primary={"Logout"}
+							/>
+						{/* </Link> */}
+						
 					</ListItemButton>
 				</ListItem>
 			</List>
@@ -188,22 +176,11 @@ const SideNavbar = () => {
 
 	return (
 		<div className={`${Styles.navbar}`}>
-			{/* {['left', 'right', 'top', 'bottom'].map((anchor) => (
-                <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-                    <Drawer
-                        anchor={anchor}
-                        open={state[anchor]}
-                        onClose={toggleDrawer(anchor, false)}
-                    >
-                        {list(anchor)}
-                    </Drawer>
-                </React.Fragment>
-            ))} */}
-
+			
 			<MenuIcon className={Styles.menuIcon} onClick={toggleDrawer("left", true)} />
 
 			<Drawer
+				className={Styles.drawer}
 				anchor={"left"}
 				open={state["left"]}
 				onClose={toggleDrawer("left", false)}

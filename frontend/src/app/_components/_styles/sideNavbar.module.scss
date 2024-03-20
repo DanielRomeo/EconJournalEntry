@@ -14,10 +14,18 @@
 	// border: 1px solid black;
 	margin-top: 10px;
 	margin-left: 10px;
+	z-index: 9998;
+
+	position: relative;  /* Remove the div from the normal document flow */
+	// top: 0;           /* Position it at the top of the viewport */
+	// left: 50px; 
 
 	&:hover{
 		color: #543ee0;
 	}
+}
+.drawer{
+	z-index: 9999;
 }
 
 .list {
