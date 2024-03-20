@@ -27,7 +27,7 @@ const FeedComponent = () => {
 			try {
 				const userRef = doc(collection(db, 'users'), uid); // Create a document reference
 				const userDocSnap = await getDoc(userRef); // Get the user document snapshot
-				if (userDocSnap.exists) {
+				if (userDocSnap.exists()) {
 				  const userData = userDocSnap.data();
 				//   console.log('Complete user data:', userData);
 		  

@@ -7,6 +7,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+
 // icons:
 import { IoPersonOutline } from "react-icons/io5";
 import { IoIosNotificationsOutline } from "react-icons/io";
@@ -17,7 +18,7 @@ import { FaRegEnvelopeOpen } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
 import { GrLineChart } from "react-icons/gr";
 
-// firebase
+// firebase:
 import { signOut } from 'firebase/auth'; // Import Firebase Auth functions
 import { auth } from "./firebaseConfig";
 import { useRouter } from "next/navigation";
