@@ -1,0 +1,15 @@
+.container{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    h4{
+
+        span{
+            font-weight: bold;
+        }
+    }
+
+}
