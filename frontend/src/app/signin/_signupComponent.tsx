@@ -10,7 +10,6 @@ import {
 } from "react-bootstrap";
 
 import { auth, provider } from "../_components/firebaseConfig";
-import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 import { db } from "../_components/firebaseConfig";
 // import set
@@ -27,6 +26,8 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const schema = yup.object().shape({
 	email: yup.string().email("Invalid email").required("Email is required"),
@@ -55,6 +56,18 @@ const SignupComponent: React.FC = () => {
 	const onSubmit = async (data: any) => {
 		//
 		setIsLoading(false);
+		console.log(data);
+
+		createUserWithEmailAndPassword(auth, data.email, data.password)
+		.then((userCredential: any) => {
+			// Signed up 
+			const user = userCredential.user;
+			// ...
+		}).catch((error: any) => {
+			const errorCode = error.code;
+			const errorMessage = error.message;
+			// ..
+		});
 
 		// try {
 		// 	// Use Firebase Authentication to create a new user securely
