@@ -9,12 +9,16 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 // import Styles from "../_styles/LandingPage/navbarComponent.module.scss";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import Styles from './_styles/topNavbar.module.scss'
 import { CiSearch } from "react-icons/ci";
 
+import  { useRef } from "react";
+import SideNavbar from "./sideNavbar";
+
 const TopNavbar = ({children}: PropsWithChildren<{}>) => {
+
 
     const [height, setHeight] = useState<number>(0); // State to store calculated height
 
@@ -27,9 +31,13 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
 	return (
 		<Navbar className={`${Styles.navBar} navbar-expand-sm `}>
 			<Container className={`${Styles.navbarContainer}`}>
-				
+				<Navbar.Brand className={`${Styles.navbarBrand}`}>
+				<SideNavbar></SideNavbar>
+				</Navbar.Brand>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse className={Styles.collapsedNavbar} id="basic-navbar-nav">
 					<Nav className="mx-auto">
+						
                         <div className="input-group mb-3">
                             <div className="input-group-prepend">
                                 <span className={`input-group-text ${Styles.searchButtonInputSpan}`} id="basic-addon1"><CiSearch size={25}></CiSearch></span>

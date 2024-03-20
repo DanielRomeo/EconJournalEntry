@@ -46,11 +46,11 @@ const FeedComponent = () => {
 
 	return (
 		<div className={Styles.mainDiv}>
-			<SideNavbar></SideNavbar>
+			{/* <SideNavbar></SideNavbar> */}
 
-			<Container className={`${Styles.navbarContainer}`}>
+			{/* <Container className={`${Styles.navbarContainer}`}> */}
 				<TopNavbar></TopNavbar>
-			</Container>
+			{/* </Container> */}
 			
 			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>

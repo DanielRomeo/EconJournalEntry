@@ -23,10 +23,12 @@ import { signOut } from 'firebase/auth'; // Import Firebase Auth functions
 import { auth } from "./firebaseConfig";
 import { useRouter } from "next/navigation";
 
+import  { forwardRef, useImperativeHandle } from "react";
+
 // styles:
 import Styles from "./_styles/sideNavbar.module.scss";
 
-const SideNavbar = () => {
+const SideNavbar = forwardRef((props, ref) => {
 	const router = useRouter();
 	const [state, setState] = React.useState({
 		top: false,
@@ -34,6 +36,12 @@ const SideNavbar = () => {
 		bottom: false,
 		right: false,
 	});
+
+	// useImperativeHandle(ref, () => ({
+    //     hello() {
+    //         console.log("Hello, says the componentOne");
+    //     }
+    // }));
 
 	// logout function:
 	const handleLogout =  async () =>{
@@ -202,6 +210,6 @@ const SideNavbar = () => {
 			</Drawer>
 		</div>
 	);
-};
+});
 
 export default SideNavbar;
