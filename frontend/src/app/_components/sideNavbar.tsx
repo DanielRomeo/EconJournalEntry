@@ -37,11 +37,9 @@ const SideNavbar = forwardRef((props, ref) => {
 		right: false,
 	});
 
-	// useImperativeHandle(ref, () => ({
-    //     hello() {
-    //         console.log("Hello, says the componentOne");
-    //     }
-    // }));
+	const handleLinkClick = (urlname: string) =>{
+		router.push(`/${urlname}`);
+	}
 
 	// logout function:
 	const handleLogout =  async () =>{
@@ -91,7 +89,7 @@ const SideNavbar = forwardRef((props, ref) => {
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding>
-					<ListItemButton>
+					<ListItemButton onClick={()=>{handleLinkClick('feed')}}>
 						&emsp;&emsp;&emsp;
 						<CgFeed></CgFeed>
 						&nbsp;&nbsp;
@@ -161,7 +159,7 @@ const SideNavbar = forwardRef((props, ref) => {
 				</ListItem>
 
 				<ListItem disablePadding>
-					<ListItemButton>
+					<ListItemButton onClick={()=>{handleLinkClick('profile')}}>
 						&emsp;&emsp;&emsp;
 						<IoPersonOutline></IoPersonOutline>
 						&nbsp;&nbsp;

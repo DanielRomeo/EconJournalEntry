@@ -21,7 +21,6 @@ const FeedComponent = () => {
 			// User is logged in
 			const uid = user.uid;
 			const email = user.email; // Include email if necessary
-			console.log('Logged in user:', { uid, email });
 		
 			// Fetch additional user details from Firestore
 			try {
@@ -29,7 +28,6 @@ const FeedComponent = () => {
 				const userDocSnap = await getDoc(userRef); // Get the user document snapshot
 				if (userDocSnap.exists()) {
 				  const userData = userDocSnap.data();
-				//   console.log('Complete user data:', userData);
 		  
 				} else {
 				  console.log('No user document found for this UID.');

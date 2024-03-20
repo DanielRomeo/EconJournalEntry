@@ -36,7 +36,7 @@ const ProfilePageComponent = () => {
 				const userDocSnap = await getDoc(userRef); // Get the user document snapshot
 				if (userDocSnap.exists()) {
 					const userData = userDocSnap.data();
-					console.log(userData);
+					
 					setUserdata({ 
 						...userData, 
 						firstname: userData.firstname  ,
