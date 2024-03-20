@@ -14,7 +14,24 @@
 	padding: 100px;
 	max-width: 1100px;
 
+	// when the device is now small:
+	@media(max-width: 767px){
+		// width: 1000px;
+		max-width: 2000px;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+
 	.headerRow {
+
+		// when the device is now small:
+		@media(max-width: 767px){
+			// display: flex;
+			// flex-direction: column;
+			// justify-content: center;
+			// align-items: center;
+		}
+
 		.postButton {
 			background-color: #543ee0;
 			border: 1px solid #543ee0;

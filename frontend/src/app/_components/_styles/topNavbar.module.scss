@@ -1,21 +1,10 @@
 .navBar{
     background-color: white;
-    
-    /* Don't collapse navbar until breakpoint (e.g., 992px) */
-    @media (min-width: 992px) {
-        .navbar-expand {
-        /* Remove the default collapse behavior */
+    border: 1px solid green;
+    @media (max-width: 100px) {
         flex-wrap: nowrap;
         justify-content: space-between;
-        }
-    }
-    
-    /* Apply Bootstrap's default collapse behavior for smaller screens */
-    @media (max-width: 991px) {
-        .navbar-expand {
-        /* Keep Bootstrap's default behavior */
-        }
-    }
+      }
 }
 
 .searchButtonInputSpan{

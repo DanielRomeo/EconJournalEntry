@@ -20,12 +20,12 @@ const FeedComponent = () => {
 			
 			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>
-					<Col lg="8" md="8" sm="6">
+					<Col lg="8" md="8" sm="12">
 						<h1>FEED</h1>
 						<small>Explore different content youd love </small>
 					</Col>
 
-					<Col lg="4" md="4" sm="6">
+					<Col lg="4" md="4" sm="12">
 						<Link href="/createpost">
 							<Button className={`${Styles.postButton}`}>
 								<FaPen /> Post a content

@@ -22,11 +22,10 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
 		const newHeight =
 			img.naturalHeight * (img.clientWidth / img.naturalWidth);
 		setHeight(newHeight);
-
-		
 	};
+
 	return (
-		<Navbar className={`${Styles.navBar} `} expand="lg">
+		<Navbar className={`${Styles.navBar} navbar-expand-sm `} expand="lg">
 			<Container className={`${Styles.navbarContainer}`}>
 				
 				<Navbar.Collapse id="basic-navbar-nav">
@@ -35,7 +34,7 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
                             <div className="input-group-prepend">
                                 <span className={`input-group-text ${Styles.searchButtonInputSpan}`} id="basic-addon1"><CiSearch size={25}></CiSearch></span>
                             </div>
-                            <input type="text" className={`${Styles.searchBox} form-control`}  aria-label="Username" aria-describedby="basic-addon1"/>
+                            <input type="text" className={`${Styles.searchBox} form-control`} placeholder="Search Chatter"  aria-label="Username" aria-describedby="basic-addon1"/>
                         </div>
 					</Nav>
 
