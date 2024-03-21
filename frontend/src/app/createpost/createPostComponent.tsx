@@ -2,12 +2,11 @@
 import Image from "next/image";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import React, { useState } from "react";
-import MarkdownEditor from "./markdownEditor"; // Assuming the path is correct
+import MarkdownEditor from "./markdownEditor";
 import Styles from "../_styles/CreatePost/CreatePostComponent.module.scss";
 import { addDoc, collection } from "firebase/firestore";
 import { db, auth, imageDb } from "../_components/firebaseConfig";
 import SideNavbar from "../_components/sideNavbar";
-
 import { v4 as uuidv4} from 'uuid'
 import {ref, uploadBytes, getDownloadURL, getStorage} from 'firebase/storage'
 
@@ -16,35 +15,47 @@ interface Post {
 	content: string;
 }
 
+
+// Main component
 const CreatePostComponent = () => {
 	const [post, setPost] = useState<Post>({ title: "", content: "" });
-	const [thumbnail, setThumbnail] = useState<any>(undefined); // thumbnail state
+	const [thumbnail, setThumbnail] = useState<any>(''); // thumbnail state
 	const [downloadUrl, setDownloadUrl] = useState<any>()
 
 	const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPost({ ...post, title: event.target.value });
 	};
-
 	const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setPost({ ...post, content: event.target.value });
 	};
-
 	const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		// const file = event.target.files?.[0];
-		const fileList : any= event.target.files;
+		const file: File | undefined = event.target.files?.[0]; // works
+		console.log(file);
 
-		setThumbnail(fileList);
-	};
+		if (file && file.type.startsWith('image/')) { // Ensure it's an image
+			const reader = new FileReader();
+			console.log("starts with image") // true
+
+			reader.onload = (event) => {
+				if (event.target && event.target.result) { // Check for existence and result
+					const blob = new Blob([event.target.result], { type: file.type });
+					// console.log(blob);
+					setThumbnail(blob)
+				  } else {
+					// Handle the case where reading failed (optional)
+				  }
+			}
+			// console.log(true);
+			reader.readAsArrayBuffer(file);
+		} else{
+			console.log('File is not an image.');
+		}
+
+	}
 
 	
 	// create post function:
 	const createPost = async () => {
-
-		if (thumbnail) {
-			const formData = new FormData();
-			// formData.append("image", thumbnail, fileSelected.name);
-		}
-
 
 		const imageRef = ref(imageDb, `files/${uuidv4()}`);
 
@@ -52,8 +63,6 @@ const CreatePostComponent = () => {
 		uploadBytes(imageRef, thumbnail).then( async (snapshot) => {
 			console.log('Uploaded a blob or file!');
 			console.log(snapshot)
-
-			// get download url:
 			await getDownloadURL(imageRef)
 				.then((url: string) => {
 				// Insert url into an <img> tag to "download"
@@ -92,12 +101,14 @@ const CreatePostComponent = () => {
 			},
 			created: new Date().toDateString(),
 		});
-	};
+	}; // end of creat post function
 
 	return (
 		<div className={`${Styles.main}`}>
 			<SideNavbar></SideNavbar>
 			<Container className={`${Styles.container}`}>
+			
+
 				<Row className={`${Styles.row1}`}>
 					<Col className={`${Styles.col}`} lg="12" md="12" sm="12">
 						<Button
