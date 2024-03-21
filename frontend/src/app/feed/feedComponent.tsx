@@ -11,7 +11,6 @@ import { auth, db } from "../_components/firebaseConfig";
 import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import Firebase Auth functions
 import { collection, doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 
-
 const FeedComponent = () => {
 
 	useEffect(()=>{
@@ -74,7 +73,6 @@ const FeedComponent = () => {
 							eventKey="Foryou"
 							title="For you"
 						>
-							<PostComponent></PostComponent>
 							<PostComponent></PostComponent>
 						</Tab>
 						<Tab

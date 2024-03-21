@@ -1,0 +1,36 @@
+.error{
+    background-color: red;
+    color: white;
+}
+
+.success{
+    background-color: #543ee0;
+    color: white;
+}
+
+.button{
+    border: 1px solid
+}
+
+.buttonSuccess{
+    border: 2px solid white;
+    color: white;
+    background-color: inherit;
+    font-weight: bold;
+    &:hover{
+        background-color: white;
+        color: #543ee0;
+    }
+}
+.buttonError{
+    border: 2px solid white;
+    color: white;
+    background-color: inherit;
+    
+    &:hover{
+        background-color: white;
+        // color: #543ee0;
+        border: 1px solid red;    
+        color: red;
+    }
+}
