@@ -80,14 +80,14 @@ const FeedComponent = () => {
 							eventKey="Featured"
 							title="Featured"
 						>
-							sdfsdfs
+							<PostComponent></PostComponent>
 						</Tab>
 						<Tab
 							className={`${Styles.tab}`}
 							eventKey="Recent"
 							title="Recent"
 						>
-							re
+							<PostComponent></PostComponent>
 						</Tab>
 					</Tabs>
 				</Row>
