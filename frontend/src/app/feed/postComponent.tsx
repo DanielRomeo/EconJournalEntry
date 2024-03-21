@@ -31,12 +31,17 @@ const PostComponent: React.FC = () => {
 
                 const data: any[] = [];
                 await snapshot.forEach(doc => {
-                    // data.push({ id: doc.id, ...doc.data() });
-					data.push({...doc.data()})
-					// console.log(doc.data())
-					// console.log("-------------------------------------")
+                    // console.log(doc.data())
+                
+					let newObject = {
+						id: doc.id,
+						...doc.data()
+					}
+					// console.log(newObject)	
+					data.push(newObject);
+					// console.log(data);
                 });
-
+				// console.log(data)
                 setPosts(data);
 				// console.log(data)
                 setLoading(false);
@@ -56,11 +61,12 @@ const PostComponent: React.FC = () => {
             ) : (
                 <div>
                     {posts.length > 0 ? (
-                        posts.map(post => (
-                            <Card key={post.id} className={`${Styles.card}`}>
+						// <div>{JSON.stringify(posts[0]["author"]["firstname"])}</div>
+                        posts.map((post: any, index: number) => (
+                            <Card key={index} className={`${Styles.card}`}>
 							
 							{/* {posts ? <div>{JSON.stringify(posts)}</div>: <div></div>} */}
-							<Link className={`${Styles.link}`} href='/post/1'>
+							{/* <Link className={`${Styles.link}`} href={`/post/${post.id}`}> */}
 							<Card.Body className={`${Styles.cardBodyUserinfo}`}>
 								<div className={`${Styles.imageDiv}`}>
 									<Image
@@ -73,35 +79,36 @@ const PostComponent: React.FC = () => {
 								</div>
 
 								<div className={`${Styles.detailsDiv}`}>
-									<h6>{post["firstname"]}</h6>
+									 {post.author.firstname} {post.author.lastname}
 									<p>
-										Product manager .<span>May 25th, 2023</span>
+										{post.author.type} .<span>{post.created}</span>
 									</p>
 								</div>
 							</Card.Body>
 
 							<Card.Body className={`${Styles.cardBodyPostDetails}`}>
+								<Link className={`${Styles.link}`} href={`/post/${post.id}`}>
 								<Card.Title className={`${Styles.cardBodyPostDetailsTitle}`}>
-									Starting out as a Product designer
+									{post.title}
 								</Card.Title>
+								</Link>
 								<Card.Text>
 									<SlBookOpen /> 10 mins read{" "}
 								</Card.Text>
 								<Card.Text>
-									Some quick example text to build on the card title and make
-									up the bulk of the card&apos;s content.
+									
 								</Card.Text>
 
 								<Image
 									className={`${Styles.postThumbnail}`}
-									src="/postthumbnailImage.jpg"
+									src={post.thumbnail}
 									width={400}
 									height={height}
 									onLoadingComplete={handleLoadComplete}
 									alt="Picture of the author"
 								/>
 							</Card.Body>
-							</Link>
+							{/* </Link> */}
 						</Card>
                         ))
                     ) : (

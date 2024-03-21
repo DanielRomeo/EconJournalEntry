@@ -94,7 +94,7 @@ const CreatePostComponent = () => {
 			let userDetails: UserDetails | null = await getUserDetails(auth);
 		
 			// Create a new post in Firestore
-			const postsCollectionRef = collection(db, "posts");
+			const postsCollectionRef =  await collection(db, "posts");
 			await addDoc(postsCollectionRef, {
 			  thumbnail: imageUrl,
 			  title: post.title,
