@@ -18,11 +18,7 @@ const LandingComponent = () => {
 		const newHeight =
 			img.naturalHeight * (img.clientWidth / img.naturalWidth);
 		setHeight(newHeight);
-
-		
 	};
-
-	
 
 	return (
 		<div>
