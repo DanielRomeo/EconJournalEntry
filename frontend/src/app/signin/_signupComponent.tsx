@@ -210,10 +210,7 @@ const SignupComponent: React.FC = () => {
 					&nbsp; Sign up with Google
 				</Button>
 
-				<Button className={`${Styles.FacbookButton}`}>
-					<FaFacebookF />
-					&nbsp; Sign up with Facebook
-				</Button>
+				
 			</Row>
 		</div>
 	);

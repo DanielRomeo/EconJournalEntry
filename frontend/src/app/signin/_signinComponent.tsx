@@ -161,12 +161,7 @@ const SigninComponent = () => {
 					</Button>
 				</FormGroup>
 
-				<FormGroup className="mb-3">
-					<Button className={`${Styles.FacbookButton}`}>
-						<FaFacebookF></FaFacebookF>
-						&nbsp; Login with Facebook
-					</Button>
-				</FormGroup>
+				
 			</Row>
 		</div>
 	);
