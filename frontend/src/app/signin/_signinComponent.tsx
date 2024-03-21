@@ -104,7 +104,6 @@ const SigninComponent = () => {
 			<Row className={`${Styles.header}`}>
 				<h3>Welcome back</h3>
 
-				{user ? <>user is logged in</> : <>no user</>}
 			</Row>
 
 			<Row className={`${Styles.signinRow}`}>
