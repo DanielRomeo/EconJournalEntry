@@ -21,6 +21,7 @@ interface StateType {
 
 const ProfilePageComponent = () => {
 	const [editModalShow, setEditModalShow] = useState<boolean>(false);
+	const [loading, setLoading] = useState<boolean>(true);
 
 	const [userData, setUserdata] = useState<StateType>({
 		thumbnail: '',
@@ -59,6 +60,7 @@ const ProfilePageComponent = () => {
 						email: userData.email  ,
 						type: userData.type  
 					});
+					setLoading(false);
 				} else {
 				  console.log('No user document found for this UID.');
 				}
@@ -80,52 +82,68 @@ const ProfilePageComponent = () => {
 			
 			
 			<Container className={Styles.container}>
-				<Row className={Styles.imageRow}>
-					<Col lg='12' md='12' sm='12'>
-					{
-						userData.thumbnail && userData.thumbnail.length > 0 ? 
-						<div>
-							<Image
-								className={`${Styles.image}`}
-								src={userData.thumbnail}
-								width={250}
-								height={250}
-								onLoadingComplete={handleLoadComplete}
-								alt="Picture of the author that uses the platform to write journals."
-							/>
-						</div>
-						: <CgProfile size={150} />
-					}
-						
-					</Col>
-				</Row>
+				{
+					loading ? <>Loading ...</> : 
+					
+					<>
+						<Row className={Styles.imageRow}>
+							<Col lg='12' md='12' sm='12'>
+							{
+								userData.thumbnail && userData.thumbnail.length > 0 ? 
+								<div>
+									<Image
+										className={`${Styles.image}`}
+										src={userData.thumbnail}
+										width={250}
+										height={250}
+										onLoadingComplete={handleLoadComplete}
+										alt="Picture of the author that uses the platform to write journals."
+									/>
+								</div>
+								: <CgProfile size={150} />
+							}
+								
+							</Col>
+						</Row>
 
-				<Row className={Styles.userInfoRow}>
-					<Col lg='12' md='12' sm='12'>
-						<h4>First name: <span>{userData.firstname}</span></h4>
-						<h4>Last name: <span>{userData.lastname}</span> </h4>
-						<h4>Email address: <span>{userData.email}</span></h4>
-						<h4>Writer/Reader: <span>{userData.type}</span></h4>
-					</Col>
-				</Row>
+						<Row className={Styles.userInfoRow}>
+							<Col lg='12' md='12' sm='12'>
+								<h4>First name: <span>{userData.firstname}</span></h4>
+								<h4>Last name: <span>{userData.lastname}</span> </h4>
+								<h4>Email address: <span>{userData.email}</span></h4>
+								<h4>Writer/Reader: <span>{userData.type}</span></h4>
+							</Col>
+						</Row>
 
-				<Row className={Styles.editAccountRow}>
-					<Col lg='12' md='12' sm='12'>
-						<Button onClick={() => setEditModalShow(true)} className={Styles.editAccountButton}>Edit Account</Button>
-					</Col>
-				</Row>
+						<Row className={Styles.editAccountRow}>
+							<Col lg='12' md='12' sm='12'>
+								<Button onClick={() => setEditModalShow(true)} className={Styles.editAccountButton}>Edit Account</Button>
+							</Col>
+						</Row>
 
-				<Row className={Styles.deleteAccountRow}>
-					<Col lg='12' md='12' sm='12'>
-						<Button className={Styles.deleteAccountButton}>Delete Account</Button>
-					</Col>
-				</Row>
+						<Row className={Styles.deleteAccountRow}>
+							<Col lg='12' md='12' sm='12'>
+								<Button className={Styles.deleteAccountButton}>Delete Account</Button>
+							</Col>
+						</Row>
+					</>
+				}
+
+				
 				
 			</Container>
-           
-			<EditAccountModal 
-			show={editModalShow}
-        	onHide={() => setEditModalShow(false)}></EditAccountModal>
+			{
+				loading ? <></> : 
+				<>
+					<EditAccountModal 
+					show={editModalShow}
+					onHide={() => setEditModalShow(false)}
+					userdata={userData ? userData : ''}
+					></EditAccountModal>
+				</>
+			}
+			
+			
 		</div>
 	);
 };
