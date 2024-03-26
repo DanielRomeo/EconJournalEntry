@@ -84,19 +84,24 @@ const EditAccountModal = (props: any) => {
 
     // onSubmit function:
     const onSubmit = (newUserData: StateType)=>{
+        setIsLoading(true);
         handleFormSubmit(newUserData);
     }
     //
-    const handleFormSubmit = async (newUserData: StateType) => {
+    const handleFormSubmit = async (newUserData: StateType | any) => {
         onAuthStateChanged(auth, async (user) => {
             if (user) {
               const uid: string = user.uid;
               try {
                 const userRef = doc(db, 'users', uid); // Reference to specific user
                 await updateDoc(userRef, newUserData); // Update user data
-                console.log("User data successfully updated in Firestore!");
+                // console.log("User data successfully updated in Firestore!");
+                setIsLoading(false);
+                location.reload();
               } catch (error) {
                 console.error("Error updating user data:", error);
+                setIsLoading(false);
+                location.reload();
               }
             } else {
               // User is not signed in
@@ -195,9 +200,16 @@ const EditAccountModal = (props: any) => {
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="primary" type='submit' >
-                        Save Changes
-                    </Button>
+                    {
+                        isLoading ? <>
+                            <Button variant="primary" disabled type='submit' >
+                                Loading...
+                            </Button>
+                        </> : <Button variant="primary" type='submit' >
+                                Save Changes
+                            </Button>
+                    }
+                    
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
