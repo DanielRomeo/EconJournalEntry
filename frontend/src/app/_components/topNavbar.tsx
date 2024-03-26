@@ -54,7 +54,7 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
 						</NavItem>
 
 						<NavItem>
-							<Link href="/profile">
+							<Link href="/account">
                             <Image
 								className={`${Styles.image}`}
 								src="/personSectionImage.png"

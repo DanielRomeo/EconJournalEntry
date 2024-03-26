@@ -159,7 +159,7 @@ const SideNavbar = forwardRef((props, ref) => {
 				</ListItem>
 
 				<ListItem disablePadding>
-					<ListItemButton onClick={()=>{handleLinkClick('profile')}}>
+					<ListItemButton onClick={()=>{handleLinkClick('account')}}>
 						&emsp;&emsp;&emsp;
 						<IoPersonOutline></IoPersonOutline>
 						&nbsp;&nbsp;
