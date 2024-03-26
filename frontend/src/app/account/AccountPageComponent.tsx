@@ -1,9 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { Container, Col, Row, Button } from "react-bootstrap";
-import SideNavbar from "../_components/sideNavbar";
 import TopNavbar from "../_components/topNavbar";
-// import Styles from '../_styles/Account/AccountPageComponent.module.scss'
 import Styles from '../_styles/Account/AccountPageComponent.module.scss'
 import { onAuthStateChanged } from "firebase/auth";
 import { doc } from "firebase/firestore";
@@ -11,7 +9,7 @@ import { auth, db } from "../_components/firebaseConfig";
 import { collection , getDoc} from "firebase/firestore";
 import Image from "next/image";
 import { CgProfile } from "react-icons/cg";
-
+import EditAccountModal from "./_EditAccountModal";
 
 interface StateType {
 	thumbnail?: string,
@@ -22,6 +20,7 @@ interface StateType {
 }
 
 const ProfilePageComponent = () => {
+	const [editModalShow, setEditModalShow] = useState<boolean>(false);
 
 	const [userData, setUserdata] = useState<StateType>({
 		thumbnail: '',
@@ -38,6 +37,8 @@ const ProfilePageComponent = () => {
 			img.naturalHeight * (img.clientWidth / img.naturalWidth);
 		setHeight(newHeight);
 	};
+
+	
 
 	useEffect(()=>{
 		onAuthStateChanged(auth, async (user: any) => {
@@ -108,13 +109,23 @@ const ProfilePageComponent = () => {
 					</Col>
 				</Row>
 
-				<Row className={Styles.editProfileRow}>
+				<Row className={Styles.editAccountRow}>
 					<Col lg='12' md='12' sm='12'>
-						<Button className={Styles.editProfileButton}>EditProfile</Button>
+						<Button onClick={() => setEditModalShow(true)} className={Styles.editAccountButton}>Edit Account</Button>
 					</Col>
 				</Row>
+
+				<Row className={Styles.deleteAccountRow}>
+					<Col lg='12' md='12' sm='12'>
+						<Button className={Styles.deleteAccountButton}>Delete Account</Button>
+					</Col>
+				</Row>
+				
 			</Container>
            
+			<EditAccountModal 
+			show={editModalShow}
+        	onHide={() => setEditModalShow(false)}></EditAccountModal>
 		</div>
 	);
 };
