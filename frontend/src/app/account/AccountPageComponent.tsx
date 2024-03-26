@@ -121,11 +121,11 @@ const ProfilePageComponent = () => {
 							</Col>
 						</Row>
 
-						<Row className={Styles.deleteAccountRow}>
+						{/* <Row className={Styles.deleteAccountRow}>
 							<Col lg='12' md='12' sm='12'>
 								<Button className={Styles.deleteAccountButton}>Delete Account</Button>
 							</Col>
-						</Row>
+						</Row> */}
 					</>
 				}
 
