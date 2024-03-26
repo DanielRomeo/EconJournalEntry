@@ -4,11 +4,18 @@ import { useRouter } from 'next/navigation';
 
 // validator libs
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, provider } from "../_components/firebaseConfig";
+import { collection,  updateDoc, doc} from 'firebase/firestore';
+import { db } from "../_components/firebaseConfig";
+import Styles from "../_styles/SigninPage/SignupComponent.module.scss";
+import { FcGoogle } from "react-icons/fc";
+import { FaFacebookF } from "react-icons/fa";
+import { onAuthStateChanged } from 'firebase/auth';
+
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { setDefaultResultOrder } from 'dns';
 
 // Schema
 const schema = yup.object().shape({
@@ -76,9 +83,27 @@ const EditAccountModal = (props: any) => {
     }
 
     // onSubmit function:
-    const onSubmit = (data: any)=>{
-        
+    const onSubmit = (newUserData: StateType)=>{
+        handleFormSubmit(newUserData);
     }
+    //
+    const handleFormSubmit = async (newUserData: StateType) => {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+              const uid: string = user.uid;
+              try {
+                const userRef = doc(db, 'users', uid); // Reference to specific user
+                await updateDoc(userRef, newUserData); // Update user data
+                console.log("User data successfully updated in Firestore!");
+              } catch (error) {
+                console.error("Error updating user data:", error);
+              }
+            } else {
+              // User is not signed in
+              console.log("No user is currently signed in");
+            }
+          });
+    };
 
     return (
         <Modal
@@ -92,8 +117,9 @@ const EditAccountModal = (props: any) => {
                 <Modal.Title>Edit your profile</Modal.Title>
             </Modal.Header>
 
+            <form onSubmit={handleSubmit(onSubmit)}>
             <Modal.Body>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                
                     <Row>
                         <Col lg="6" md="6" sm="12">
                             <FormGroup className="mb-3">
@@ -138,16 +164,16 @@ const EditAccountModal = (props: any) => {
                     <Row>
                         <FormGroup className="mb-3">
                             <select
-                                {...register("joiningas")}
+                                {...register("type")}
                                 className="form-select"
                                 aria-label="Default select example"
                             >
                                 <option value="reader">Reader</option>
                                 <option value="writer">Writer</option>
                             </select>
-                            {errors.joiningas && (
+                            {errors.type && (
                                 <span style={{ color: "red" }}>
-                                    {errors.joiningas.message}
+                                    {errors.type.message}
                                 </span>
                             )}
                         </FormGroup>
@@ -164,18 +190,19 @@ const EditAccountModal = (props: any) => {
                             
                         </FormGroup>
                     </Row>
-                </form>
+               
 
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" type='submit' >
                         Save Changes
                     </Button>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
             </Modal.Footer>
+            </form>
         </Modal>
     );
 }
