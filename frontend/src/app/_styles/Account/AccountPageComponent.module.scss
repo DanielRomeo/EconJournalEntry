@@ -1,0 +1,54 @@
+$primaryColor: #543ee0;
+
+.container{
+    background-color: lightgrey;
+    // color: white;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .imageRow{
+        margin-bottom: 30px;
+        .image{
+            border-radius: 50%;
+        }
+    }
+
+    .userInfoRow{
+        margin-bottom: 20px;
+        h4{
+
+            span{
+                font-weight: bold;
+            }
+        }
+    }
+
+    .editAccountRow{
+        margin-bottom: 10px;
+        .editAccountButton{
+            border: 1px solid $primaryColor;
+            background-color: $primaryColor;
+            color: white;
+            &:hover{
+                background-color: white;
+                color: $primaryColor;
+            }
+        }
+    }
+    .deleteAccountRow{
+        .deleteAccountButton{
+            border: 1px solid red;
+            background-color: red;
+            color: white;
+            &:hover{
+                background-color: white;
+                color: red;
+            }
+        }
+       
+    }
+
+}
