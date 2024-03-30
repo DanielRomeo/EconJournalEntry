@@ -136,7 +136,6 @@ const EditAccountModal = (props: any) => {
                                     className={`form-control`}
                                     type="text"
                                     id="firstName"
-                                    value={props.userdata.firstname}
                                 />
                                 {errors.firstname && (
                                     <span style={{ color: "red" }}>
