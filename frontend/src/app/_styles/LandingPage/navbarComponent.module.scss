@@ -1,26 +1,69 @@
+@use "../theme" as theme;
+
 .navBar {
-	.navbarContainer {
-		.navbarBrand {
-			// color: brown;
-		}
+  background: rgba(18, 42, 48, 0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 
-		.navbarLink {
-			text-decoration: none;
-			color: #543ee0;
-			font-weight: bold;
-		}
+  .navbarContainer {
+    .navbarBrand {
+      .navbarLink {
+        text-decoration: none;
+        font-family: 'Playfair Display', serif;
+        font-size: 1.35rem;
+        font-weight: 900;
+        color: theme.$color-primary;
+        letter-spacing: 0.02em;
+      }
+    }
 
-		.loginButton {
-			border: 1px solid #543ee0;
-			background-color: inherit;
-			color: black;
-			margin: 5px;
-		}
-		.signupButton {
-			margin: 5px;
-			border: 1px solid #543ee0;
-			background-color: #543ee0;
-			color: white;
-		}
-	}
+    .navLink {
+      color: rgba(255,255,255,0.75);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+      padding: 0.5rem 0.8rem;
+
+      &:hover { color: theme.$color-primary; }
+    }
+
+    .loginButton {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: #fff;
+      font-weight: 600;
+      border-radius: theme.$radius-pill;
+      padding: 0.5rem 1.4rem;
+      margin: 0 0.3rem;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+
+      &:hover {
+        border-color: theme.$color-primary;
+        color: theme.$color-primary;
+        background: transparent;
+      }
+    }
+
+    .signupButton {
+      background: theme.$color-primary;
+      border: 1.5px solid theme.$color-primary;
+      color: theme.$color-dark;
+      font-weight: 700;
+      border-radius: theme.$radius-pill;
+      padding: 0.5rem 1.4rem;
+      margin: 0 0.3rem;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+
+      &:hover {
+        background: theme.$color-primary-light;
+        border-color: theme.$color-primary-light;
+        transform: translateY(-1px);
+      }
+    }
+  }
 }

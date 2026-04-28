@@ -1,0 +1,111 @@
+@use "../../_styles/theme" as theme;
+
+.signinPage {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  @media(max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Left image panel ──────────────────────────────────────────────────────────
+.imagePanel {
+  background:
+    linear-gradient(160deg, rgba(18,42,48,0.90) 30%, rgba(245,191,28,0.18) 100%),
+    url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1200&q=80') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 60px;
+  position: relative;
+
+  @media(max-width: 768px) { display: none; }
+
+  .brandLogo {
+    position: absolute;
+    top: 40px; left: 60px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: theme.$color-primary;
+  }
+
+  .tagline {
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+      color: #fff;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .decorLine {
+      width: 48px;
+      height: 4px;
+      background: theme.$color-primary;
+      border-radius: 2px;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+// ── Right form panel ──────────────────────────────────────────────────────────
+.formPanel {
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 48px;
+  overflow-y: auto;
+
+  @media(max-width: 768px) { padding: 40px 24px; }
+
+  .formContainer {
+    width: 100%;
+    max-width: 440px;
+
+    .mobileBrand {
+      display: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: theme.$color-primary;
+      margin-bottom: 2rem;
+
+      @media(max-width: 768px) { display: block; }
+    }
+
+    // Bootstrap tabs override
+    :global(.nav-tabs) {
+      border-bottom: 2px solid theme.$color-border;
+      margin-bottom: 2rem;
+
+      :global(.nav-link) {
+        color: theme.$color-text-light;
+        font-weight: 600;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0;
+        transition: color 0.2s;
+
+        &:hover { color: theme.$color-dark; }
+
+        &:global(.active) {
+          color: theme.$color-dark;
+          border-bottom: 3px solid theme.$color-primary;
+          background: transparent;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

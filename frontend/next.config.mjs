@@ -3,7 +3,7 @@
 
 const nextConfig = {
     images: {
-        domains: ['firebasestorage.googleapis.com', 'res.cloudinary.com'],
+        domains: ['firebasestorage.googleapis.com', 'res.cloudinary.com', 'unsplash.com', 'images.unsplash.com'],
         remotePatterns: [
           {
             protocol: 'https',

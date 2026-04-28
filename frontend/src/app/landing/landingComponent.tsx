@@ -1,290 +1,272 @@
+"use client";
 import LandingNavbar from "./navbarComponent";
-import { Button, Container, Row, Col, Card } from "react-bootstrap";
+import { Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import Styles from "../_styles/LandingPage/LandingComponent.module.scss";
 import Image from "next/image";
-import { Image as ImageReact } from "react-bootstrap";
-import { FaChartLine } from "react-icons/fa";
+import { FaChartLine, FaUsers, FaPenNib, FaArrowRight } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
 import { IoNewspaperOutline } from "react-icons/io5";
-
-
+import Link from "next/link";
 
 const LandingComponent = () => {
-
-	const [height, setHeight] = useState<number>(0); // State to store calculated height
-
-	const handleLoadComplete = (img: any) => {
-		const newHeight =
-			img.naturalHeight * (img.clientWidth / img.naturalWidth);
-		setHeight(newHeight);
-	};
-
 	return (
 		<div>
-			<LandingNavbar></LandingNavbar>
-			{/* Landing section */}
-			<div className={`${Styles.landingSection}`}>
-				<Container className={`${Styles.landingSectionContainer}`}>
-					<h1>Welcome to chatter: A Haven for Text-Based Content</h1>
-					<small>
-						Unleash the Power of Words, Connect with Like-minded
-						Readers and Writers{" "}
-					</small>
-					<br />
-					<Button className={`${Styles.landingButton}`}>
-						Get started
-					</Button>
+			<LandingNavbar />
+
+			{/* ── Hero ─────────────────────────────────────────────────────── */}
+			<div className={Styles.landingSection}>
+				<Container className={Styles.landingSectionContainer}>
+					<p className={Styles.eyebrow}>Economics · Finance · Ideas</p>
+					<h1>
+						Where Great <em>Economic</em> Ideas
+						Find Their Voice
+					</h1>
+					<p>
+						Econ Journal Entry connects writers and readers passionate
+						about economics, finance, and evidence-based thinking.
+					</p>
+					<div className={Styles.heroButtons}>
+						<Link href="/signin">
+							<Button className={Styles.landingButton}>
+								Start Reading &nbsp;<FaArrowRight />
+							</Button>
+						</Link>
+						<Link href="/signin">
+							<Button className={Styles.outlineButton}>
+								Write an Article
+							</Button>
+						</Link>
+					</div>
 				</Container>
 			</div>
-			{/* About secttion */}
-			<div className={`${Styles.aboutSection}`}>
-				<Container className={`${Styles.aboutSectionContainer}`}>
-					<Row className={`${Styles.aboutSectionRow}`}>
-						<Col className={`${Styles.aboutSectionCol1}`} lg="6" md="6" sm="12">
-							<h1>About Chatter</h1>
 
+			{/* ── Stats Bar ────────────────────────────────────────────────── */}
+			<div className={Styles.statsBar}>
+				<Container>
+					<div className={Styles.statsContainer}>
+						<div className={Styles.stat}>
+							<span className={Styles.statNumber}>12K+</span>
+							<span className={Styles.statLabel}>Readers</span>
+						</div>
+						<div className={Styles.stat}>
+							<span className={Styles.statNumber}>800+</span>
+							<span className={Styles.statLabel}>Articles</span>
+						</div>
+						<div className={Styles.stat}>
+							<span className={Styles.statNumber}>340+</span>
+							<span className={Styles.statLabel}>Writers</span>
+						</div>
+						<div className={Styles.stat}>
+							<span className={Styles.statNumber}>50+</span>
+							<span className={Styles.statLabel}>Categories</span>
+						</div>
+					</div>
+				</Container>
+			</div>
+
+			{/* ── About ────────────────────────────────────────────────────── */}
+			<div className={Styles.aboutSection}>
+				<Container className={Styles.aboutSectionContainer}>
+					<Row className={`${Styles.aboutSectionRow} align-items-center`}>
+						<Col className={Styles.aboutSectionCol1} lg="6" md="6" sm="12">
+							<span className={Styles.sectionTag}>About the Platform</span>
+							<h1>A Haven for Text-Based Economic Thought</h1>
 							<p>
-								Chatter is a multi-functional platform where
-								authors and readers can have access to their own
-								content. It aims to be a traditional bookworms
-								heaven and a blog to get access to more text
-								based content. Our vision is to foster an
-								inclusive and vibrant community where diversity
-								is celebrated. We encourage open-mindedness and
-								respect for all individuals, regardless of their
-								backgrounds or beliefs. By promoting dialogue
-								and understanding, we strive{" "}
+								Econ Journal Entry is a multi-functional platform where
+								economists, analysts, students, and curious minds can
+								publish and discover rigorous, well-written content.
+								Our vision is a community where insight is celebrated
+								and ideas travel far.
 							</p>
 						</Col>
 
-						<Col className={`${Styles.aboutSectionCol2}`} lg="6" md="6" sm="12">
-							{/* <Image
-								className={`${Styles.image}`}
-								// style={{'border':'1px solid red'}}
-								src="/aboutSectionImage.jpg"
-								// width={100}
-								// height={height}
-								// onLoadingComplete={handleLoadComplete}
-								layout="fill"
-								alt="Picture of a group of asian individuals in a library."
-							/> */}
-							<Card className="mb-3">
-								<Card.Img variant="top" className="dynamic-image" src="/aboutSectionImage.jpg" />
-							</Card>
+						<Col className={Styles.aboutSectionCol2} lg="6" md="6" sm="12">
+							<div className={Styles.aboutImage}>
+								{/* Unsplash: economics library reading */}
+								<img
+									src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
+									alt="Economist reading in a modern library"
+								/>
+							</div>
 						</Col>
 					</Row>
 				</Container>
 			</div>
-			{/* Why you should join section */}
-			<div className={`${Styles.whyJoinSection}`}>
-				<Container className={`${Styles.whyJoinSectionContainer}`}>
-					<Row className={`${Styles.headerRow}`}>
-						<h1>Why you should join chatter</h1>
-					</Row>
 
-					<Row className={`${Styles.descriptionRow}`}>
+			{/* ── Why Join ─────────────────────────────────────────────────── */}
+			<div className={Styles.whyJoinSection}>
+				<Container className={Styles.whyJoinSectionContainer}>
+					<Row className={Styles.headerRow}>
+						<span className={Styles.sectionTag}>Platform Features</span>
+						<h1>Why Join Econ Journal Entry</h1>
+					</Row>
+					<Row className={Styles.descriptionRow}>
 						<p>
-							Our goal is to make writers and readers see our
-							platform as their next heaven for blogging, ensuring
-							ease in interactions, connecting with like-minded
-							peers, have access to favorite content based on
-							interests and able to communicate your great ideas
-							with people
+							Built for writers who care about depth and readers who demand quality.
+							Your ideas deserve a platform that takes them seriously.
 						</p>
 					</Row>
 
-					<Row className={`${Styles.cardsRow}`}>
+					<Row className={`${Styles.cardsRow} g-4`}>
 						<Col lg="4" md="6" sm="12">
-							<Card className={`${Styles.card}`}>
-								<Card.Body>
-									<Card.Title>
-										<FaChartLine size={60} />
-									</Card.Title>
-									<Card.Title
-										className={`${Styles.cardTitle}`}
-									>
-										Analytics
-									</Card.Title>
-									<Card.Text>
-										Analytics to track the number of views,
-										likes and comment and also analyze the
-										performance of your articles over a
-										period of time
-									</Card.Text>
-								</Card.Body>
-							</Card>
+							<div className={Styles.card}>
+								<div className={Styles.iconWrap}><FaChartLine size={28} /></div>
+								<p className={Styles.cardTitle}>Analytics</p>
+								<p className={Styles.cardText}>
+									Track views, likes, and engagement. Understand what
+									resonates with your audience over time.
+								</p>
+							</div>
 						</Col>
-
 						<Col lg="4" md="6" sm="12">
-							<Card className={`${Styles.card}`}>
-								<Card.Body>
-									<Card.Title>
-										<MdGroups size={60} />
-									</Card.Title>
-									<Card.Title
-										className={`${Styles.cardTitle}`}
-									>
-										Social interactions
-									</Card.Title>
-									<Card.Text>
-										Users on the platform can interact with
-										posts they like, comment and engage in
-										discussions
-									</Card.Text>
-								</Card.Body>
-							</Card>
+							<div className={Styles.card}>
+								<div className={Styles.iconWrap}><MdGroups size={28} /></div>
+								<p className={Styles.cardTitle}>Community</p>
+								<p className={Styles.cardText}>
+									Connect with fellow economists, finance professionals,
+									and intellectually curious readers worldwide.
+								</p>
+							</div>
 						</Col>
-
 						<Col lg="4" md="6" sm="12">
-							<Card className={`${Styles.card}`}>
-								<Card.Body>
-									<Card.Title>
-										<IoNewspaperOutline size={60} />
-									</Card.Title>
-									<Card.Title
-										className={`${Styles.cardTitle}`}
-									>
-										Content creation
-									</Card.Title>
-									<Card.Text>
-										Write nice and appealing with our
-										in-built markdown, a rich text editor
-									</Card.Text>
-								</Card.Body>
-							</Card>
-						</Col>
-					</Row>
-				</Container>
-			</div>{" "}
-			{/* End of why join section*/}
-			{/* Person section */}
-			<div className={`${Styles.personSection}`}>
-				<Container className={`${Styles.personSectionContainer}`}>
-					<Row className={`${Styles.personSectionRow}`}>
-						<Col className={`${Styles.col1}`} lg="4" md="6" sm="12">
-							
-							<Image
-								className={`${Styles.image}`}
-								src="/personSectionImage.png"
-								width={250}
-								height={250}
-								onLoadingComplete={handleLoadComplete}
-								alt="Picture of the author that uses the platform to write journals."
-							/>
-						</Col>
-
-						<Col className={`${Styles.col2}`} lg="8" md="6" sm="12">
-							<p>
-								&quot;Chatter has become an integral part of my
-								online experience. As a user of this incredible
-								blogging platform, I have discovered a vibrant
-								community of individuals who are passionate
-								about sharing their ideas and engaging in
-								thoughtful discussions.&quot;
-							</p>
-
-							<h6>
-								Adebobola Muhydeen,{" "}
-								<small>Software developer at Apple</small>{" "}
-							</h6>
-
-							<Button className={`${Styles.joinButton}`}>
-								Join chatter
-							</Button>
+							<div className={Styles.card}>
+								<div className={Styles.iconWrap}><FaPenNib size={28} /></div>
+								<p className={Styles.cardTitle}>Rich Editor</p>
+								<p className={Styles.cardText}>
+									Write with our markdown editor, embed charts, images,
+									and video — publish professional-grade content.
+								</p>
+							</div>
 						</Col>
 					</Row>
 				</Container>
 			</div>
-			{/* write, read, connect section */}
-			<div className={`${Styles.writeSection}`}>
-				<Container className={`${Styles.writeSectionContainer}`}>
-					<Row className={`${Styles.writeSectionRow}`}>
-						<Col className={`${Styles.col1}`} lg="6" md="6" sm="12">
-							<Container>
-								<Row className={`${Styles.imageDivisionRow}`}>
-									<Col lg='6' md='6' sm='6'
-										className={`${Styles.imageDivisionRowCol1}`}
-									>
-											<Image
-												className={`${Styles.image}`}
-												src="/writeSectionImage1.jpg"
-												width={150}
-												height={height}
-												onLoadingComplete={handleLoadComplete}
-												alt="Picture of the author that uses the platform to write journals."
-												/>
-											<Image
-												className={`${Styles.image}`}
-												src="/writeSectionImage2.jpg"
-												width={150}
-												height={height}
-												onLoadingComplete={handleLoadComplete}
-												alt="Picture of the author that uses the platform to write journals."
-												/>
-									</Col>
 
-									<Col lg='6' md='6' sm='6'
-										className={`${Styles.imageDivisionRowCol2}`}
-									>
-											<Image
-												className={`${Styles.image}`}
-												src="/writeSectionImage3.jpg"
-												width={150}
-												height={height}
-												onLoadingComplete={handleLoadComplete}
-												alt="Picture of the author that uses the platform to write journals."
-												/>
-									</Col>
-								</Row>
-							</Container>
+			{/* ── Testimonial ──────────────────────────────────────────────── */}
+			<div className={Styles.personSection}>
+				<Container className={Styles.personSectionContainer}>
+					<Row className={`${Styles.personSectionRow} align-items-center`}>
+						<Col className={Styles.col1} lg="4" md="5" sm="12">
+							<div className={Styles.avatarWrap}>
+								<Image
+									className={Styles.image}
+									src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80"
+									width={240}
+									height={240}
+									alt="Featured writer"
+								/>
+							</div>
 						</Col>
 
-						<Col className={`${Styles.col2}`} lg="6" md="6" sm="12">
-							<h1>
-								Write, read and connect with great minds on
-								chatter
-							</h1>
-							<p>
-								Share people your great ideas, and also read
-								write-ups based on your interests. connect with
-								people of same interests and goals{" "}
-							</p>
-							<Button className={`${Styles.getStartedButton}`}>
-								Get started
-							</Button>
+						<Col className={Styles.col2} lg="8" md="7" sm="12">
+							<blockquote>
+								"Econ Journal Entry gave my research a real audience.
+								The quality of discourse here is unlike anything else
+								I have found online — rigorous, respectful, and genuinely engaging."
+							</blockquote>
+							<div className={Styles.attribution}>
+								<h6>Dr. Amara Osei, <small>Senior Economist at Oxford</small></h6>
+							</div>
+							<Link href="/signin">
+								<Button className={Styles.joinButton}>Join the Community</Button>
+							</Link>
 						</Col>
 					</Row>
 				</Container>
 			</div>
-			{/* footer */}
-			<div className={`${Styles.footer}`}>
+
+			{/* ── Write / Read / Connect ────────────────────────────────────── */}
+			<div className={Styles.writeSection}>
+				<Container className={Styles.writeSectionContainer}>
+					<Row className={`${Styles.writeSectionRow} align-items-center`}>
+						<Col className={Styles.col1} lg="6" md="6" sm="12">
+							<div className={Styles.imageGrid}>
+								<div className={Styles.gridImg}>
+									<img
+										src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=600&q=80"
+										alt="Writer at laptop"
+									/>
+								</div>
+								<div className={Styles.gridImg}>
+									<img
+										src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&q=80"
+										alt="Financial charts and data"
+									/>
+								</div>
+								<div className={Styles.gridImg}>
+									<img
+										src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&q=80"
+										alt="Reading and learning"
+									/>
+								</div>
+							</div>
+						</Col>
+
+						<Col className={Styles.col2} lg="6" md="6" sm="12">
+							<span className={Styles.sectionTag}>Get Started Today</span>
+							<h1>Write, Read and Connect with Great Minds</h1>
+							<p>
+								Share your analysis, discover perspectives that challenge
+								your thinking, and build relationships with people who
+								take ideas as seriously as you do.
+							</p>
+							<Link href="/signin">
+								<Button className={Styles.getStartedButton}>
+									Get Started Free &nbsp;<FaArrowRight />
+								</Button>
+							</Link>
+						</Col>
+					</Row>
+				</Container>
+			</div>
+
+			{/* ── Footer ───────────────────────────────────────────────────── */}
+			<div className={Styles.footer}>
 				<Container>
-					<Row>
-						<Col lg="3" md="3" sm="12">
-							<h4>Chatter</h4>
+					<Row className="g-4">
+						<Col lg="4" md="4" sm="12">
+							<div className={Styles.footerBrand}>
+								<h4>Econ Journal Entry</h4>
+								<p>
+									A platform for rigorous economic thought,
+									connecting writers and readers who believe
+									ideas can change the world.
+								</p>
+							</div>
 						</Col>
 
-						<Col lg="3" md="3" sm="12">
-							<h4>Explore</h4>
-							<p>Community</p>
-							<p>Trending Blogs</p>
-							<p>Chatter for teams</p>
+						<Col lg="2" md="3" sm="6">
+							<div className={Styles.footerCol}>
+								<h4>Explore</h4>
+								<p>Community</p>
+								<p>Trending Posts</p>
+								<p>Teams</p>
+							</div>
 						</Col>
 
-						<Col lg="3" md="3" sm="12">
-							<h4>Support</h4>
-							<p>Suppor docs</p>
-							<p>Join slack</p>
-							<p>Contact</p>
+						<Col lg="2" md="3" sm="6">
+							<div className={Styles.footerCol}>
+								<h4>Support</h4>
+								<p>Documentation</p>
+								<p>Join Slack</p>
+								<p>Contact Us</p>
+							</div>
 						</Col>
 
-						<Col lg="3" md="3" sm="12">
-							<h4>Official blog</h4>
-							<p>Official blog</p>
-							<p>Engineering blog</p>
+						<Col lg="2" md="2" sm="6">
+							<div className={Styles.footerCol}>
+								<h4>Blog</h4>
+								<p>Official Blog</p>
+								<p>Engineering</p>
+							</div>
 						</Col>
 					</Row>
+
+					<hr className={Styles.footerDivider} />
+					<p className={Styles.footerBottom}>
+						© {new Date().getFullYear()} Econ Journal Entry. All rights reserved.
+					</p>
 				</Container>
 			</div>
 		</div>
