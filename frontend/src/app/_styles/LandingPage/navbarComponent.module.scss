@@ -1,69 +1,241 @@
 @use "../theme" as theme;
 
 .navBar {
-  background: rgba(18, 42, 48, 0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  position: sticky;
-  top: 0;
+  position: fixed;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
+  background: transparent;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  padding: 0;
 
-  .navbarContainer {
-    .navbarBrand {
-      .navbarLink {
-        text-decoration: none;
-        font-family: 'Playfair Display', serif;
-        font-size: 1.35rem;
-        font-weight: 900;
-        color: theme.$color-primary;
-        letter-spacing: 0.02em;
-      }
-    }
+  &.scrolled {
+    background: rgba(10, 22, 26, 0.96);
+    backdrop-filter: blur(16px);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.3);
+  }
+}
 
-    .navLink {
-      color: rgba(255,255,255,0.75);
-      font-weight: 500;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-      padding: 0.5rem 0.8rem;
+.navbarContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  padding: 0 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
+}
 
-      &:hover { color: theme.$color-primary; }
-    }
+// ── Logo Block ────────────────────────────────────────────────────────────────
+.logoBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
 
-    .loginButton {
-      background: transparent;
-      border: 1.5px solid rgba(255,255,255,0.3);
-      color: #fff;
-      font-weight: 600;
-      border-radius: theme.$radius-pill;
-      padding: 0.5rem 1.4rem;
-      margin: 0 0.3rem;
-      font-size: 0.9rem;
-      transition: all 0.2s;
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: theme.$color-primary;
+  color: theme.$color-dark;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  letter-spacing: -0.02em;
+  flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(245,191,28,0.35);
+}
 
-      &:hover {
-        border-color: theme.$color-primary;
-        color: theme.$color-primary;
-        background: transparent;
-      }
-    }
+.logoText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
 
-    .signupButton {
-      background: theme.$color-primary;
-      border: 1.5px solid theme.$color-primary;
-      color: theme.$color-dark;
-      font-weight: 700;
-      border-radius: theme.$radius-pill;
-      padding: 0.5rem 1.4rem;
-      margin: 0 0.3rem;
-      font-size: 0.9rem;
-      transition: all 0.2s;
+.logoMain {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 0.95rem;
+  color: #fff;
+  letter-spacing: 0.08em;
+}
 
-      &:hover {
-        background: theme.$color-primary-light;
-        border-color: theme.$color-primary-light;
-        transform: translateY(-1px);
-      }
+.logoSub {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 0.65rem;
+  color: theme.$color-primary;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+// ── Desktop Nav Links ─────────────────────────────────────────────────────────
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  @media(max-width: 768px) { display: none; }
+}
+
+.navLink {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  color: rgba(255,255,255,0.72);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: theme.$radius-sm;
+  transition: all 0.2s;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px; left: 50%; right: 50%;
+    height: 2px;
+    background: theme.$color-primary;
+    border-radius: 2px;
+    transition: left 0.2s, right 0.2s;
+  }
+
+  &:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.06);
+
+    &::after {
+      left: 1rem;
+      right: 1rem;
     }
   }
+}
+
+// ── CTA Group ────────────────────────────────────────────────────────────────
+.ctaGroup {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  @media(max-width: 768px) { display: none; }
+}
+
+.loginLink {
+  color: rgba(255,255,255,0.78);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: theme.$radius-sm;
+  transition: color 0.2s;
+
+  &:hover { color: #fff; }
+}
+
+.ctaButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: theme.$color-primary;
+  color: theme.$color-dark;
+  border: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.4rem;
+  border-radius: theme.$radius-sm;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 14px rgba(245,191,28,0.3);
+
+  &:hover {
+    background: theme.$color-primary-light;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(245,191,28,0.4);
+
+    svg { transform: translateX(3px); }
+  }
+
+  svg { transition: transform 0.2s; }
+}
+
+// ── Hamburger ────────────────────────────────────────────────────────────────
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  width: 36px;
+
+  @media(max-width: 768px) { display: flex; }
+
+  span {
+    display: block;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  &.open {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+// ── Mobile Menu ───────────────────────────────────────────────────────────────
+.mobileMenu {
+  display: none;
+  flex-direction: column;
+  padding: 1rem 2rem 2rem;
+  background: rgba(10, 22, 26, 0.97);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  gap: 0.25rem;
+  transform: translateY(-10px);
+  opacity: 0;
+  transition: all 0.25s ease;
+  pointer-events: none;
+
+  @media(max-width: 768px) { display: flex; }
+
+  &.mobileMenuOpen {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.mobileLink {
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transition: color 0.2s;
+
+  &:hover { color: theme.$color-primary; }
+}
+
+.mobileCta {
+  margin-top: 1rem;
+  width: 100%;
+  background: theme.$color-primary;
+  color: theme.$color-dark;
+  border: none;
+  font-weight: 700;
+  padding: 0.9rem;
+  border-radius: theme.$radius-sm;
+  cursor: pointer;
+  font-size: 1rem;
 }

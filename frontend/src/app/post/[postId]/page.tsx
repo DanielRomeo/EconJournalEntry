@@ -89,19 +89,7 @@ const PostPage = ({ params }: PostPageProps) => {
 								alt={post.title}
 							/>
 
-							{/* YouTube embed if found in content */}
-							{youtubeId && (
-								<div className={Styles.youtubeWrap}>
-									<iframe
-										src={`https://www.youtube.com/embed/${youtubeId}`}
-										title="YouTube video"
-										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-										allowFullScreen
-									/>
-								</div>
-							)}
-
-							<hr />
+							
 							<h1>{post.title}</h1>
 							{post.category && (
 								<span className={Styles.categoryBadge}>{post.category}</span>
@@ -114,6 +102,22 @@ const PostPage = ({ params }: PostPageProps) => {
 							<div className={Styles.articleBody}>
 								<MarkdownEditor value={post.post} />
 							</div>
+
+							<hr />
+
+							{/* YouTube embed if found in content */}
+							{youtubeId && (
+								<div className={Styles.youtubeWrap}>
+									<iframe
+										src={`https://www.youtube.com/embed/${youtubeId}`}
+										title="YouTube video"
+										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+										allowFullScreen
+									/>
+								</div>
+							)}
+
+							
 
 							<hr />
 
