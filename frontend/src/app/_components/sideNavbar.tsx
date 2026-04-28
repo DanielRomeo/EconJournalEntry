@@ -105,7 +105,7 @@ const SideNavbar = forwardRef((props, ref) => {
 						<ListItemText primary={"Create Post"} />
 					</ListItemButton>
 				</ListItem>
-				<ListItem disablePadding>
+				{/* <ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;&emsp;
 						<IoBookmarksOutline></IoBookmarksOutline>
@@ -128,8 +128,10 @@ const SideNavbar = forwardRef((props, ref) => {
 						&nbsp;&nbsp;
 						<ListItemText primary={"Drafts"} />
 					</ListItemButton>
-				</ListItem>
-				<ListItem disablePadding>
+				</ListItem> */}
+
+
+				{/* <ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;&emsp;
 						<MdInsertChartOutlined></MdInsertChartOutlined>
@@ -138,8 +140,10 @@ const SideNavbar = forwardRef((props, ref) => {
 					</ListItemButton>
 				</ListItem>
 
-				<Divider />
-				<ListItem disablePadding>
+				<Divider /> */}
+
+
+				{/* <ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;
 						<ListItemText
@@ -155,9 +159,9 @@ const SideNavbar = forwardRef((props, ref) => {
 						&emsp;&emsp; &emsp;
 						<ListItemText primary={"Programming"} />
 					</ListItemButton>
-				</ListItem>
+				</ListItem> */}
 				<Divider />
-				<ListItem disablePadding>
+				{/* <ListItem disablePadding>
 					<ListItemButton>
 						&emsp;
 						<ListItemText
@@ -165,7 +169,7 @@ const SideNavbar = forwardRef((props, ref) => {
 							primary={"Personal"}
 						/>
 					</ListItemButton>
-				</ListItem>
+				</ListItem> */}
 
 				<ListItem disablePadding>
 					<ListItemButton onClick={()=>{handleLinkClick('account')}}>
@@ -176,14 +180,14 @@ const SideNavbar = forwardRef((props, ref) => {
 					</ListItemButton>
 				</ListItem>
 
-				<ListItem disablePadding>
+				{/* <ListItem disablePadding>
 					<ListItemButton>
 						&emsp;&emsp;&emsp;
 						<IoIosNotificationsOutline></IoIosNotificationsOutline>
 						&nbsp;&nbsp;
 						<ListItemText primary={"Notifications"} />
 					</ListItemButton>
-				</ListItem>
+				</ListItem> */}
 				<Divider />
 
 				<ListItem disablePadding>
