@@ -1,94 +1,121 @@
 @use "../theme" as theme;
 
-.cardsContainer {
-	width: 100%;
-}
+.cardsContainer { width: 100%; }
 
-.gridRow {
-	row-gap: 1.2rem;
-}
+.gridRow { row-gap: 1.5rem; }
 
-.gridCol {
-	display: flex;
-}
+.gridCol { display: flex; }
 
 .card {
-	width: 100%;
-	border-radius: theme.$radius-md;
-	border: 1px solid theme.$color-border;
-	margin-bottom: 0;
-	box-shadow: theme.$shadow-card;
-	overflow: hidden;
-	background: #ffffff;
+  width: 100%;
+  border-radius: theme.$radius-md;
+  border: 1px solid theme.$color-border;
+  background: #fff;
+  box-shadow: theme.$shadow-card;
+  overflow: hidden;
+  transition: transform 0.22s, box-shadow 0.22s;
 
-	.link{
-		text-decoration: none;
-		color: #12192f;
-	}
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: theme.$shadow-strong;
+  }
 
-	.cardBodyUserinfo {
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
-	}
+  .link {
+    text-decoration: none;
+    color: theme.$color-dark;
+  }
 
-	.createdDate {
-		color: theme.$color-muted;
-		font-size: 0.9rem;
-	}
+  .cardBodyUserinfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1rem;
+  }
 
-	.postThumbnail {
-		width: 100%;
-		height: 190px;
-		object-fit: cover;
-		border-top: 1px solid theme.$color-border;
-		border-bottom: 1px solid theme.$color-border;
-	}
+  .createdDate {
+    color: theme.$color-text-light;
+    font-size: 0.82rem;
+    white-space: nowrap;
+  }
 
-	.cardBodyPostDetails {
-		.cardBodyPostDetailsTitle {
-			font-weight: bold;
-			font-size: 1.2rem;
-			margin-bottom: 0.55rem;
-		}
-		.readMeta {
-			color: theme.$color-muted;
-			margin-bottom: 0.5rem;
-		}
-		.postSnippet {
-			min-height: 65px;
-			color: #2a3555;
-		}
-		.metaRow {
-			display: flex;
-			flex-wrap: wrap;
-			gap: 0.4rem;
-			margin-bottom: 0.75rem;
-		}
-		.categoryBadge,
-		.hashtagBadge {
-			padding: 0.2rem 0.6rem;
-			border-radius: 999px;
-			font-size: 0.75rem;
-			font-weight: 600;
-		}
-		.categoryBadge {
-			background: #ecf4ff;
-			color: #204a8f;
-		}
-		.hashtagBadge {
-			background: #f4f2ff;
-			color: #4d3bb5;
-		}
-		.readMoreLink {
-			text-decoration: none;
-		}
-		.readMoreButton {
-			background-color: theme.$color-primary;
-			border: 1px solid theme.$color-primary;
-			border-radius: 999px;
-			padding: 0.4rem 1rem;
-		}
-	}
+  .postThumbnail {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    display: block;
+    border-top: 1px solid theme.$color-border;
+    border-bottom: 1px solid theme.$color-border;
+  }
+
+  .cardBodyPostDetails {
+    padding: 1.1rem;
+
+    .cardBodyPostDetailsTitle {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.45rem;
+      color: theme.$color-dark;
+      line-height: 1.35;
+    }
+
+    .readMeta {
+      color: theme.$color-text-light;
+      font-size: 0.85rem;
+      margin-bottom: 0.55rem;
+    }
+
+    .postSnippet {
+      min-height: 60px;
+      color: theme.$color-text-light;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 0.85rem;
+    }
+
+    .metaRow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .categoryBadge {
+      background: theme.$color-primary-soft;
+      color: theme.$color-muted;
+      padding: 0.2rem 0.65rem;
+      border-radius: theme.$radius-pill;
+      font-size: 0.75rem;
+      font-weight: 700;
+      border: 1px solid theme.$color-border;
+    }
+
+    .hashtagBadge {
+      background: rgba(245,191,28,0.1);
+      color: theme.$color-muted;
+      padding: 0.2rem 0.65rem;
+      border-radius: theme.$radius-pill;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid theme.$color-border;
+    }
+
+    .readMoreLink { text-decoration: none; }
+
+    .readMoreButton {
+      background: theme.$color-dark;
+      border: none;
+      color: #fff;
+      font-weight: 600;
+      border-radius: theme.$radius-pill;
+      padding: 0.45rem 1.2rem;
+      font-size: 0.88rem;
+      transition: all 0.2s;
+
+      &:hover {
+        background: theme.$color-primary;
+        color: theme.$color-dark;
+      }
+    }
+  }
 }

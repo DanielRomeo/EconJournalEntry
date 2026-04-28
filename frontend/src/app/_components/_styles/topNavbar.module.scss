@@ -1,55 +1,60 @@
-.navBar{
-    background-color: white;
-    
+@use "../../_styles/theme" as theme;
 
-    .navbarContainer{
+.navBar {
+  background: #fff;
+  border-bottom: 1px solid theme.$color-border;
+  box-shadow: 0 2px 12px rgba(18,42,48,0.06);
 
-        .collapsedNavbar{
-            // @media (max-width: 500px) {
-            //     width: auto;
-            // }
-            // border: 1px solid orange;
-        }
+  .navbarContainer {
+    .collapsedNavbar {}
 
-        .rightHandNav{
-            @media(max-width: 767px){
-                display: none;
-            }
-        }
+    .rightHandNav {
+      @media(max-width: 767px) { display: none; }
     }
+  }
 }
 
-.searchButtonInputSpan{
-    background-color: #f1f5ff;
-    color: #34518e;
-    border-right: 0px;
-    height: 46px;
-    border: 1px solid #cfdbff;
-    border-top-left-radius: 999px;
-    border-bottom-left-radius: 999px;
+.searchButtonInputSpan {
+  background: theme.$color-bg;
+  color: theme.$color-muted;
+  height: 44px;
+  border: 1.5px solid theme.$color-border;
+  border-right: 0;
+  border-top-left-radius: theme.$radius-pill;
+  border-bottom-left-radius: theme.$radius-pill;
+}
 
+.searchBox {
+  background: theme.$color-bg;
+  border: 1.5px solid theme.$color-border;
+  border-top-right-radius: theme.$radius-pill;
+  border-bottom-right-radius: theme.$radius-pill;
+  min-width: 400px;
+  height: 44px;
+  font-size: 0.9rem;
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(245,191,28,0.18);
+    background: #fff;
+    border-color: theme.$color-primary;
+  }
+
+  @media(max-width: 767px) { min-width: 200px; }
 }
-.searchBox{
-    background-color: #f1f5ff;
-    border: 1px solid #cfdbff;
-    border-top-right-radius: 999px;
-    border-bottom-right-radius: 999px;
-    min-width: 420px;
-    height: 46px;
-    &:focus{
-        box-shadow: 0 0 0 0.2rem rgba(41, 88, 183, 0.15);
-        background-color: #ffffff;
-    }
-    @media(max-width: 767px){
-        min-width: 220px;
-    }
+
+.image {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid theme.$color-primary;
 }
-.image{
-    border-radius: 50%;
-}
-.navLink{
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    align-items: center;
+
+.navLink {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  color: theme.$color-muted;
+  transition: color 0.2s;
+
+  &:hover { color: theme.$color-primary; }
 }

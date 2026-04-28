@@ -1,0 +1,196 @@
+@use "../../_styles/theme" as theme;
+
+.profileContainer {
+  max-width: 1000px;
+  margin: 3rem auto 6rem;
+  padding: 0 1rem;
+}
+
+// ── Profile header ─────────────────────────────────────────────────────────────
+.profileHeader {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+  padding: 2.5rem;
+  background: #fff;
+  border: 1px solid theme.$color-border;
+  border-radius: theme.$radius-lg;
+  box-shadow: theme.$shadow-card;
+  margin-bottom: 3rem;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, theme.$color-primary, theme.$color-primary-light);
+    border-radius: theme.$radius-lg theme.$radius-lg 0 0;
+  }
+
+  @media(max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
+.avatarWrap {}
+
+.avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid theme.$color-primary;
+}
+
+.avatarFallback {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: theme.$color-primary-soft;
+  border: 4px solid theme.$color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: theme.$color-muted;
+}
+
+.profileInfo {
+  flex: 1;
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 900;
+    color: theme.$color-dark;
+    margin-bottom: 0.4rem;
+  }
+}
+
+.roleBadge {
+  display: inline-block;
+  background: theme.$color-primary-soft;
+  color: theme.$color-muted;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.3rem 0.9rem;
+  border-radius: theme.$radius-pill;
+  border: 1px solid theme.$color-border;
+  margin-bottom: 0.9rem;
+}
+
+.bio {
+  color: theme.$color-text-light;
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 1.2rem;
+  max-width: 560px;
+}
+
+.socialRow {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    color: #fff;
+  }
+}
+
+.fb  { background: #1877F2; }
+.ig  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+.tw  { background: #000; }
+.li  { background: #0A66C2; }
+
+// ── Posts section ──────────────────────────────────────────────────────────────
+.postsSection {}
+
+.sectionTitle {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: theme.$color-dark;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 3px solid theme.$color-primary;
+  display: inline-block;
+}
+
+.postCard {
+  border: 1px solid theme.$color-border;
+  border-radius: theme.$radius-md;
+  overflow: hidden;
+  box-shadow: theme.$shadow-card;
+  height: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: theme.$shadow-strong;
+  }
+}
+
+.cardThumb {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.cardTitle {
+  font-weight: 700;
+  font-size: 1rem;
+  color: theme.$color-dark;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+
+  &:hover { color: theme.$color-primary; }
+}
+
+.readMeta {
+  color: theme.$color-text-light;
+  font-size: 0.85rem;
+  margin-bottom: 0.6rem;
+}
+
+.snippet {
+  color: theme.$color-text-light;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.readBtn {
+  background: theme.$color-dark;
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  border-radius: theme.$radius-pill;
+  padding: 0.45rem 1.2rem;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+
+  &:hover {
+    background: theme.$color-primary;
+    color: theme.$color-dark;
+  }
+}
