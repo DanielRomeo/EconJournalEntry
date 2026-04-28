@@ -3,13 +3,13 @@
 
 const nextConfig = {
     images: {
-        domains: ['firebasestorage.googleapis.com'],
+        domains: ['firebasestorage.googleapis.com', 'res.cloudinary.com'],
         remotePatterns: [
           {
             protocol: 'https',
-            hostname: 'assets.example.com',
+            hostname: 'res.cloudinary.com',
             port: '',
-            pathname: '/account123/**',
+            pathname: '/**',
           },
         ],
       }

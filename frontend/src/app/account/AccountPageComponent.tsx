@@ -12,11 +12,16 @@ import { CgProfile } from "react-icons/cg";
 import EditAccountModal from "./_EditAccountModal";
 
 interface StateType {
-	thumbnail?: string,
+	image?: string,
 	firstname: string,
 	lastname: string,
 	email: string,
-	type: string
+	type: string,
+	bio: string,
+	facebook: string,
+	instagram: string,
+	x: string,
+	linkedin: string
 }
 
 const ProfilePageComponent = () => {
@@ -24,11 +29,16 @@ const ProfilePageComponent = () => {
 	const [loading, setLoading] = useState<boolean>(true);
 
 	const [userData, setUserdata] = useState<StateType>({
-		thumbnail: '',
+		image: '',
 		firstname: '',
 		lastname: '',
 		email: '',
-		type: ''
+		type: '',
+		bio: '',
+		facebook: '',
+		instagram: '',
+		x: '',
+		linkedin: ''
 	})
 
 	const [height, setHeight] = useState<number>(0); // State to store calculated height
@@ -58,7 +68,12 @@ const ProfilePageComponent = () => {
 						firstname: userData.firstname  ,
 						lastname: userData.lastname  ,
 						email: userData.email  ,
-						type: userData.type  
+						type: userData.type,
+						bio: userData.bio || "",
+						facebook: userData.facebook || "",
+						instagram: userData.instagram || "",
+						x: userData.x || "",
+						linkedin: userData.linkedin || ""
 					});
 					setLoading(false);
 				} else {
@@ -89,11 +104,11 @@ const ProfilePageComponent = () => {
 						<Row className={Styles.imageRow}>
 							<Col lg='12' md='12' sm='12'>
 							{
-								userData.thumbnail && userData.thumbnail.length > 0 ? 
+								userData.image && userData.image.length > 0 ? 
 								<div>
 									<Image
 										className={`${Styles.image}`}
-										src={userData.thumbnail}
+										src={userData.image}
 										width={250}
 										height={250}
 										onLoadingComplete={handleLoadComplete}
@@ -112,6 +127,11 @@ const ProfilePageComponent = () => {
 								<h4>Last name: <span>{userData.lastname}</span> </h4>
 								<h4>Email address: <span>{userData.email}</span></h4>
 								<h4>Writer/Reader: <span>{userData.type}</span></h4>
+								<h4>Bio: <span>{userData.bio || "No bio yet."}</span></h4>
+								<h4>Facebook: <span>{userData.facebook || "-"}</span></h4>
+								<h4>Instagram: <span>{userData.instagram || "-"}</span></h4>
+								<h4>X: <span>{userData.x || "-"}</span></h4>
+								<h4>LinkedIn: <span>{userData.linkedin || "-"}</span></h4>
 							</Col>
 						</Row>
 

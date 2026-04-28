@@ -1,6 +1,12 @@
+@use "../theme" as theme;
+
 .main {
 	.container {
 		margin-top: 40px;
+		background: #ffffff;
+		border: 1px solid theme.$color-border;
+		border-radius: theme.$radius-md;
+		padding: 1.5rem;
 		.row1 {
 			.col {
 				display: flex;
@@ -8,8 +14,8 @@
 				justify-content: flex-end;
 
 				.publishButton {
-					background-color: #543ee0;
-					border: 1px solid #543ee0;
+					background-color: theme.$color-primary;
+					border: 1px solid theme.$color-primary;
 				}
 			}
 		}
@@ -22,8 +28,80 @@
 
 		.row3{
 			small{
-				color: #543ee0;
+				color: theme.$color-primary;
 			}
 		}
 	}
+}
+
+.editorActions {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 0.6rem;
+}
+
+.inlineImageButton {
+	display: inline-flex;
+	align-items: center;
+	padding: 0.45rem 0.85rem;
+	border: 1px solid theme.$color-primary;
+	background: theme.$color-primary-soft;
+	color: theme.$color-primary;
+	border-radius: 999px;
+	cursor: pointer;
+	font-size: 0.9rem;
+	font-weight: 600;
+}
+
+.inlineImageButton input {
+	display: none;
+}
+
+.thumbnailPreview {
+	width: min(100%, 420px);
+	height: auto;
+	border-radius: theme.$radius-sm;
+	object-fit: contain;
+	border: 1px solid theme.$color-border;
+}
+
+.editorTabs {
+	display: flex;
+	gap: 0.5rem;
+	margin-bottom: 0.6rem;
+}
+
+.tabButton,
+.activeTabButton {
+	border-radius: 999px;
+	font-size: 0.85rem;
+	padding: 0.35rem 0.75rem;
+}
+
+.tabButton {
+	background: #ffffff;
+	border: 1px solid theme.$color-border;
+	color: theme.$color-primary;
+}
+
+.activeTabButton {
+	background: theme.$color-primary;
+	border: 1px solid theme.$color-primary;
+	color: #ffffff;
+}
+
+.markdownToolbar {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	margin-bottom: 0.6rem;
+}
+
+.toolbarButton {
+	border-radius: 0.5rem;
+	background: #ffffff;
+	border: 1px solid theme.$color-border;
+	color: theme.$color-primary;
+	padding: 0.25rem 0.6rem;
+	font-size: 0.85rem;
 }

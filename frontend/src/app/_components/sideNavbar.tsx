@@ -17,6 +17,7 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { FaRegEnvelopeOpen } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
 import { GrLineChart } from "react-icons/gr";
+import { FaPen } from "react-icons/fa";
 
 // firebase:
 import { signOut } from 'firebase/auth'; // Import Firebase Auth functions
@@ -77,7 +78,7 @@ const SideNavbar = forwardRef((props, ref) => {
 						&emsp;&emsp;
 						<ListItemText
 							className={`${Styles.chatter}`}
-							primary={"CHATTER"}
+							primary={"ECON JOURNAL"}
 						/>
 					</ListItemButton>
 				</ListItem>
@@ -94,6 +95,14 @@ const SideNavbar = forwardRef((props, ref) => {
 						<CgFeed></CgFeed>
 						&nbsp;&nbsp;
 						<ListItemText primary={"Feed"} />
+					</ListItemButton>
+				</ListItem>
+				<ListItem disablePadding>
+					<ListItemButton onClick={()=>{handleLinkClick('createpost')}}>
+						&emsp;&emsp;&emsp;
+						<FaPen></FaPen>
+						&nbsp;&nbsp;
+						<ListItemText primary={"Create Post"} />
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding>

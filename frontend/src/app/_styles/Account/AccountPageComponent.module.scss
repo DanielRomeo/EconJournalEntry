@@ -1,9 +1,9 @@
-$primaryColor: #543ee0;
+$primaryColor: #0c4a94;
 
 .container{
-    background-color: lightgrey;
+    background: linear-gradient(180deg, #f4f8ff 0%, #ffffff 100%);
     // color: white;
-    height: 70vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;

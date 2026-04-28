@@ -20,14 +20,29 @@
 }
 
 .searchButtonInputSpan{
-    background-color: white;
-    color: black;
+    background-color: #f1f5ff;
+    color: #34518e;
     border-right: 0px;
-    height: 40px;
+    height: 46px;
+    border: 1px solid #cfdbff;
+    border-top-left-radius: 999px;
+    border-bottom-left-radius: 999px;
 
 }
 .searchBox{
-    
+    background-color: #f1f5ff;
+    border: 1px solid #cfdbff;
+    border-top-right-radius: 999px;
+    border-bottom-right-radius: 999px;
+    min-width: 420px;
+    height: 46px;
+    &:focus{
+        box-shadow: 0 0 0 0.2rem rgba(41, 88, 183, 0.15);
+        background-color: #ffffff;
+    }
+    @media(max-width: 767px){
+        min-width: 220px;
+    }
 }
 .image{
     border-radius: 50%;

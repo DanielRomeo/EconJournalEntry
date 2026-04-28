@@ -1,6 +1,7 @@
 // components/MarkdownEditor.tsx
 import React from "react";
 import Markdown from "react-markdown"; // Direct import
+import Styles from "../_styles/CreatePost/MarkdownEditor.module.scss";
 
 interface MarkdownProps {
 	value: string;
@@ -8,7 +9,7 @@ interface MarkdownProps {
 
 const MarkdownEditor: React.FC<MarkdownProps> = ({ value }) => {
 	return (
-		<div className="markdown-container">{<Markdown >{value}</Markdown>}</div>
+		<div className={Styles.markdownContainer}>{<Markdown>{value}</Markdown>}</div>
 	);
 };
 

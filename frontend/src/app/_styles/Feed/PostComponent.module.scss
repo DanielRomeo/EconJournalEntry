@@ -1,32 +1,94 @@
+@use "../theme" as theme;
+
+.cardsContainer {
+	width: 100%;
+}
+
+.gridRow {
+	row-gap: 1.2rem;
+}
+
+.gridCol {
+	display: flex;
+}
+
 .card {
 	width: 100%;
+	border-radius: theme.$radius-md;
+	border: 1px solid theme.$color-border;
+	margin-bottom: 0;
+	box-shadow: theme.$shadow-card;
+	overflow: hidden;
+	background: #ffffff;
 
 	.link{
 		text-decoration: none;
-		color: black;
+		color: #12192f;
 	}
 
 	.cardBodyUserinfo {
 		display: flex;
 		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
 
-		.imageDiv {
-			.image {
-				border-radius: 50%;
-			}
-		}
-		.detailsDiv {
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			margin-left: 20px;
-		}
+	.createdDate {
+		color: theme.$color-muted;
+		font-size: 0.9rem;
+	}
+
+	.postThumbnail {
+		width: 100%;
+		height: 190px;
+		object-fit: cover;
+		border-top: 1px solid theme.$color-border;
+		border-bottom: 1px solid theme.$color-border;
 	}
 
 	.cardBodyPostDetails {
 		.cardBodyPostDetailsTitle {
 			font-weight: bold;
-			font-size: 35px;
+			font-size: 1.2rem;
+			margin-bottom: 0.55rem;
+		}
+		.readMeta {
+			color: theme.$color-muted;
+			margin-bottom: 0.5rem;
+		}
+		.postSnippet {
+			min-height: 65px;
+			color: #2a3555;
+		}
+		.metaRow {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.4rem;
+			margin-bottom: 0.75rem;
+		}
+		.categoryBadge,
+		.hashtagBadge {
+			padding: 0.2rem 0.6rem;
+			border-radius: 999px;
+			font-size: 0.75rem;
+			font-weight: 600;
+		}
+		.categoryBadge {
+			background: #ecf4ff;
+			color: #204a8f;
+		}
+		.hashtagBadge {
+			background: #f4f2ff;
+			color: #4d3bb5;
+		}
+		.readMoreLink {
+			text-decoration: none;
+		}
+		.readMoreButton {
+			background-color: theme.$color-primary;
+			border: 1px solid theme.$color-primary;
+			border-radius: 999px;
+			padding: 0.4rem 1rem;
 		}
 	}
 }

@@ -1,16 +1,13 @@
 'use client'
-// import { useRouter } from "next/router";
-import { useRouter } from "next/navigation";
 import { useState , useEffect} from "react";
-import { usePathname, useSearchParams } from 'next/navigation'
 import { Container, Col, Row } from "react-bootstrap";
 import { doc, getDoc } from "firebase/firestore";
-import { addDoc, collection } from "firebase/firestore";
-import { db, auth } from "../../_components/firebaseConfig";
+import { db } from "../../_components/firebaseConfig";
 import Image from "next/image";
-// import TopNavbar from "@/app/_components/topNavbar";
 import TopNavbar from '../../_components/topNavbar'
 import MarkdownEditor from '../../createpost/markdownEditor'
+import Styles from "../../_styles/Feed/PostView.module.scss";
+import AuthorProfileCard from "../../_components/authorProfileCard";
 
 
 interface PostPageProps {
@@ -20,20 +17,8 @@ interface PostPageProps {
 }
 
 const PostPage = ({params}: PostPageProps) => {
-	const router = useRouter();
-    const pathname = usePathname()
-    const searchParams = useSearchParams()
-    const [postId, setPostId] = useState<string | null>();
-    const [post, setPost] = useState<any>([]);
-  	const [loading, setLoading] = useState(false);
-
-      const [height, setHeight] = useState<number>(0); // State to store calculated height
-
-      const handleLoadComplete = (img: any) => {
-          const newHeight =
-              img.naturalHeight * (img.clientWidth / img.naturalWidth);
-          setHeight(newHeight);
-      };
+    const [post, setPost] = useState<any>(null);
+  	const [loading, setLoading] = useState(true);
 
     const fetchData = async (postId: string) => {
         try {
@@ -61,36 +46,50 @@ const PostPage = ({params}: PostPageProps) => {
     };
     
     useEffect(() => {
-        const postId = params.postId; // Replace 'your-post-id' with the actual ID of the post you want to fetch
+        const postId = params.postId;
         fetchData(postId);
     }, []);
 
+    const postUrl = typeof window !== "undefined" ? window.location.href : "";
+    const shareText = post?.title || "Check this post on Econ Journal";
 
 	return (
 		<div>
            <TopNavbar></TopNavbar>
 			<div>
-                {post ? (
-                    // <p>post number {postId} page</p>
-                    <Container>
+                {loading ? (
+                    <p>Loading post...</p>
+                ) : post ? (
+                    <Container className={Styles.postContainer}>
                         <Row> 
                             <Col lg='12' md='12' sm='12'>
                             <Image
                                 src={post.thumbnail}
-                                width={200}
-                                height={200}
-                                // onLoadingComplete={handleLoadComplete}
+                                className={Styles.postThumbnail}
+                                width={1200}
+                                height={520}
                                 alt="Picture of thumbnail on post page of chatter page."
                             />
                             <hr />
-                            <h4>{post.title}</h4>
+                            <h1>{post.title}</h1>
                             <hr />
-                            <MarkdownEditor value={post.post} />
+                            <div className={Styles.articleBody}>
+                                <MarkdownEditor value={post.post} />
+                            </div>
+                            <hr />
+                            <div className={Styles.shareRow}>
+                                <strong>Share this post:</strong>
+                                <a target="_blank" rel="noreferrer" href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`}>Facebook</a>
+                                <a target="_blank" rel="noreferrer" href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`}>X</a>
+                                <a target="_blank" rel="noreferrer" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`}>LinkedIn</a>
+                                <a target="_blank" rel="noreferrer" href={`https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText} ${postUrl}`)}`}>WhatsApp</a>
+                            </div>
+                            <AuthorProfileCard author={post.author} />
                             </Col>
                         </Row>
                     </Container>
                 ) : (
-                    <p>Loading post...</p>
+                    <p>Post not found.</p>
                 )}
             </div> 
 		</div>

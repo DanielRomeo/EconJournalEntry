@@ -3,23 +3,17 @@ import {
 	Form,
 	FormGroup,
 	Button,
-	Container,
-	Col,
 	Row,
-	Tab,
 } from "react-bootstrap";
 import Styles from "../_styles/SigninPage/SigninComponent.module.scss";
 import { useRouter } from "next/navigation";
 import { auth, db , provider } from "../_components/firebaseConfig";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import { useState, useEffect } from "react";
-import isAuthenticated from "../_components/isAuthenticated";
-import { GetLocalStorage, SetLocalStorage } from "../_components/localStorage";
+import { SetLocalStorage } from "../_components/localStorage";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
-
-import { collection, doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 import {  signInWithEmailAndPassword } from "firebase/auth";
+import { ensureUserProfileDoc } from "../_components/ensureUserProfileDoc";
 
 
 // validator libs
@@ -69,6 +63,7 @@ const SigninComponent = () => {
 			SetLocalStorage("isAuth", JSON.stringify(true));
 			setIsAuth(true);
 			setUser(user); // Update user state
+			await ensureUserProfileDoc(user);
 			router.push("/feed");
 		} catch (error) {
 			console.error("Login error:", error);
@@ -86,6 +81,7 @@ const SigninComponent = () => {
 			try {
 				// After successful signup, extract user information from the auth object (excluding password)
 				const user = userCredential.user;
+				await ensureUserProfileDoc(user);
 				router.push('/feed');
 			} catch (error: unknown) {
 				console.log(error);

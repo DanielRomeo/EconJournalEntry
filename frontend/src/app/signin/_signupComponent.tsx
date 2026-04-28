@@ -30,6 +30,7 @@ const schema = yup.object().shape({
 		.required("Password is required"),
 	firstname: yup.string().required("First name is required"),
 	lastname: yup.string().required("Last name is required"),
+	bio: yup.string().max(280, "Bio should be under 280 characters"),
 	joiningas: yup.string().required("Who do you want to join as"),
 	confirmpassword: yup.string().required("Please confirm your password"),
 }); // end of schema
@@ -62,7 +63,13 @@ const SignupComponent: React.FC = () => {
 					email: user.email,
 					firstname: data.firstname,
 					lastname: data.lastname,
-					type: data.joiningas
+					type: data.joiningas,
+					bio: data.bio || "",
+					image: "",
+					facebook: "",
+					instagram: "",
+					x: "",
+					linkedin: ""
 				};
 
 				const userRef = doc(db, 'users', userData.uid); // Use doc() for a single document
@@ -126,6 +133,22 @@ const SignupComponent: React.FC = () => {
 							)}
 						</FormGroup>
 					</Col>
+				</Row>
+
+				<Row>
+					<FormGroup className="mb-3">
+						<Form.Label htmlFor="bio">Short bio</Form.Label>
+						<textarea
+							{...register("bio")}
+							className="form-control"
+							id="bio"
+							rows={3}
+							placeholder="Tell readers what you usually write about"
+						/>
+						{errors.bio && (
+							<span style={{ color: "red" }}>{errors.bio.message as string}</span>
+						)}
+					</FormGroup>
 				</Row>
 
 				<Row>

@@ -1,17 +1,15 @@
 "use client";
-import { Row, Container, Col, Button, Tabs, Tab } from "react-bootstrap";
+import { Row, Container, Col, Tabs, Tab } from "react-bootstrap";
 import Styles from "../_styles/Feed/FeedComponent.module.scss";
-import { FaPen } from "react-icons/fa";
 import PostComponent from "./postComponent";
-import Link from "next/link";
-import SideNavbar from "../_components/sideNavbar";
 import TopNavbar from "../_components/topNavbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { auth, db } from "../_components/firebaseConfig";
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // Import Firebase Auth functions
+import { onAuthStateChanged } from 'firebase/auth'; // Import Firebase Auth functions
 import { collection, doc, getDoc } from 'firebase/firestore'; // Import Firestore functions
 
 const FeedComponent = () => {
+	const [searchTerm, setSearchTerm] = useState<string>("");
 
 	useEffect(()=>{
 		
@@ -43,27 +41,19 @@ const FeedComponent = () => {
 
 	return (
 		<div className={Styles.mainDiv}>
-			<TopNavbar></TopNavbar>
+			<TopNavbar searchTerm={searchTerm} onSearchChange={setSearchTerm}></TopNavbar>
 			
 			<Container className={`${Styles.mainContainer}`}>
 				<Row className={`${Styles.headerRow}`}>
-					<Col lg="8" md="8" sm="12">
-						<h1>FEED</h1>
-						<small>Explore different content youd love </small>
-					</Col>
-
-					<Col lg="4" md="4" sm="12">
-						<Link href="/createpost">
-							<Button className={`${Styles.postButton}`}>
-								<FaPen /> Post a content
-							</Button>
-						</Link>
+					<Col lg="12" md="12" sm="12">
+						<h1>Discover. Learn. Share.</h1>
+						<small>Stories from builders, readers, and curious minds.</small>
 					</Col>
 				</Row>
 
 				<Row className={`${Styles.mainRow}`}>
 					<Tabs
-						defaultActiveKey="register"
+						defaultActiveKey="Foryou"
 						id="fill-tab-example"
 						className={`${Styles.tabs} mb-3`}
 						fill
@@ -73,21 +63,14 @@ const FeedComponent = () => {
 							eventKey="Foryou"
 							title="For you"
 						>
-							<PostComponent></PostComponent>
+							<PostComponent searchTerm={searchTerm}></PostComponent>
 						</Tab>
 						<Tab
 							className={`${Styles.tab}`}
 							eventKey="Featured"
 							title="Featured"
 						>
-							<PostComponent></PostComponent>
-						</Tab>
-						<Tab
-							className={`${Styles.tab}`}
-							eventKey="Recent"
-							title="Recent"
-						>
-							<PostComponent></PostComponent>
+							<PostComponent searchTerm={searchTerm}></PostComponent>
 						</Tab>
 					</Tabs>
 				</Row>

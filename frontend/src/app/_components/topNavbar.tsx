@@ -1,23 +1,24 @@
 import {
 	Navbar,
-	NavDropdown,
 	Container,
 	Nav,
 	NavItem,
-	Button,
 } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-// import Styles from "../_styles/LandingPage/navbarComponent.module.scss";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import Styles from './_styles/topNavbar.module.scss'
 import { CiSearch } from "react-icons/ci";
 
-import  { useRef } from "react";
 import SideNavbar from "./sideNavbar";
 
-const TopNavbar = ({children}: PropsWithChildren<{}>) => {
+interface TopNavbarProps extends PropsWithChildren {
+	searchTerm?: string;
+	onSearchChange?: (value: string) => void;
+}
+
+const TopNavbar = ({ children, searchTerm = "", onSearchChange }: TopNavbarProps) => {
 
 
     const [height, setHeight] = useState<number>(0); // State to store calculated height
@@ -42,7 +43,15 @@ const TopNavbar = ({children}: PropsWithChildren<{}>) => {
                             <div className="input-group-prepend">
                                 <span className={`input-group-text ${Styles.searchButtonInputSpan}`} id="basic-addon1"><CiSearch size={25}></CiSearch></span>
                             </div>
-                            <input type="text" className={`${Styles.searchBox} form-control`} placeholder="Search Chatter"  aria-label="Username" aria-describedby="basic-addon1"/>
+                            <input
+								type="text"
+								value={searchTerm}
+								onChange={(event) => onSearchChange?.(event.target.value)}
+								className={`${Styles.searchBox} form-control`}
+								placeholder="Search posts, #hashtags, categories"
+								aria-label="Search posts"
+								aria-describedby="basic-addon1"
+							/>
                         </div>
 					</Nav>
 

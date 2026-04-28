@@ -1,0 +1,53 @@
+@use "../../_styles/theme" as theme;
+
+.card {
+	display: flex;
+	gap: 1rem;
+	align-items: flex-start;
+	padding: 1rem;
+	border: 1px solid theme.$color-border;
+	border-radius: theme.$radius-md;
+	background: #f9fbff;
+}
+
+.compact {
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+.image {
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.name {
+	font-weight: 700;
+	margin-bottom: 0.2rem;
+}
+
+.meta {
+	color: theme.$color-muted;
+	font-size: 0.9rem;
+	margin-bottom: 0.3rem;
+}
+
+.bio {
+	margin-bottom: 0;
+}
+
+.socialRow {
+	margin-top: 0.75rem;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+}
+
+.socialRow a {
+	text-decoration: none;
+	padding: 0.25rem 0.65rem;
+	border-radius: 999px;
+	background: theme.$color-primary-soft;
+	color: theme.$color-primary;
+	font-size: 0.85rem;
+}

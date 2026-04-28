@@ -1,14 +1,20 @@
 import { doc } from "firebase/firestore";
-import { auth, db } from "../_components/firebaseConfig";
+import { db } from "../_components/firebaseConfig";
 import { collection , getDoc} from "firebase/firestore";
-import { Auth, User } from "firebase/auth";
+import { Auth } from "firebase/auth";
 
 export interface UserDetails {
     uid: string,
     firstname: string,
     lastname: string,
     email: string,
-    type: string
+    type: string,
+    bio?: string,
+    image?: string,
+    facebook?: string,
+    instagram?: string,
+    x?: string,
+    linkedin?: string
 }
 
 // really, i think i should have used OauthStateChanged in this functtion too.
@@ -28,16 +34,34 @@ const getUserDetails = async (auth: Auth): Promise<UserDetails | null> => {
                     firstname: userData.firstname  ,
                     lastname: userData.lastname  ,
                     email: userData.email  ,
-                    type: userData.type  
+                    type: userData.type,
+                    bio: userData.bio || "",
+                    image: userData.image || userData.thumbnail || "",
+                    facebook: userData.facebook || "",
+                    instagram: userData.instagram || "",
+                    x: userData.x || "",
+                    linkedin: userData.linkedin || ""
                 };
 
                 return userDetails;
             }else{
-                console.log('UserDoc snap does not exits! Check to see if the exists in the database!')
-                return null;
+                const names = (user.displayName || "").split(" ");
+                return {
+                    uid: uid,
+                    firstname: names[0] || "Guest",
+                    lastname: names.slice(1).join(" ") || "Writer",
+                    email: email || "",
+                    type: "writer",
+                    bio: "",
+                    image: "",
+                    facebook: "",
+                    instagram: "",
+                    x: "",
+                    linkedin: ""
+                };
             }
         }else{
-            console.log("User does not exits");
+            console.log("User does not exist");
             return null;
         }
     }catch(error){
