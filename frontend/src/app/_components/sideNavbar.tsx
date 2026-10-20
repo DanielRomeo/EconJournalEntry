@@ -62,7 +62,7 @@ const SideNavbar = forwardRef((props, ref) => {
 			return;
 		}
 
-		setState({ ...state, [anchor]: open });
+		setState((currentState) => ({ ...currentState, [anchor]: open }));
 	};
 
 	const list = (anchor: any) => (
@@ -217,6 +217,7 @@ const SideNavbar = forwardRef((props, ref) => {
 				anchor={"left"}
 				open={state["left"]}
 				onClose={toggleDrawer("left", false)}
+				ModalProps={{ keepMounted: false }}
 				PaperProps={{ className: Styles.drawerPaper }}
 			>
 				{list("left")}

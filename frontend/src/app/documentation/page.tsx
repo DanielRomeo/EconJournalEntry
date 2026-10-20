@@ -3,7 +3,11 @@ import Link from "next/link";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Documentation | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Documentation",
+	description: "Learn how to set up your Journal Entry profile, discover articles, and publish your own writing.",
+	alternates: { canonical: "/documentation" },
+};
 
 export default function DocumentationPage() {
 	return (

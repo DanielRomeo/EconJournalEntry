@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Community | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Community",
+	description: "Meet thoughtful writers, explore ideas across disciplines, and contribute useful writing to the Journal Entry community.",
+	alternates: { canonical: "/community" },
+};
 
 export default function CommunityPage() {
 	return (

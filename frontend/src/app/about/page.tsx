@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "About | Journal Entry" };
+export const metadata: Metadata = {
+	title: "About",
+	description: "Why Daniel created Journal Entry as a public journal for learning, accountability, and ideas worth remembering.",
+	alternates: { canonical: "/about" },
+};
 
 export default function AboutPage() {
 	return (

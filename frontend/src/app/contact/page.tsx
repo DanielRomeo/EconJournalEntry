@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Contact | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Contact",
+	description: "Get help with your Journal Entry account, report a problem, or share editorial feedback.",
+	alternates: { canonical: "/contact" },
+};
 
 export default function ContactPage() {
 	return (

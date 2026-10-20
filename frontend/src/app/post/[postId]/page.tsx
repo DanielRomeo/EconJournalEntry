@@ -1,187 +1,98 @@
-'use client'
-import { useState, useEffect, useRef } from "react";
-import { Container, Col, Row } from "react-bootstrap";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../_components/firebaseConfig";
-import Image from "next/image";
-import TopNavbar from '../../_components/topNavbar';
-import MarkdownEditor from '../../createpost/markdownEditor';
-import Styles from "../../_styles/Feed/PostView.module.scss";
-import AuthorProfileCard from "../../_components/authorProfileCard";
-import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { getPostAuthors } from "../../_components/postAuthors";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { authorName, getPostAuthors } from "../../_components/postAuthors";
+import { getPublicPost, postExcerpt } from "@/lib/firestorePosts";
+import { absoluteUrl, SITE_NAME } from "@/lib/site";
+import PostPageClient from "./PostPageClient";
 
-interface PostPageProps {
-	params: { postId: string }
+type PostPageProps = {
+	params: { postId: string };
+};
+
+export const revalidate = 300;
+
+const dateValue = (value?: string) => {
+	if (!value) return undefined;
+	const date = new Date(value);
+	return Number.isNaN(date.getTime()) ? undefined : date.toISOString();
+};
+
+export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
+	const post = await getPublicPost(params.postId);
+	if (!post) return { title: `Post not found | ${SITE_NAME}`, robots: { index: false, follow: false } };
+
+	const title = post.title || "Journal Entry article";
+	const description = postExcerpt(post.post) || `Read ${title} on ${SITE_NAME}.`;
+	const url = absoluteUrl(`/post/${post.id}`);
+	const images = post.thumbnail ? [{ url: post.thumbnail, alt: title }] : [];
+	const authors = getPostAuthors(post).map(authorName);
+
+	return {
+		title,
+		description,
+		keywords: [post.category, ...(post.hashtags || [])].filter(Boolean) as string[],
+		authors: authors.map((name) => ({ name })),
+		alternates: { canonical: url },
+		openGraph: {
+			type: "article",
+			url,
+			title,
+			description,
+			siteName: SITE_NAME,
+			publishedTime: dateValue(post.created) || post.createTime,
+			modifiedTime: dateValue(post.updated) || post.updateTime,
+			authors,
+			tags: [post.category, ...(post.hashtags || [])].filter(Boolean) as string[],
+			images: images.length ? images : undefined,
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: images.length ? images.map((image) => image.url) : undefined,
+		},
+		robots: {
+			index: true,
+			follow: true,
+			googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+		},
+	};
 }
 
-// Extract YouTube video ID from various URL formats
-const getYouTubeId = (url: string): string | null => {
-	const patterns = [
-		/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]{11})/,
-		/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/,
-	];
-	for (const pattern of patterns) {
-		const match = url.match(pattern);
-		if (match) return match[1];
-	}
-	return null;
-};
+export default async function PostPage({ params }: PostPageProps) {
+	const post = await getPublicPost(params.postId);
+	if (!post) notFound();
 
-// Detect if post content contains a YouTube link and return the first video ID
-const extractFirstYouTubeId = (content: string): string | null => {
-	const urlRegex = /https?:\/\/[^\s)]+/g;
-	const urls = content.match(urlRegex) || [];
-	for (const url of urls) {
-		const id = getYouTubeId(url);
-		if (id) return id;
-	}
-	return null;
-};
-
-const PostPage = ({ params }: PostPageProps) => {
-	const [post, setPost] = useState<any>(null);
-	const [loading, setLoading] = useState(true);
-	const [readingProgress, setReadingProgress] = useState(0);
-	const articleRef = useRef<HTMLDivElement | null>(null);
-
-	useEffect(() => {
-		const fetchData = async (postId: string) => {
-			try {
-				const ref = doc(db, 'posts', postId);
-				const docSnapshot = await getDoc(ref);
-				if (docSnapshot.exists()) {
-					setPost({ id: docSnapshot.id, ...docSnapshot.data() });
-				}
-			} catch (error) {
-				console.error('Error fetching data:', error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		fetchData(params.postId);
-	}, [params.postId]);
-
-	useEffect(() => {
-		const updateProgress = () => {
-			const article = articleRef.current;
-			if (!article) return;
-			const articleTop = window.scrollY + article.getBoundingClientRect().top;
-			const finishLine = Math.max(articleTop + article.scrollHeight - window.innerHeight, articleTop + 1);
-			const currentPosition = window.scrollY + 76;
-			const percentage = ((currentPosition - articleTop) / (finishLine - articleTop)) * 100;
-			setReadingProgress(Math.min(100, Math.max(0, percentage)));
-		};
-		updateProgress();
-		window.addEventListener("scroll", updateProgress, { passive: true });
-		window.addEventListener("resize", updateProgress);
-		return () => {
-			window.removeEventListener("scroll", updateProgress);
-			window.removeEventListener("resize", updateProgress);
-		};
-	}, [post]);
-
-	const postUrl = typeof window !== "undefined" ? window.location.href : "";
-	const shareText = post?.title || "Check this post on Journal Entry";
-	const thumbUrl = post?.thumbnail || "";
-
-	// Social share URLs — thumbnail image embedded via og:image meta but for direct link sharing
-	const fbShare = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`;
-	const twitterShare = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(shareText)}`;
-	const linkedinShare = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
-	const whatsappShare = `https://api.whatsapp.com/send?text=${encodeURIComponent(`${shareText}\n${postUrl}\n${thumbUrl}`)}`;
-
-	const youtubeId = post ? extractFirstYouTubeId(post.post || "") : null;
+	const url = absoluteUrl(`/post/${post.id}`);
+	const description = postExcerpt(post.post) || `Read ${post.title || "this article"} on ${SITE_NAME}.`;
+	const authors = getPostAuthors(post);
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BlogPosting",
+		mainEntityOfPage: { "@type": "WebPage", "@id": url },
+		headline: post.title,
+		description,
+		image: post.thumbnail ? [post.thumbnail] : undefined,
+		datePublished: dateValue(post.created) || post.createTime,
+		dateModified: dateValue(post.updated) || post.updateTime || post.createTime,
+		author: authors.map((author) => ({
+			"@type": "Person",
+			name: authorName(author),
+			url: absoluteUrl(`/profile/${author.id}`),
+		})),
+		publisher: {
+			"@type": "Organization",
+			name: SITE_NAME,
+			logo: { "@type": "ImageObject", url: absoluteUrl("/icon.svg") },
+		},
+		articleSection: post.category,
+		keywords: [post.category, ...(post.hashtags || [])].filter(Boolean).join(", "),
+	};
 
 	return (
-		<div>
-			<div className={Styles.readingProgressTrack} role="progressbar" aria-label="Article reading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(readingProgress)}>
-				<div className={Styles.readingProgressBar} style={{ width: `${readingProgress}%` }} />
-			</div>
-			<TopNavbar />
-			{loading ? (
-				<Container><p className="mt-5">Loading post...</p></Container>
-			) : post ? (
-				<Container ref={articleRef} className={Styles.postContainer}>
-					<Row>
-						<Col lg="12" md="12" sm="12">
-							{/* Thumbnail */}
-							<Image
-								src={post.thumbnail}
-								className={Styles.postThumbnail}
-								width={1200}
-								height={520}
-								alt={post.title}
-							/>
-
-							
-							<h1>{post.title}</h1>
-							{post.category && (
-								<span className={Styles.categoryBadge}>{post.category}</span>
-							)}
-							{Array.isArray(post.hashtags) && post.hashtags.map((tag: string) => (
-								<span key={tag} className={Styles.hashtagBadge}>#{tag}</span>
-							))}
-							<hr />
-
-							<div className={Styles.articleBody}>
-								<MarkdownEditor value={post.post} />
-							</div>
-
-							<hr />
-
-							{/* YouTube embed if found in content */}
-							{youtubeId && (
-								<div className={Styles.youtubeWrap}>
-									<iframe
-										src={`https://www.youtube.com/embed/${youtubeId}`}
-										title="YouTube video"
-										allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-										allowFullScreen
-									/>
-								</div>
-							)}
-
-							
-
-							<hr />
-
-							{/* Social share with react-icons */}
-							<div className={Styles.shareRow}>
-								<strong>Share this post:</strong>
-								<a href={fbShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.fb}`} aria-label="Share on Facebook">
-									<FaFacebookF />
-								</a>
-								<a href={twitterShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.twitter}`} aria-label="Share on X (Twitter)">
-									<FaXTwitter />
-								</a>
-								<a href={linkedinShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.linkedin}`} aria-label="Share on LinkedIn">
-									<FaLinkedinIn />
-								</a>
-								<a href={whatsappShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.whatsapp}`} aria-label="Share on WhatsApp">
-									<FaWhatsapp />
-								</a>
-							</div>
-
-							<section className={Styles.authorsSection} aria-labelledby="authors-heading">
-								<h2 id="authors-heading">{getPostAuthors(post).length > 1 ? "About the authors" : "About the author"}</h2>
-								<div className={Styles.authorsGrid}>
-									{getPostAuthors(post).map((author, index) => (
-										<a key={author.id} href={`/profile/${author.id}`} className={Styles.authorLink}>
-											<AuthorProfileCard author={author} title={getPostAuthors(post).length > 1 ? (index === 0 ? "Main author" : "Co-author") : "About the author"} />
-										</a>
-									))}
-								</div>
-							</section>
-						</Col>
-					</Row>
-				</Container>
-			) : (
-				<Container><p className="mt-5">Post not found.</p></Container>
-			)}
-		</div>
+		<>
+			<script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+			<PostPageClient post={post} postUrl={url} />
+		</>
 	);
-};
-
-export default PostPage;
+}

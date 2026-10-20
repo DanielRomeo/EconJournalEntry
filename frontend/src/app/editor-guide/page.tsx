@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Editor Guide | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Editor Guide",
+	description: "Learn how to structure, format, review, and publish a clear article with the Journal Entry editor.",
+	alternates: { canonical: "/editor-guide" },
+};
 
 export default function EditorGuidePage() {
 	return (

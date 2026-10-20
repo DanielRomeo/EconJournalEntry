@@ -11,8 +11,22 @@ const LandingNavbar = () => {
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 20);
+		const onKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") setMenuOpen(false);
+		};
+		const onResize = () => {
+			if (window.innerWidth > 768) setMenuOpen(false);
+		};
+
 		window.addEventListener("scroll", onScroll);
-		return () => window.removeEventListener("scroll", onScroll);
+		window.addEventListener("keydown", onKeyDown);
+		window.addEventListener("resize", onResize);
+
+		return () => {
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("keydown", onKeyDown);
+			window.removeEventListener("resize", onResize);
+		};
 	}, []);
 
 	return (
@@ -50,15 +64,22 @@ const LandingNavbar = () => {
 				{/* ── Mobile Hamburger ────────────────────────────── */}
 				<button
 					className={`${Styles.hamburger} ${menuOpen ? Styles.open : ""}`}
-					onClick={() => setMenuOpen(!menuOpen)}
+					onClick={() => setMenuOpen((isOpen) => !isOpen)}
+					type="button"
 					aria-label="Toggle menu"
+					aria-expanded={menuOpen}
+					aria-controls="mobile-navigation"
 				>
 					<span /><span /><span />
 				</button>
 			</Container>
 
 			{/* ── Mobile Menu ─────────────────────────────────────── */}
-			<div className={`${Styles.mobileMenu} ${menuOpen ? Styles.mobileMenuOpen : ""}`}>
+			<div
+				id="mobile-navigation"
+				className={`${Styles.mobileMenu} ${menuOpen ? Styles.mobileMenuOpen : ""}`}
+				aria-hidden={!menuOpen}
+			>
 				<Link href="/about" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>About</Link>
 				<Link href="/feed" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Stories</Link>
 				<Link href="/community" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Community</Link>

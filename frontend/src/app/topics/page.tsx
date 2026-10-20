@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Topics | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Topics",
+	description: "Explore Journal Entry writing across economics, finance, technology, science, society, and culture.",
+	alternates: { canonical: "/topics" },
+};
 
 const topics = [
 	["Economics", "Markets, policy, development, incentives, and the choices behind the numbers."],

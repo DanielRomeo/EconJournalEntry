@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import PublicPage from "../_components/publicPage";
 import Styles from "../_styles/PublicPage.module.scss";
 
-export const metadata: Metadata = { title: "Start Writing | Journal Entry" };
+export const metadata: Metadata = {
+	title: "Start Writing",
+	description: "Turn an idea, lesson, book review, or lived experience into a clear and useful Journal Entry article.",
+	alternates: { canonical: "/start-writing" },
+};
 
 export default function StartWritingPage() {
 	return (

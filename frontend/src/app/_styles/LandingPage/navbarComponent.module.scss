@@ -199,20 +199,30 @@
 .mobileMenu {
   display: none;
   flex-direction: column;
-  padding: 1rem 2rem 2rem;
+  max-height: 0;
+  padding: 0 2rem;
   background: var(--surface);
-  border-top: 1px solid theme.$color-border;
+  border-top: 0 solid transparent;
   gap: 0.25rem;
   transform: translateY(-10px);
   opacity: 0;
-  transition: all 0.25s ease;
+  overflow: hidden;
+  visibility: hidden;
+  transition: max-height 0.25s ease, padding 0.25s ease, transform 0.25s ease, opacity 0.2s ease, visibility 0s linear 0.25s;
   pointer-events: none;
 
   @media(max-width: 768px) { display: flex; }
 
   &.mobileMenuOpen {
+    max-height: calc(100vh - 72px);
+    max-height: calc(100dvh - 72px);
+    padding: 1rem 2rem 2rem;
+    border-top-width: 1px;
+    border-top-color: theme.$color-border;
     transform: translateY(0);
     opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
     pointer-events: all;
   }
 }
