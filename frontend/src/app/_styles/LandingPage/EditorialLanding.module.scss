@@ -1,0 +1,36 @@
+@use "../theme" as theme;
+
+.page { min-height: 100vh; background: theme.$color-bg; color: theme.$color-text; }
+.hero { padding: 118px 0 86px; border-bottom: 1px solid theme.$color-border; }
+.issueLine { display: flex; justify-content: space-between; gap: 20px; padding: 12px 0; border-top: 1px solid theme.$color-dark; border-bottom: 1px solid theme.$color-dark; color: theme.$color-text-light; font-size: .72rem; font-weight: 700; letter-spacing: .11em; text-transform: uppercase; }
+.issueLine span:first-child { color: theme.$color-dark; }
+.heroGrid { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(300px, .7fr); gap: clamp(40px, 8vw, 110px); align-items: stretch; padding-top: 56px; }
+.heroCopy { align-self: center; }
+.kicker, .sectionHeading span { margin: 0 0 18px; color: theme.$color-primary; font-size: .75rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+.hero h1 { margin: 0; color: theme.$color-dark; font-size: clamp(3.7rem, 9vw, 7.8rem); font-weight: 500; line-height: .87; letter-spacing: -.065em; }
+.intro { max-width: 650px; margin: 32px 0 0; color: theme.$color-text-light; font-size: clamp(1rem, 1.7vw, 1.18rem); line-height: 1.8; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+.primaryAction, .secondaryAction { display: inline-flex; min-height: 48px; align-items: center; gap: 10px; padding: 11px 18px; border: 1px solid theme.$color-dark; border-radius: theme.$radius-sm; font-weight: 750; text-decoration: none; }
+.primaryAction { background: theme.$color-dark; color: theme.$color-bg; }
+.secondaryAction { color: theme.$color-dark; }
+.cover { display: flex; min-height: 470px; flex-direction: column; justify-content: space-between; padding: 28px; background: theme.$color-primary; color: #f7f3ea; box-shadow: 18px 18px 0 theme.$color-dark; }
+.coverTop, .coverBottom { display: flex; justify-content: space-between; gap: 16px; font-size: .72rem; font-weight: 800; letter-spacing: .11em; text-transform: uppercase; }
+.coverTop span:first-child { font-family: "Palatino Linotype", Georgia, serif; font-size: 2rem; letter-spacing: -.08em; }
+.coverStatement { max-width: 330px; font-family: "Palatino Linotype", Georgia, serif; font-size: clamp(2rem, 4vw, 3.3rem); line-height: 1.02; letter-spacing: -.04em; }
+.coverBottom { padding-top: 18px; border-top: 1px solid rgba(255,255,255,.48); }
+.selectedStories { padding: 88px 0 100px; background: theme.$color-white; }
+.sectionHeading { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; margin-bottom: 30px; padding-bottom: 16px; border-bottom: 1px solid theme.$color-dark; }
+.sectionHeading span { margin: 0 0 4px; }
+.sectionHeading h2 { margin: 0; color: theme.$color-dark; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 500; }
+.sectionHeading > a { display: inline-flex; align-items: center; gap: 8px; color: theme.$color-primary; font-weight: 750; text-decoration: none; }
+.editorialSection { padding: 100px 0; border-top: 1px solid theme.$color-border; }
+.editorialGrid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(44px, 10vw, 140px); }
+.sectionNumber { display: block; margin-bottom: 40px; color: theme.$color-primary; font-weight: 800; }
+.editorialGrid h2 { margin: 0; color: theme.$color-dark; font-size: clamp(2.4rem, 5vw, 4.6rem); font-weight: 500; line-height: 1; }
+.editorialCopy > p { margin: 0; color: theme.$color-text; font-family: "Palatino Linotype", Georgia, serif; font-size: clamp(1.3rem, 2.5vw, 2rem); line-height: 1.55; }
+.topicGrid { display: grid; grid-template-columns: 1fr 1fr; margin-top: 44px; border-top: 1px solid theme.$color-border; }
+.topicGrid a { padding: 17px 0; border-bottom: 1px solid theme.$color-border; color: theme.$color-text-light; font-weight: 700; text-decoration: none; }
+.topicGrid a:nth-child(odd) { margin-right: 20px; }
+.topicGrid a:hover { color: theme.$color-primary; }
+@media(max-width: 900px) { .heroGrid, .editorialGrid { grid-template-columns: 1fr; } .cover { min-height: 360px; box-shadow: 10px 10px 0 theme.$color-dark; } }
+@media(max-width: 600px) { .hero { padding: 96px 0 60px; } .issueLine span:last-child { display: none; } .heroGrid { padding-top: 40px; } .hero h1 { font-size: clamp(3.1rem, 17vw, 5rem); } .coverBottom { flex-direction: column; } .selectedStories, .editorialSection { padding: 64px 0; } .sectionHeading { align-items: flex-start; flex-direction: column; } .topicGrid { grid-template-columns: 1fr; } .topicGrid a:nth-child(odd) { margin-right: 0; } }

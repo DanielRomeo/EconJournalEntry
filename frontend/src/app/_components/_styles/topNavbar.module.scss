@@ -1,60 +1,30 @@
 @use "../../_styles/theme" as theme;
 
-.navBar {
-  background: #fff;
-  border-bottom: 1px solid theme.$color-border;
-  box-shadow: 0 2px 12px rgba(18,42,48,0.06);
-
-  .navbarContainer {
-    .collapsedNavbar {}
-
-    .rightHandNav {
-      @media(max-width: 767px) { display: none; }
-    }
-  }
-}
-
-.searchButtonInputSpan {
-  background: theme.$color-bg;
-  color: theme.$color-muted;
-  height: 44px;
-  border: 1.5px solid theme.$color-border;
-  border-right: 0;
-  border-top-left-radius: theme.$radius-pill;
-  border-bottom-left-radius: theme.$radius-pill;
-}
-
+.navBar { position: sticky; top: 0; z-index: 1000; min-height: 76px; background: color-mix(in srgb, var(--surface) 97%, transparent); border-bottom: 1px solid theme.$color-dark; backdrop-filter: blur(12px); }
+.navbarContainer { max-width: 1200px; gap: 20px; }
+.brandGroup { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.wordmark { display: flex; align-items: center; gap: 10px; color: var(--text); font-family: "Palatino Linotype", Georgia, serif; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.035em; text-decoration: none; }
+.brandMark { display: grid; width: 34px; height: 34px; place-items: center; border-radius: 2px; background: theme.$color-primary; color: #fff; font-family: "Manrope", sans-serif; font-size: 0.72rem; letter-spacing: -0.03em; }
+.collapsedNavbar { align-items: center; gap: 22px; }
+.searchNav { flex: 1; justify-content: center; }
+.searchGroup { width: min(100%, 440px); margin: 0; }
+.searchButtonInputSpan { height: 42px; padding-left: 14px; border: 1px solid theme.$color-border; border-right: 0; border-radius: 3px 0 0 3px; background: var(--surface-2); color: var(--text-light); }
 .searchBox {
-  background: theme.$color-bg;
-  border: 1.5px solid theme.$color-border;
-  border-top-right-radius: theme.$radius-pill;
-  border-bottom-right-radius: theme.$radius-pill;
-  min-width: 400px;
-  height: 44px;
-  font-size: 0.9rem;
-
-  &:focus {
-    box-shadow: 0 0 0 3px rgba(245,191,28,0.18);
-    background: #fff;
-    border-color: theme.$color-primary;
-  }
-
-  @media(max-width: 767px) { min-width: 200px; }
+  height: 42px; min-height: 42px; border: 1px solid theme.$color-border; border-left: 0; border-radius: 0 3px 3px 0; background: var(--surface-2); color: theme.$color-dark; font-size: 0.88rem;
+  &:focus { border-color: var(--color-primary); background: var(--surface); box-shadow: 0 0 0 3px var(--primary-soft); }
 }
-
-.image {
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2.5px solid theme.$color-primary;
-}
-
-.navLink {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  align-items: center;
-  color: theme.$color-muted;
-  transition: color 0.2s;
-
-  &:hover { color: theme.$color-primary; }
+.rightHandNav { display: flex; flex-direction: row; align-items: center; gap: 12px; }
+.writeLink { display: inline-flex; align-items: center; gap: 7px; padding: 9px 15px; border-radius: 3px; background: theme.$color-dark; color: theme.$color-bg; font-size: 0.86rem; font-weight: 700; text-decoration: none; &:hover { background: theme.$color-primary; color: #fff; } }
+.navLink { display: grid; place-items: center; color: var(--text-light); text-decoration: none; }
+.image { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #d5e4f4; }
+.profileLink { display: grid; place-items: center; text-decoration: none; }
+.emptyAvatar { display: grid; width: 40px; height: 40px; place-items: center; overflow: hidden; border: 1px solid var(--border); border-radius: 50%; background: var(--surface-2); color: var(--text-light); font-size: 1.75rem; }
+.navBar :global(.navbar-toggler) { place-items: center; padding: 8px; border-color: theme.$color-border; color: var(--text); }
+@media (max-width: 767px) {
+  .navBar { min-height: 66px; }
+  .navBar :global(.navbar-toggler) { display: grid; }
+  .wordmark > span:last-child { display: none; }
+  .collapsedNavbar { padding: 16px 0 8px; }
+  .searchNav, .searchGroup { width: 100%; }
+  .rightHandNav { justify-content: space-between; margin-top: 14px; }
 }

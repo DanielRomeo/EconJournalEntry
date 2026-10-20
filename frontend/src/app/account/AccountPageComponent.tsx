@@ -6,10 +6,11 @@ import Styles from '../_styles/Account/AccountPageComponent.module.scss'
 import { onAuthStateChanged } from "firebase/auth";
 import { doc } from "firebase/firestore";
 import { auth, db } from "../_components/firebaseConfig";
-import { collection , getDoc} from "firebase/firestore";
+import { collection, getDoc, getDocs } from "firebase/firestore";
 import Image from "next/image";
 import { CgProfile } from "react-icons/cg";
 import EditAccountModal from "./_EditAccountModal";
+import WritingRhythm from "../_components/writingRhythm";
 
 interface StateType {
 	image?: string,
@@ -27,6 +28,7 @@ interface StateType {
 const ProfilePageComponent = () => {
 	const [editModalShow, setEditModalShow] = useState<boolean>(false);
 	const [loading, setLoading] = useState<boolean>(true);
+	const [posts, setPosts] = useState<any[]>([]);
 
 	const [userData, setUserdata] = useState<StateType>({
 		image: '',
@@ -41,18 +43,8 @@ const ProfilePageComponent = () => {
 		linkedin: ''
 	})
 
-	const [height, setHeight] = useState<number>(0); // State to store calculated height
-
-	const handleLoadComplete = (img: any) => {
-		const newHeight =
-			img.naturalHeight * (img.clientWidth / img.naturalWidth);
-		setHeight(newHeight);
-	};
-
-	
-
 	useEffect(()=>{
-		onAuthStateChanged(auth, async (user: any) => {
+		const unsubscribe = onAuthStateChanged(auth, async (user: any) => {
 			if (user) {
 			// User is logged in
 			const uid = user.uid;
@@ -75,30 +67,45 @@ const ProfilePageComponent = () => {
 						x: userData.x || "",
 						linkedin: userData.linkedin || ""
 					});
-					setLoading(false);
+					if (String(userData.type || "").toLowerCase() === "writer") {
+						const postsSnapshot = await getDocs(collection(db, "posts"));
+						const authorPosts: any[] = [];
+						postsSnapshot.forEach((postDoc) => {
+							const post = { id: postDoc.id, ...postDoc.data() } as any;
+							if (post.status !== "draft" && (post.author?.id === uid || post.coAuthorIds?.includes(uid))) authorPosts.push(post);
+						});
+						setPosts(authorPosts);
+					}
 				} else {
 				  console.log('No user document found for this UID.');
 				}
 			  } catch (error) {
 				console.error('Error fetching user data:', error);
+			  } finally {
+				setLoading(false);
 			  }
 			} else {
-			// User is logged out
-			console.log('No user is logged in.');
+				setLoading(false);
 			}
 		});
+		return unsubscribe;
 	}, [])
 	
 	return (
-		<div>
+		<div className={Styles.page}>
             {/* <SideNavbar></SideNavbar> */}
             <TopNavbar></TopNavbar>
 
 			
 			
 			<Container className={Styles.container}>
+				<div className={Styles.pageHeading}>
+					<span>Account settings</span>
+					<h1>Your profile</h1>
+					<p>Keep your public identity and author details up to date.</p>
+				</div>
 				{
-					loading ? <>Loading ...</> : 
+					loading ? <div className={Styles.loading}>Loading your profile…</div> :
 					
 					<>
 						<Row className={Styles.imageRow}>
@@ -111,11 +118,10 @@ const ProfilePageComponent = () => {
 										src={userData.image}
 										width={250}
 										height={250}
-										onLoadingComplete={handleLoadComplete}
 										alt="Picture of the author that uses the platform to write journals."
 									/>
 								</div>
-								: <CgProfile size={150} />
+								: <CgProfile className={Styles.emptyAvatar} />
 							}
 								
 							</Col>
@@ -134,6 +140,10 @@ const ProfilePageComponent = () => {
 								<h4>LinkedIn: <span>{userData.linkedin || "-"}</span></h4>
 							</Col>
 						</Row>
+
+						{String(userData.type || "").toLowerCase() === "writer" && (
+							<div className={Styles.writingRhythmRow}><WritingRhythm posts={posts} className={Styles.accountRhythm} /></div>
+						)}
 
 						<Row className={Styles.editAccountRow}>
 							<Col lg='12' md='12' sm='12'>

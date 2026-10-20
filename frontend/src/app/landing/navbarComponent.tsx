@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Link from "next/link";
 import Styles from "../_styles/LandingPage/navbarComponent.module.scss";
 
@@ -18,18 +20,18 @@ const LandingNavbar = () => {
 			<Container className={Styles.navbarContainer}>
 				{/* ── Logo Block ───────────────────────────────────── */}
 				<Link href="/" className={Styles.logoBlock}>
-					<span className={Styles.logoIcon}>EJE</span>
+					<span className={Styles.logoIcon}>JE</span>
 					<div className={Styles.logoText}>
-						<span className={Styles.logoMain}>ECON JOURNAL</span>
+						<span className={Styles.logoMain}>JOURNAL</span>
 						<span className={Styles.logoSub}>ENTRY</span>
 					</div>
 				</Link>
 
 				{/* ── Desktop Links ────────────────────────────────── */}
 				<div className={Styles.navLinks}>
-					<a href="#about" className={Styles.navLink}>About</a>
-					<a href="#features" className={Styles.navLink}>Features</a>
-					<a href="#community" className={Styles.navLink}>Community</a>
+					<Link href="/about" className={Styles.navLink}>About</Link>
+					<Link href="/feed" className={Styles.navLink}>Stories</Link>
+					<Link href="/community" className={Styles.navLink}>Community</Link>
 				</div>
 
 				{/* ── CTA Block ────────────────────────────────────── */}
@@ -57,9 +59,9 @@ const LandingNavbar = () => {
 
 			{/* ── Mobile Menu ─────────────────────────────────────── */}
 			<div className={`${Styles.mobileMenu} ${menuOpen ? Styles.mobileMenuOpen : ""}`}>
-				<a href="#about" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>About</a>
-				<a href="#features" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Features</a>
-				<a href="#community" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Community</a>
+				<Link href="/about" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>About</Link>
+				<Link href="/feed" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Stories</Link>
+				<Link href="/community" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Community</Link>
 				<Link href="/signin" className={Styles.mobileLink} onClick={() => setMenuOpen(false)}>Sign in</Link>
 				<Link href="/signin">
 					<button className={Styles.mobileCta} onClick={() => setMenuOpen(false)}>Get Started Free</button>

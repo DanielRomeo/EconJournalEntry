@@ -1,121 +1,47 @@
 @use "../theme" as theme;
 
-.cardsContainer { width: 100%; }
-
-.gridRow { row-gap: 1.5rem; }
-
+.postsRegion, .cardsContainer { width: 100%; }
+.gridRow { row-gap: 34px; }
 .gridCol { display: flex; }
-
 .card {
-  width: 100%;
-  border-radius: theme.$radius-md;
-  border: 1px solid theme.$color-border;
-  background: #fff;
-  box-shadow: theme.$shadow-card;
-  overflow: hidden;
-  transition: transform 0.22s, box-shadow 0.22s;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: theme.$shadow-strong;
-  }
-
-  .link {
-    text-decoration: none;
-    color: theme.$color-dark;
-  }
-
-  .cardBodyUserinfo {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.85rem 1rem;
-  }
-
-  .createdDate {
-    color: theme.$color-text-light;
-    font-size: 0.82rem;
-    white-space: nowrap;
-  }
-
-  .postThumbnail {
-    width: 100%;
-    height: 190px;
-    object-fit: cover;
-    display: block;
-    border-top: 1px solid theme.$color-border;
-    border-bottom: 1px solid theme.$color-border;
-  }
-
-  .cardBodyPostDetails {
-    padding: 1.1rem;
-
-    .cardBodyPostDetailsTitle {
-      font-weight: 700;
-      font-size: 1.1rem;
-      margin-bottom: 0.45rem;
-      color: theme.$color-dark;
-      line-height: 1.35;
-    }
-
-    .readMeta {
-      color: theme.$color-text-light;
-      font-size: 0.85rem;
-      margin-bottom: 0.55rem;
-    }
-
-    .postSnippet {
-      min-height: 60px;
-      color: theme.$color-text-light;
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 0.85rem;
-    }
-
-    .metaRow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .categoryBadge {
-      background: theme.$color-primary-soft;
-      color: theme.$color-muted;
-      padding: 0.2rem 0.65rem;
-      border-radius: theme.$radius-pill;
-      font-size: 0.75rem;
-      font-weight: 700;
-      border: 1px solid theme.$color-border;
-    }
-
-    .hashtagBadge {
-      background: rgba(245,191,28,0.1);
-      color: theme.$color-muted;
-      padding: 0.2rem 0.65rem;
-      border-radius: theme.$radius-pill;
-      font-size: 0.75rem;
-      font-weight: 600;
-      border: 1px solid theme.$color-border;
-    }
-
-    .readMoreLink { text-decoration: none; }
-
-    .readMoreButton {
-      background: theme.$color-dark;
-      border: none;
-      color: #fff;
-      font-weight: 600;
-      border-radius: theme.$radius-pill;
-      padding: 0.45rem 1.2rem;
-      font-size: 0.88rem;
-      transition: all 0.2s;
-
-      &:hover {
-        background: theme.$color-primary;
-        color: theme.$color-dark;
-      }
-    }
-  }
+  width: 100%; border: 1px solid theme.$color-border; border-radius: 2px; background: var(--surface);
+  box-shadow: none; overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  &:hover { transform: translateY(-3px); border-color: theme.$color-dark; box-shadow: 8px 8px 0 theme.$color-primary-soft; }
+  .link { text-decoration: none; color: theme.$color-dark; }
 }
+.cardBodyUserinfo { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid theme.$color-border; }
+.createdDate { color: theme.$color-text-light; font-size: 0.76rem; white-space: nowrap; }
+.imageLink { display: block; overflow: hidden; background: var(--surface-2); }
+.postThumbnail { width: 100%; height: 210px; object-fit: cover; display: block; transition: transform 0.35s ease; }
+.card:hover .postThumbnail { transform: scale(1.025); }
+.thumbnailFallback { display: grid; place-items: center; height: 210px; color: theme.$color-primary; font-size: 2.4rem; background: linear-gradient(135deg, var(--surface-2), var(--surface)); }
+.cardBodyPostDetails {
+  display: flex; flex: 1; flex-direction: column; padding: 20px;
+  .cardBodyPostDetailsTitle { margin: 0 0 9px; color: theme.$color-dark; font-size: 1.42rem; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
+}
+.readMeta { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; color: theme.$color-text-light; font-size: 0.8rem; }
+.postSnippet { min-height: 66px; margin-bottom: 14px; color: theme.$color-text-light; font-size: 0.9rem; line-height: 1.65; }
+.metaRow { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+.categoryBadge, .hashtagBadge { padding: 3px 0; border-radius: 0; font-size: 0.7rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.categoryBadge { background: transparent; color: theme.$color-primary; }
+.hashtagBadge { background: var(--surface-2); color: var(--text-light); }
+.readMoreLink {
+  display: inline-flex; align-items: center; gap: 7px; width: fit-content; margin-top: auto; color: theme.$color-primary; font-size: 0.88rem; font-weight: 750; text-decoration: none;
+  svg { transition: transform 0.2s ease; }
+  &:hover svg { transform: translateX(3px); }
+}
+.emptyState {
+  display: flex; min-height: 280px; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px;
+  border: 1px dashed var(--color-primary); border-radius: 18px; background: var(--surface); text-align: center;
+  > svg { color: theme.$color-primary; font-size: 2.4rem; }
+  h3 { margin: 14px 0 6px; font-family: inherit; font-size: 1.15rem; font-weight: 750; }
+  p { margin: 0; color: theme.$color-text-light; }
+  button { margin-top: 16px; padding: 9px 18px; border: 0; border-radius: 2px; background: theme.$color-primary; color: #fff; font-weight: 700; }
+}
+.skeletonGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.skeletonCard { height: 440px; border: 1px solid theme.$color-border; border-radius: 2px; background: linear-gradient(90deg, var(--surface-2) 25%, var(--surface) 50%, var(--surface-2) 75%); background-size: 200% 100%; animation: shimmer 1.4s infinite linear; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (max-width: 991px) { .skeletonGrid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) { .skeletonGrid { grid-template-columns: 1fr; } .postThumbnail, .thumbnailFallback { height: 200px; } }
+@media (prefers-reduced-motion: reduce) { .card, .postThumbnail, .readMoreLink svg { transition: none; } .skeletonCard { animation: none; } }

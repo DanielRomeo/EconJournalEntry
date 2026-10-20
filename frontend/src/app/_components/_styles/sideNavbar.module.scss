@@ -1,6 +1,6 @@
 .Navbar {
 	display: flex;
-	background-color: white;
+	background-color: var(--surface);
 	padding: 10px;
 	// min-height: 300px;
 	// border: 1px solid red;
@@ -8,32 +8,25 @@
 	
 }
 
-.menuIcon{
-	width: 50px;
-	height: 50px;
-	// border: 1px solid black;
-	margin-top: 10px;
-	margin-left: 10px;
-	z-index: 9998;
-
-	position: relative;  /* Remove the div from the normal document flow */
-	// top: 0;           /* Position it at the top of the viewport */
-	// left: 50px; 
-
-	&:hover{
-		color: #1c6dd0;
-	}
-}
+.menuButton { color: var(--text) !important; }
+.menuIcon { width: 27px; height: 27px; }
 .drawer{
 	z-index: 9999;
+}
+.drawerPaper {
+	width: 288px;
+	border-right: 1px solid var(--border) !important;
+	background: var(--surface) !important;
+	color: var(--text) !important;
+	box-shadow: 14px 0 40px rgba(0,0,0,0.16) !important;
 }
 
 .list {
 	.chatter {
 		* {
 			font-weight: bold;
-			font-size: 30px;
-			color: #0c4a94;
+			font-size: 21px;
+			color: var(--text);
 		}
 	}
 
@@ -54,3 +47,18 @@
 		color: #cf2939;
 	}
 }
+
+.list { padding: 18px 12px !important; }
+.list :global(.MuiListItemButton-root) {
+	min-height: 48px;
+	margin: 3px 0;
+	border-radius: 2px;
+	color: var(--text);
+	transition: background 0.2s, color 0.2s;
+}
+.list :global(.MuiListItemIcon-root), .list svg { flex: 0 0 auto; margin-right: 12px; }
+.list :global(.MuiListItemButton-root:hover) { background: var(--primary-soft); box-shadow: inset 3px 0 var(--color-primary); color: var(--color-primary); }
+.list :global(.MuiDivider-root) { margin: 14px 8px; border-color: var(--border); }
+.sectionLabel * { color: var(--text-light); font-size: 0.7rem !important; font-weight: 800 !important; letter-spacing: 0.12em; text-transform: uppercase; }
+.logoutItem { margin-top: 8px !important; background: rgba(255, 85, 105, 0.08) !important; }
+.logoutbutton { color: var(--danger) !important; }

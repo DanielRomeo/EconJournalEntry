@@ -1,0 +1,28 @@
+@use "../../_styles/theme" as theme;
+
+.streakSection {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  border: 1px solid theme.$color-border;
+  border-top: 3px solid theme.$color-primary;
+  background: theme.$color-white;
+}
+.streakHeader { display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: 1.5rem; }
+.streakHeader span { color: theme.$color-primary; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.streakHeader h2 { margin: 0.35rem 0 0; color: theme.$color-dark; font-size: clamp(1.45rem, 3vw, 2rem); font-weight: 500; }
+.streakHeader p { margin: 0; color: theme.$color-text-light; font-size: 0.86rem; }
+.streakHeader p strong { color: theme.$color-dark; font-size: 1.15rem; }
+.weekScroller { overflow-x: auto; padding: 0.2rem 0 0.45rem; }
+.monthGrid, .weekGrid { display: grid; grid-template-columns: repeat(49, 14px); gap: 4px; width: max-content; min-width: 100%; }
+.monthGrid { min-height: 22px; margin-bottom: 0.45rem; align-items: end; }
+.monthGrid span { color: theme.$color-text-light; font-size: 0.64rem; font-weight: 700; line-height: 1; white-space: nowrap; }
+.weekBox { display: block; width: 14px; height: 14px; border: 1px solid theme.$color-border; background: var(--surface-2); }
+.weekActive { border-color: theme.$color-primary; background: theme.$color-primary; box-shadow: 0 0 0 2px theme.$color-primary-soft; }
+.weekStrong { background: theme.$color-primary-dark; }
+.weekLabels { display: flex; justify-content: space-between; margin-top: 0.55rem; color: theme.$color-text-light; font-size: 0.68rem; }
+.streakNote { margin: 0.8rem 0 0; color: theme.$color-text-light; font-size: 0.76rem; }
+
+@media(max-width: 600px) {
+  .streakSection { padding: 1.4rem; }
+  .streakHeader { align-items: flex-start; flex-direction: column; gap: 0.75rem; }
+}

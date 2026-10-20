@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
-import { doc, getDoc, collection, getDocs, query, where, orderBy, limit } from "firebase/firestore";
+import { doc, getDoc, collection, getDocs } from "firebase/firestore";
 import { db } from "../../_components/firebaseConfig";
 import Image from "next/image";
 import TopNavbar from "../../_components/topNavbar";
@@ -11,6 +11,7 @@ import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { CgProfile } from "react-icons/cg";
 import { SlBookOpen } from "react-icons/sl";
+import WritingRhythm, { parsePostDate } from "../../_components/writingRhythm";
 
 interface ProfilePageProps {
 	params: { userId: string }
@@ -42,8 +43,8 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 				snapshot.forEach(d => allPosts.push({ id: d.id, ...d.data() }));
 
 				const authorPosts = allPosts
-					.filter(p => p.author?.id === params.userId)
-					.slice(0, 3);
+					.filter(p => p.status !== "draft" && (p.author?.id === params.userId || p.coAuthorIds?.includes(params.userId)))
+					.sort((a, b) => (parsePostDate(b)?.getTime() || 0) - (parsePostDate(a)?.getTime() || 0));
 
 				setPosts(authorPosts);
 			} catch (err) {
@@ -53,7 +54,9 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 			}
 		};
 		fetchProfile();
-	}, []);
+	}, [params.userId]);
+
+	const isWriter = String(userData?.type || "").toLowerCase() === "writer";
 
 	return (
 		<div>
@@ -109,12 +112,14 @@ const ProfilePage = ({ params }: ProfilePageProps) => {
 						</div>
 					</div>
 
+					{isWriter && <WritingRhythm posts={posts} />}
+
 					{/* ── Latest posts ──────────────────────────────── */}
 					{posts.length > 0 && (
 						<div className={Styles.postsSection}>
 							<h2 className={Styles.sectionTitle}>Latest Articles</h2>
 							<Row className="g-4">
-								{posts.map((post) => (
+								{posts.slice(0, 3).map((post) => (
 									<Col key={post.id} lg={4} md={6} sm={12}>
 										<Card className={Styles.postCard}>
 											{post.thumbnail && (

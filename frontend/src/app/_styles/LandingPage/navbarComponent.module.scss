@@ -4,14 +4,16 @@
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 1000;
-  background: transparent;
+  background: color-mix(in srgb, var(--surface) 96%, transparent);
+  border-bottom: 1px solid theme.$color-border;
+  backdrop-filter: blur(16px);
   transition: background 0.3s ease, box-shadow 0.3s ease;
   padding: 0;
 
   &.scrolled {
-    background: rgba(10, 22, 26, 0.96);
+    background: color-mix(in srgb, var(--surface) 98%, transparent);
     backdrop-filter: blur(16px);
-    box-shadow: 0 2px 32px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 30px rgba(20,20,20,0.08);
   }
 }
 
@@ -38,17 +40,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
   background: theme.$color-primary;
-  color: theme.$color-dark;
-  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-family: "Palatino Linotype", Georgia, serif;
   font-weight: 900;
   font-size: 0.85rem;
-  border-radius: 10px;
+  border-radius: 2px;
   letter-spacing: -0.02em;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(245,191,28,0.35);
+  box-shadow: none;
 }
 
 .logoText {
@@ -58,18 +60,18 @@
 }
 
 .logoMain {
-  font-family: 'Playfair Display', serif;
+  font-family: "Palatino Linotype", Georgia, serif;
   font-weight: 900;
   font-size: 0.95rem;
-  color: #fff;
+  color: theme.$color-dark;
   letter-spacing: 0.08em;
 }
 
 .logoSub {
-  font-family: 'DM Sans', sans-serif;
+  font-family: inherit;
   font-weight: 500;
   font-size: 0.65rem;
-  color: theme.$color-primary;
+  color: theme.$color-text-light;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   margin-top: 1px;
@@ -88,7 +90,7 @@
   display: flex;
   align-items: center;
   padding: 0.5rem 1rem;
-  color: rgba(255,255,255,0.72);
+  color: theme.$color-text-light;
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
@@ -107,8 +109,8 @@
   }
 
   &:hover {
-    color: #fff;
-    background: rgba(255,255,255,0.06);
+    color: theme.$color-dark;
+    background: theme.$color-primary-soft;
 
     &::after {
       left: 1rem;
@@ -127,7 +129,7 @@
 }
 
 .loginLink {
-  color: rgba(255,255,255,0.78);
+  color: theme.$color-text;
   font-size: 0.9rem;
   font-weight: 600;
   text-decoration: none;
@@ -135,7 +137,7 @@
   border-radius: theme.$radius-sm;
   transition: color 0.2s;
 
-  &:hover { color: #fff; }
+  &:hover { color: theme.$color-primary; }
 }
 
 .ctaButton {
@@ -143,7 +145,7 @@
   align-items: center;
   gap: 0.5rem;
   background: theme.$color-primary;
-  color: theme.$color-dark;
+  color: #fff;
   border: none;
   font-weight: 700;
   font-size: 0.9rem;
@@ -151,12 +153,12 @@
   border-radius: theme.$radius-sm;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 2px 14px rgba(245,191,28,0.3);
+  box-shadow: none;
 
   &:hover {
     background: theme.$color-primary-light;
     transform: translateY(-1px);
-    box-shadow: 0 6px 24px rgba(245,191,28,0.4);
+    box-shadow: none;
 
     svg { transform: translateX(3px); }
   }
@@ -181,7 +183,7 @@
   span {
     display: block;
     height: 2px;
-    background: #fff;
+    background: theme.$color-dark;
     border-radius: 2px;
     transition: all 0.3s;
   }
@@ -198,8 +200,8 @@
   display: none;
   flex-direction: column;
   padding: 1rem 2rem 2rem;
-  background: rgba(10, 22, 26, 0.97);
-  border-top: 1px solid rgba(255,255,255,0.06);
+  background: var(--surface);
+  border-top: 1px solid theme.$color-border;
   gap: 0.25rem;
   transform: translateY(-10px);
   opacity: 0;
@@ -216,12 +218,12 @@
 }
 
 .mobileLink {
-  color: rgba(255,255,255,0.78);
+  color: theme.$color-text;
   text-decoration: none;
   font-size: 1rem;
   font-weight: 500;
   padding: 0.75rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: 1px solid theme.$color-border;
   transition: color 0.2s;
 
   &:hover { color: theme.$color-primary; }
@@ -231,7 +233,7 @@
   margin-top: 1rem;
   width: 100%;
   background: theme.$color-primary;
-  color: theme.$color-dark;
+  color: #fff;
   border: none;
   font-weight: 700;
   padding: 0.9rem;

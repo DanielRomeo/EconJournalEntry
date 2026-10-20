@@ -1,29 +1,29 @@
-// Econ Journal Entry — Brand Colors
-$color-primary:       #f5bf1c;   // gold
-$color-primary-dark:  #e0aa0f;   // darker gold for hover
-$color-primary-light: #f7cc49;   // lighter gold
-$color-dark:          #122a30;   // deep teal-black
-$color-dark-2:        #1c3b43;   // slightly lighter dark
-$color-muted:         #57524f;   // warm grey (from logo)
-$color-bg:            #f9f5ee;   // warm off-white background
+// Journal Entry — Brand Colors
+$color-primary:       var(--color-primary);
+$color-primary-dark:  var(--color-primary-dark);
+$color-primary-light: var(--color-primary-light);
+$color-dark:          var(--dark);
+$color-dark-2:        var(--dark-2);
+$color-muted:         var(--muted);
+$color-bg:            var(--bg);
 $color-bg-dark:       #0e2128;   // dark page bg
-$color-white:         #ffffff;
-$color-text:          #122a30;
-$color-text-light:    #57524f;
-$color-border:        #e8dfc5;
+$color-white:         var(--surface);
+$color-text:          var(--text);
+$color-text-light:    var(--text-light);
+$color-border:        var(--border);
 $color-border-dark:   #1e3840;
 
 // Soft tints
-$color-primary-soft:  rgba(245, 191, 28, 0.12);
-$color-dark-soft:     rgba(18, 42, 48, 0.07);
+$color-primary-soft:  var(--primary-soft);
+$color-dark-soft:     var(--surface-2);
 
 // Radii
-$radius-sm: 0.6rem;
-$radius-md: 1rem;
-$radius-lg: 1.5rem;
+$radius-sm: 0.35rem;
+$radius-md: 0.55rem;
+$radius-lg: 0.85rem;
 $radius-pill: 999px;
 
 // Shadows
 $shadow-card:   0 4px 24px rgba(18, 42, 48, 0.1);
 $shadow-strong: 0 8px 40px rgba(18, 42, 48, 0.18);
-$shadow-gold:   0 4px 20px rgba(245, 191, 28, 0.25);
+$shadow-gold:   0 4px 20px rgba(23, 79, 143, 0.22);

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Styles from "./_styles/authorProfileCard.module.scss";
+import { CgProfile } from "react-icons/cg";
 
 interface AuthorData {
 	firstname?: string;
@@ -28,13 +29,11 @@ const AuthorProfileCard = ({
 
 	return (
 		<div className={`${Styles.card} ${compact ? Styles.compact : ""}`}>
-			<Image
-				src={author?.image || "/Dans Econ logo copy.png"}
-				width={compact ? 56 : 84}
-				height={compact ? 56 : 84}
-				className={Styles.image}
-				alt="Author profile image"
-			/>
+			{author?.image ? (
+				<Image src={author.image} width={compact ? 56 : 84} height={compact ? 56 : 84} className={Styles.image} alt="Author profile image" />
+			) : (
+				<span className={`${Styles.emptyImage} ${compact ? Styles.emptyImageCompact : ""}`}><CgProfile /></span>
+			)}
 			<div>
 				{!compact && <h5>{title}</h5>}
 				<p className={Styles.name}>{fullName}</p>

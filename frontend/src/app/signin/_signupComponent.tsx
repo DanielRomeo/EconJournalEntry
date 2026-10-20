@@ -90,8 +90,9 @@ const SignupComponent: React.FC = () => {
 
 	return (
 		<div className={`${Styles.mainContainer}`}>
-			<Row className="">
-				<h3>Register as a Writer/Reader</h3>
+			<Row>
+				<h3 className={Styles.heading}>Create your account</h3>
+				<p className={Styles.subheading}>Join as a reader or writer. You can update your profile at any time.</p>
 			</Row>
 
 			<form onSubmit={handleSubmit(onSubmit)}>

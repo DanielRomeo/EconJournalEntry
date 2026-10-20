@@ -1,13 +1,11 @@
 "use client";
 import LandingNavbar from "./navbarComponent";
 import { Button, Container, Row, Col } from "react-bootstrap";
-import { useState } from "react";
 import Styles from "../_styles/LandingPage/LandingComponent.module.scss";
-import Image from "next/image";
-import { FaChartLine, FaPenNib, FaArrowRight, FaLightbulb } from "react-icons/fa";
+import { FaPenNib, FaArrowRight, FaLightbulb } from "react-icons/fa";
 import { MdGroups } from "react-icons/md";
-import { IoNewspaperOutline } from "react-icons/io5";
 import Link from "next/link";
+import SiteFooter from "../_components/siteFooter";
 
 const LandingComponent = () => {
 	return (
@@ -23,7 +21,7 @@ const LandingComponent = () => {
 						Come to <em>Learn & Share</em>
 					</h1>
 					<p>
-						From economics to everyday ideas — Econ Journal Entry is a
+						From economics to everyday ideas — Journal Entry is a
 						platform built for thinkers who want to read deeply,
 						write boldly, and connect with minds that inspire them.
 					</p>
@@ -52,30 +50,6 @@ const LandingComponent = () => {
 				</Container>
 			</div>
 
-			{/* ── Stats Bar ────────────────────────────────────────────────── */}
-			<div className={Styles.statsBar}>
-				<Container>
-					<div className={Styles.statsContainer}>
-						<div className={Styles.stat}>
-							<span className={Styles.statNumber}>12K+</span>
-							<span className={Styles.statLabel}>Readers</span>
-						</div>
-						<div className={Styles.stat}>
-							<span className={Styles.statNumber}>800+</span>
-							<span className={Styles.statLabel}>Articles</span>
-						</div>
-						<div className={Styles.stat}>
-							<span className={Styles.statNumber}>340+</span>
-							<span className={Styles.statLabel}>Writers</span>
-						</div>
-						<div className={Styles.stat}>
-							<span className={Styles.statNumber}>50+</span>
-							<span className={Styles.statLabel}>Topics</span>
-						</div>
-					</div>
-				</Container>
-			</div>
-
 			{/* ── About ────────────────────────────────────────────────────── */}
 			<div className={Styles.aboutSection} id="about">
 				<Container className={Styles.aboutSectionContainer}>
@@ -84,7 +58,7 @@ const LandingComponent = () => {
 							<span className={Styles.sectionTag}>About the Platform</span>
 							<h1>A Space for Ideas That Actually Matter</h1>
 							<p>
-								Econ Journal Entry is built for people who believe
+								Journal Entry is built for people who believe
 								knowledge shouldn't be gatekept. Whether you're an
 								economist, a student, a developer, or just endlessly
 								curious — there's a place for your voice and your
@@ -161,132 +135,7 @@ const LandingComponent = () => {
 				</Container>
 			</div>
 
-			{/* ── Testimonial ──────────────────────────────────────────────── */}
-			<div className={Styles.personSection} id="community">
-				<Container className={Styles.personSectionContainer}>
-					<Row className={`${Styles.personSectionRow} align-items-center`}>
-						<Col className={Styles.col1} lg="4" md="5" sm="12">
-							<div className={Styles.avatarWrap}>
-								<Image
-									className={Styles.image}
-									src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&q=80"
-									width={240}
-									height={240}
-									alt="Featured community member"
-								/>
-							</div>
-						</Col>
-
-						<Col className={Styles.col2} lg="8" md="7" sm="12">
-							<blockquote>
-								"I came for the economics articles and stayed for
-								everything else. This platform introduced me to ideas
-								across science, philosophy and tech that I never would
-								have found otherwise. Genuinely life-changing reading."
-							</blockquote>
-							<div className={Styles.attribution}>
-								<h6>Amara Mensah, <small>Reader & Contributor</small></h6>
-							</div>
-							<Link href="/signin">
-								<Button className={Styles.joinButton}>Join the Community</Button>
-							</Link>
-						</Col>
-					</Row>
-				</Container>
-			</div>
-
-			{/* ── Write / Read / Connect ────────────────────────────────────── */}
-			<div className={Styles.writeSection}>
-				<Container className={Styles.writeSectionContainer}>
-					<Row className={`${Styles.writeSectionRow} align-items-center`}>
-						<Col className={Styles.col1} lg="6" md="6" sm="12">
-							<div className={Styles.imageGrid}>
-								<div className={Styles.gridImg}>
-									<img
-										src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&q=80"
-										alt="Student studying and taking notes"
-									/>
-								</div>
-								<div className={Styles.gridImg}>
-									<img
-										src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=400&q=80"
-										alt="People discussing ideas"
-									/>
-								</div>
-								<div className={Styles.gridImg}>
-									<img
-										src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&q=80"
-										alt="Reading and research"
-									/>
-								</div>
-							</div>
-						</Col>
-
-						<Col className={Styles.col2} lg="6" md="6" sm="12">
-							<span className={Styles.sectionTag}>Get Started Today</span>
-							<h1>Read, Write & Share What You Know</h1>
-							<p>
-								Your perspective matters. Share your analysis, your
-								research, your discoveries. Find people who geek out
-								over the same things you do. Let ideas travel.
-							</p>
-							<Link href="/signin">
-								<Button className={Styles.getStartedButton}>
-									Start for Free &nbsp;<FaArrowRight />
-								</Button>
-							</Link>
-						</Col>
-					</Row>
-				</Container>
-			</div>
-
-			{/* ── Footer ───────────────────────────────────────────────────── */}
-			<div className={Styles.footer}>
-				<Container>
-					<Row className="g-4">
-						<Col lg="4" md="4" sm="12">
-							<div className={Styles.footerBrand}>
-								<h4>Econ Journal Entry</h4>
-								<p>
-									A platform for curious minds — from economics and
-									finance to science, tech, culture and beyond.
-									Ideas that move the world live here.
-								</p>
-							</div>
-						</Col>
-
-						<Col lg="2" md="3" sm="6">
-							<div className={Styles.footerCol}>
-								<h4>Explore</h4>
-								<p>Community</p>
-								<p>Trending Posts</p>
-								<p>All Topics</p>
-							</div>
-						</Col>
-
-						<Col lg="2" md="3" sm="6">
-							<div className={Styles.footerCol}>
-								<h4>Support</h4>
-								<p>Documentation</p>
-								<p>Contact Us</p>
-							</div>
-						</Col>
-
-						<Col lg="2" md="2" sm="6">
-							<div className={Styles.footerCol}>
-								<h4>Write</h4>
-								<p>Start Writing</p>
-								<p>Editor Guide</p>
-							</div>
-						</Col>
-					</Row>
-
-					<hr className={Styles.footerDivider} />
-					<p className={Styles.footerBottom}>
-						© {new Date().getFullYear()} Econ Journal Entry. All rights reserved.
-					</p>
-				</Container>
-			</div>
+			<SiteFooter />
 		</div>
 	);
 };

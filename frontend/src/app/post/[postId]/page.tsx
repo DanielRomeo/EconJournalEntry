@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../_components/firebaseConfig";
@@ -8,7 +8,9 @@ import TopNavbar from '../../_components/topNavbar';
 import MarkdownEditor from '../../createpost/markdownEditor';
 import Styles from "../../_styles/Feed/PostView.module.scss";
 import AuthorProfileCard from "../../_components/authorProfileCard";
-import { FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { getPostAuthors } from "../../_components/postAuthors";
 
 interface PostPageProps {
 	params: { postId: string }
@@ -41,6 +43,8 @@ const extractFirstYouTubeId = (content: string): string | null => {
 const PostPage = ({ params }: PostPageProps) => {
 	const [post, setPost] = useState<any>(null);
 	const [loading, setLoading] = useState(true);
+	const [readingProgress, setReadingProgress] = useState(0);
+	const articleRef = useRef<HTMLDivElement | null>(null);
 
 	useEffect(() => {
 		const fetchData = async (postId: string) => {
@@ -57,10 +61,29 @@ const PostPage = ({ params }: PostPageProps) => {
 			}
 		};
 		fetchData(params.postId);
-	}, []);
+	}, [params.postId]);
+
+	useEffect(() => {
+		const updateProgress = () => {
+			const article = articleRef.current;
+			if (!article) return;
+			const articleTop = window.scrollY + article.getBoundingClientRect().top;
+			const finishLine = Math.max(articleTop + article.scrollHeight - window.innerHeight, articleTop + 1);
+			const currentPosition = window.scrollY + 76;
+			const percentage = ((currentPosition - articleTop) / (finishLine - articleTop)) * 100;
+			setReadingProgress(Math.min(100, Math.max(0, percentage)));
+		};
+		updateProgress();
+		window.addEventListener("scroll", updateProgress, { passive: true });
+		window.addEventListener("resize", updateProgress);
+		return () => {
+			window.removeEventListener("scroll", updateProgress);
+			window.removeEventListener("resize", updateProgress);
+		};
+	}, [post]);
 
 	const postUrl = typeof window !== "undefined" ? window.location.href : "";
-	const shareText = post?.title || "Check this post on Econ Journal Entry";
+	const shareText = post?.title || "Check this post on Journal Entry";
 	const thumbUrl = post?.thumbnail || "";
 
 	// Social share URLs — thumbnail image embedded via og:image meta but for direct link sharing
@@ -73,11 +96,14 @@ const PostPage = ({ params }: PostPageProps) => {
 
 	return (
 		<div>
+			<div className={Styles.readingProgressTrack} role="progressbar" aria-label="Article reading progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(readingProgress)}>
+				<div className={Styles.readingProgressBar} style={{ width: `${readingProgress}%` }} />
+			</div>
 			<TopNavbar />
 			{loading ? (
 				<Container><p className="mt-5">Loading post...</p></Container>
 			) : post ? (
-				<Container className={Styles.postContainer}>
+				<Container ref={articleRef} className={Styles.postContainer}>
 					<Row>
 						<Col lg="12" md="12" sm="12">
 							{/* Thumbnail */}
@@ -128,7 +154,7 @@ const PostPage = ({ params }: PostPageProps) => {
 									<FaFacebookF />
 								</a>
 								<a href={twitterShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.twitter}`} aria-label="Share on X (Twitter)">
-									<FaTwitter />
+									<FaXTwitter />
 								</a>
 								<a href={linkedinShare} target="_blank" rel="noreferrer" className={`${Styles.shareBtn} ${Styles.linkedin}`} aria-label="Share on LinkedIn">
 									<FaLinkedinIn />
@@ -138,10 +164,16 @@ const PostPage = ({ params }: PostPageProps) => {
 								</a>
 							</div>
 
-							{/* Author card — links to their profile */}
-							<a href={`/profile/${post.author?.id}`} className={Styles.authorLink}>
-								<AuthorProfileCard author={post.author} />
-							</a>
+							<section className={Styles.authorsSection} aria-labelledby="authors-heading">
+								<h2 id="authors-heading">{getPostAuthors(post).length > 1 ? "About the authors" : "About the author"}</h2>
+								<div className={Styles.authorsGrid}>
+									{getPostAuthors(post).map((author, index) => (
+										<a key={author.id} href={`/profile/${author.id}`} className={Styles.authorLink}>
+											<AuthorProfileCard author={author} title={getPostAuthors(post).length > 1 ? (index === 0 ? "Main author" : "Co-author") : "About the author"} />
+										</a>
+									))}
+								</div>
+							</section>
 						</Col>
 					</Row>
 				</Container>

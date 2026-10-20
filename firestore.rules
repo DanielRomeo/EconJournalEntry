@@ -1,0 +1,53 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    match /users/{userId} {
+      allow read: if signedIn();
+      allow create, update: if signedIn() && request.auth.uid == userId;
+    }
+
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.author.id == request.auth.uid;
+
+      allow update, delete: if signedIn()
+        && request.auth.uid == resource.data.ownerId;
+    }
+
+    match /drafts/{draftId} {
+      function isOwner() {
+        return signedIn() && request.auth.uid == resource.data.ownerId;
+      }
+
+      function isCoAuthor() {
+        return signedIn()
+          && request.auth.uid in resource.data.coAuthorIds;
+      }
+
+      allow read: if isOwner() || isCoAuthor();
+      allow create: if signedIn()
+        && request.resource.data.ownerId == request.auth.uid
+        && request.resource.data.author.id == request.auth.uid;
+
+      allow update: if isOwner() || (
+        isCoAuthor()
+        && request.resource.data.ownerId == resource.data.ownerId
+        && request.resource.data.author == resource.data.author
+        && request.resource.data.coAuthorIds == resource.data.coAuthorIds
+        && request.resource.data.coAuthors == resource.data.coAuthors
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'title', 'post', 'category', 'hashtags', 'thumbnail', 'updated'
+        ])
+      );
+
+      allow delete: if isOwner();
+    }
+  }
+}

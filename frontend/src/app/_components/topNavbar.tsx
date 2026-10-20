@@ -1,17 +1,24 @@
+"use client";
+
 import {
 	Navbar,
 	Container,
 	Nav,
-	NavItem,
 } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import { HiOutlinePencilSquare } from "react-icons/hi2";
 import Styles from './_styles/topNavbar.module.scss'
 import { CiSearch } from "react-icons/ci";
 
 import SideNavbar from "./sideNavbar";
+import ThemeToggle from "./themeToggle";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth, db } from "./firebaseConfig";
+import { doc, getDoc } from "firebase/firestore";
+import { CgProfile } from "react-icons/cg";
 
 interface TopNavbarProps extends PropsWithChildren {
 	searchTerm?: string;
@@ -19,27 +26,41 @@ interface TopNavbarProps extends PropsWithChildren {
 }
 
 const TopNavbar = ({ children, searchTerm = "", onSearchChange }: TopNavbarProps) => {
+	const [profileImage, setProfileImage] = useState("");
 
-
-    const [height, setHeight] = useState<number>(0); // State to store calculated height
-
-	const handleLoadComplete = (img: any) => {
-		const newHeight =
-			img.naturalHeight * (img.clientWidth / img.naturalWidth);
-		setHeight(newHeight);
-	};
+	useEffect(() => {
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
+			if (!user) {
+				setProfileImage("");
+				return;
+			}
+			try {
+				const snapshot = await getDoc(doc(db, "users", user.uid));
+				setProfileImage(snapshot.exists() ? snapshot.data().image || "" : "");
+			} catch (error) {
+				console.error("Unable to load the navigation profile image", error);
+				setProfileImage("");
+			}
+		});
+		return unsubscribe;
+	}, []);
 
 	return (
-		<Navbar className={`${Styles.navBar} navbar-expand-sm `}>
+		<Navbar className={`${Styles.navBar} navbar-expand-md`} expand="md">
 			<Container className={`${Styles.navbarContainer}`}>
-				<Navbar.Brand className={`${Styles.navbarBrand}`}>
+				<div className={Styles.brandGroup}>
 				<SideNavbar></SideNavbar>
-				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="basic-navbar-nav" />
+					<Link href="/feed" className={Styles.wordmark} aria-label="Journal Entry home">
+						<span className={Styles.brandMark}>JE</span>
+						<span>Journal Entry</span>
+					</Link>
+				</div>
+				<Navbar.Toggle aria-controls="basic-navbar-nav" aria-label="Open search and account actions">
+					<CiSearch size={22} />
+				</Navbar.Toggle>
 				<Navbar.Collapse className={Styles.collapsedNavbar} id="basic-navbar-nav">
-					<Nav className="mx-auto">
-						
-                        <div className="input-group mb-3">
+					<Nav className={Styles.searchNav}>
+						<div className={`input-group ${Styles.searchGroup}`}>
                             <div className="input-group-prepend">
                                 <span className={`input-group-text ${Styles.searchButtonInputSpan}`} id="basic-addon1"><CiSearch size={25}></CiSearch></span>
                             </div>
@@ -55,25 +76,19 @@ const TopNavbar = ({ children, searchTerm = "", onSearchChange }: TopNavbarProps
                         </div>
 					</Nav>
 
-					<Nav className={`${Styles.rightHandNav} "mr-auto"`}>
-						<NavItem className={`${Styles.navLink}`}>
-							<Link href="/signin">
-                                <IoIosNotificationsOutline size={30} />
-							</Link>
-						</NavItem>
-
-						<NavItem>
-							<Link href="/account">
-                            <Image
-								className={`${Styles.image}`}
-								src="/personSectionImage.png"
-								width={50}
-								height={50}
-								onLoadingComplete={handleLoadComplete}
-								alt="Picture of the author that uses the platform to write journals."
-							/>
-							</Link>
-						</NavItem>
+					<Nav className={Styles.rightHandNav}>
+						<Link className={Styles.writeLink} href="/createpost"><HiOutlinePencilSquare /> Write</Link>
+						<ThemeToggle />
+						<Link className={Styles.navLink} href="/signin" aria-label="Notifications">
+							<IoIosNotificationsOutline size={25} />
+						</Link>
+						<Link href="/account" className={Styles.profileLink} aria-label="Open account">
+							{profileImage ? (
+								<Image className={Styles.image} src={profileImage} width={40} height={40} alt="Your profile" />
+							) : (
+								<span className={Styles.emptyAvatar}><CgProfile /></span>
+							)}
+						</Link>
 					</Nav>
 				</Navbar.Collapse>
 			</Container>

@@ -99,7 +99,7 @@ const SigninComponent = () => {
 		<div className={`${Styles.mainDiv}`}>
 			<Row className={`${Styles.header}`}>
 				<h3>Welcome back</h3>
-
+				<p>Sign in to continue reading and writing.</p>
 			</Row>
 
 			<Row className={`${Styles.signinRow}`}>

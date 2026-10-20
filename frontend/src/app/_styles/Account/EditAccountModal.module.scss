@@ -1,0 +1,15 @@
+.dialog { max-width: 760px; }
+.modalContent { overflow: hidden; border: 1px solid var(--border); border-radius: 2px; background: var(--surface); color: var(--text); box-shadow: 14px 14px 0 rgba(0,0,0,0.18); }
+.header { display: flex; gap: 14px; align-items: center; padding: 24px 28px; border-color: var(--border); background: var(--surface-2); }
+.header :global(.modal-title) { font-family: "Palatino Linotype", Georgia, serif; font-size: 1.5rem; font-weight: 500; }
+.header p { margin: 3px 0 0; color: var(--text-light); font-size: 0.85rem; }
+.titleIcon, .uploadIcon { display: grid; width: 44px; height: 44px; flex: 0 0 auto; place-items: center; border-radius: 2px; background: var(--primary-soft); color: var(--color-primary); font-size: 1.35rem; }
+.body { max-height: min(70vh, 720px); padding: 28px; overflow-y: auto; }
+.uploadGroup { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 14px; padding: 18px; border: 1px dashed var(--color-primary); border-radius: 2px; background: var(--primary-soft); }
+.uploadGroup label { margin: 0; }
+.uploadGroup p { margin: 2px 0 10px; color: var(--text-light); font-size: 0.8rem; }
+.fileInput { grid-column: 1 / -1; border-radius: 2px; }
+.footer { gap: 8px; padding: 18px 28px; border-color: var(--border); background: var(--surface-2); }
+.saveButton { order: 2; min-width: 150px; }
+.closeButton { order: 1; border-color: var(--border); background: transparent; color: var(--text); }
+@media(max-width: 600px) { .header, .body, .footer { padding-left: 18px; padding-right: 18px; } .footer { flex-direction: column-reverse; } .footer button { width: 100%; } }

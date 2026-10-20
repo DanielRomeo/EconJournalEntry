@@ -1,0 +1,82 @@
+@use "theme" as theme;
+
+.page { min-height: 100vh; background: theme.$color-bg; color: theme.$color-text; }
+
+.hero { padding: 152px 0 76px; background: theme.$color-bg; border-bottom: 1px solid theme.$color-dark; }
+
+.heroInner { max-width: 1040px; }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: theme.$color-primary;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.eyebrow::before { content: ""; width: 34px; height: 1px; background: currentColor; }
+.hero h1 {
+  max-width: 920px;
+  margin: 0 0 1.25rem;
+  color: theme.$color-dark;
+  font-size: clamp(3rem, 8vw, 6.4rem);
+  font-weight: 500;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+.hero p {
+  max-width: 690px;
+  margin: 0;
+  color: theme.$color-text-light;
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+.primaryAction, .secondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.72rem 1.35rem;
+  border-radius: 2px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.primaryAction { background: theme.$color-primary; color: #fff; border: 1px solid theme.$color-primary; }
+.secondaryAction { background: theme.$color-white; color: theme.$color-text; border: 1px solid theme.$color-border; }
+.primaryAction:hover, .secondaryAction:hover { transform: translateY(-2px); }
+.primaryAction:hover { background: theme.$color-primary-dark; }
+.secondaryAction:hover { border-color: theme.$color-primary; color: theme.$color-primary; }
+
+.content { padding: 74px 0 108px; }
+.section { max-width: 900px; margin-bottom: 4rem; }
+.section:last-child { margin-bottom: 0; }
+.section h2 { margin-bottom: 0.9rem; padding-top: 1rem; border-top: 1px solid theme.$color-dark; color: theme.$color-dark; font-size: clamp(1.8rem, 3vw, 2.45rem); font-weight: 500; }
+.section > p { max-width: 760px; color: theme.$color-text-light; line-height: 1.8; }
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; margin-top: 1.6rem; border-top: 1px solid theme.$color-border; border-left: 1px solid theme.$color-border; }
+.gridTwo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.card {
+  padding: 1.65rem;
+  background: theme.$color-white;
+  border: 0;
+  border-right: 1px solid theme.$color-border;
+  border-bottom: 1px solid theme.$color-border;
+  border-radius: 0;
+}
+.card h3 { margin: 0 0 0.65rem; color: theme.$color-dark; font-family: "Palatino Linotype", Georgia, serif; font-size: 1.25rem; font-weight: 500; }
+.card p { margin: 0; color: theme.$color-text-light; line-height: 1.65; font-size: 0.94rem; }
+.card a { color: theme.$color-primary; font-weight: 800; text-decoration: none; }
+.list { display: grid; gap: 0; margin: 1.5rem 0 0; padding: 0; border-top: 1px solid theme.$color-border; list-style: none; }
+.list li { padding: 1.15rem 0; background: transparent; border-bottom: 1px solid theme.$color-border; color: theme.$color-text-light; }
+.list strong { color: theme.$color-dark; }
+.note { padding: 1.2rem 1.35rem; background: var(--primary-soft); border-left: 3px solid theme.$color-primary; color: theme.$color-text; line-height: 1.7; }
+.inlineLink { color: theme.$color-primary; font-weight: 800; text-decoration: none; }
+
+@media(max-width: 800px) {
+  .hero { padding: 125px 0 58px; }
+  .content { padding: 54px 0 72px; }
+  .grid, .gridTwo { grid-template-columns: 1fr; }
+}

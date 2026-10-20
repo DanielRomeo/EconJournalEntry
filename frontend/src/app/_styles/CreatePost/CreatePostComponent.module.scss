@@ -3,9 +3,11 @@
 .main {
 	.container {
 		margin-top: 40px;
-		background: #ffffff;
+		margin-bottom: 72px;
+		background: var(--surface);
+		color: theme.$color-text;
 		border: 1px solid theme.$color-border;
-		border-radius: theme.$radius-md;
+		border-radius: 2px;
 		padding: 1.5rem;
 		.row1 {
 			.col {
@@ -34,6 +36,33 @@
 	}
 }
 
+.loadingState { padding: 80px 20px; color: theme.$color-text-light; }
+.editorHeader { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.editorHeader span { color: theme.$color-primary; font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+.editorHeader h1 { margin: 4px 0 0; color: theme.$color-dark; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 500; }
+.headerActions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.publishButton, .draftButton, .deleteButton { border-radius: 2px; font-weight: 750; padding: 0.65rem 1.15rem; }
+.publishButton { background: theme.$color-primary; border-color: theme.$color-primary; color: #fff; }
+.draftButton { background: theme.$color-primary-soft; border-color: theme.$color-primary; color: theme.$color-primary; }
+.deleteButton { background: transparent; border-color: var(--danger); color: var(--danger); }
+.permissionNote, .successMessage, .errorMessage { margin-bottom: 18px; padding: 12px 16px; border-radius: theme.$radius-sm; line-height: 1.55; }
+.permissionNote { background: theme.$color-primary-soft; border: 1px solid theme.$color-primary; color: theme.$color-text; }
+.successMessage { background: rgba(37, 211, 102, 0.12); border: 1px solid #25a95c; color: theme.$color-text; }
+.errorMessage { background: rgba(255, 125, 138, 0.12); border: 1px solid var(--danger); color: var(--danger); }
+.coAuthorPanel { margin-bottom: 24px; padding: 20px; border: 1px solid theme.$color-border; border-radius: 2px; background: var(--surface-2); }
+.coAuthorPanel h2 { margin: 0 0 4px; color: theme.$color-dark; font-size: 1.1rem; }
+.coAuthorPanel p { margin: 0 0 16px; color: theme.$color-text-light; font-size: 0.9rem; }
+.authorChips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.authorChips > span { position: relative; display: flex; flex-direction: column; padding: 9px 38px 9px 14px; border: 1px solid theme.$color-border; border-radius: 2px; background: var(--surface); }
+.authorChips strong { color: theme.$color-dark; font-size: 0.84rem; }
+.authorChips small { color: theme.$color-text-light; font-size: 0.68rem; }
+.authorChips button { position: absolute; top: 50%; right: 12px; border: 0; background: transparent; color: var(--danger); font-size: 1.2rem; transform: translateY(-50%); }
+.coAuthorInput { display: flex; gap: 8px; max-width: 620px; }
+.coAuthorInput input { min-width: 0; }
+.coAuthorInput button { flex: 0 0 auto; background: theme.$color-primary; border-color: theme.$color-primary; }
+.preview { color: theme.$color-text; }
+.preview > small { display: block; margin-bottom: 12px; color: theme.$color-primary; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+
 .editorActions {
 	display: flex;
 	justify-content: flex-end;
@@ -47,7 +76,7 @@
 	border: 1px solid theme.$color-primary;
 	background: theme.$color-primary-soft;
 	color: theme.$color-primary;
-	border-radius: 999px;
+	border-radius: 2px;
 	cursor: pointer;
 	font-size: 0.9rem;
 	font-weight: 600;
@@ -73,13 +102,13 @@
 
 .tabButton,
 .activeTabButton {
-	border-radius: 999px;
+	border-radius: 2px;
 	font-size: 0.85rem;
 	padding: 0.35rem 0.75rem;
 }
 
 .tabButton {
-	background: #ffffff;
+	background: var(--surface);
 	border: 1px solid theme.$color-border;
 	color: theme.$color-primary;
 }
@@ -99,9 +128,16 @@
 
 .toolbarButton {
 	border-radius: 0.5rem;
-	background: #ffffff;
+	background: var(--surface);
 	border: 1px solid theme.$color-border;
 	color: theme.$color-primary;
 	padding: 0.25rem 0.6rem;
 	font-size: 0.85rem;
+}
+
+@media(max-width: 767px) {
+	.main .container { margin-top: 20px; padding: 18px; }
+	.editorHeader { flex-direction: column; }
+	.headerActions { width: 100%; justify-content: flex-start; }
+	.coAuthorInput { flex-direction: column; }
 }

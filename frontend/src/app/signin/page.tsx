@@ -9,15 +9,23 @@ import Link from "next/link";
 const SigninPage = () => {
 	return (
 		<div className={Styles.signinPage}>
-			{/* ── Left image panel ─────────────────────────────── */}
+			{/* Illustration panel */}
 			<div className={Styles.imagePanel}>
-				<div className={Styles.brandLogo}>EJE</div>
+				<Link href="/" className={Styles.brandLogo}><span>JE</span> Journal Entry</Link>
+				<div className={Styles.journalGraphic} aria-hidden="true">
+					<div className={Styles.orbitOne} />
+					<div className={Styles.orbitTwo} />
+					<div className={Styles.journalCard}>
+						<div className={Styles.journalBinding} />
+						<div className={Styles.journalLine} />
+						<div className={Styles.journalLine} />
+						<div className={Styles.journalLineShort} />
+					</div>
+				</div>
 				<div className={Styles.tagline}>
-					<div className={Styles.decorLine} />
-					<h2>Economics That<br />Moves the World</h2>
+					<h2>A home for ideas<br />worth returning to.</h2>
 					<p>
-						Join thousands of economists, analysts, and curious minds
-						sharing ideas that matter.
+						Write with clarity, discover fresh perspectives, and build a thoughtful reading habit.
 					</p>
 				</div>
 			</div>
@@ -25,7 +33,7 @@ const SigninPage = () => {
 			{/* ── Right form panel ─────────────────────────────── */}
 			<div className={Styles.formPanel}>
 				<div className={Styles.formContainer}>
-					<div className={Styles.mobileBrand}>EJE</div>
+					<div className={Styles.mobileBrand}><span>JE</span> Journal Entry</div>
 					<Tab.Container defaultActiveKey="register">
 						<Nav variant="tabs" className="mb-4">
 							<Nav.Item>

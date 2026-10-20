@@ -7,6 +7,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
+import IconButton from "@mui/material/IconButton";
 
 // icons:
 import { IoPersonOutline } from "react-icons/io5";
@@ -18,6 +19,7 @@ import { FaRegEnvelopeOpen } from "react-icons/fa6";
 import { MdInsertChartOutlined } from "react-icons/md";
 import { GrLineChart } from "react-icons/gr";
 import { FaPen } from "react-icons/fa";
+import { HiOutlineDocumentDuplicate } from "react-icons/hi2";
 
 // firebase:
 import { signOut } from 'firebase/auth'; // Import Firebase Auth functions
@@ -66,7 +68,7 @@ const SideNavbar = forwardRef((props, ref) => {
 	const list = (anchor: any) => (
 		<Box
 			sx={{
-				width: anchor === "top" || anchor === "bottom" ? "auto" : 250,
+				width: anchor === "top" || anchor === "bottom" ? "auto" : 288,
 			}}
 			role="presentation"
 			onClick={toggleDrawer(anchor, false)}
@@ -75,38 +77,38 @@ const SideNavbar = forwardRef((props, ref) => {
 			<List className={`${Styles.list}`}>
 				<ListItem disablePadding>
 					<ListItemButton>
-						&emsp;&emsp;
 						<ListItemText
 							className={`${Styles.chatter}`}
-							primary={"ECON JOURNAL"}
+							primary={"Journal Entry"}
 						/>
 					</ListItemButton>
 				</ListItem>
 
 				<ListItem disablePadding>
 					<ListItemButton>
-						&emsp;&emsp;
-						<ListItemText primary={"Overview"} />
+						<ListItemText className={Styles.sectionLabel} primary={"Navigation"} />
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding>
 					<ListItemButton onClick={()=>{handleLinkClick('feed')}}>
-						&emsp;&emsp;&emsp;
 						<CgFeed></CgFeed>
-						&nbsp;&nbsp;
 						<ListItemText primary={"Feed"} />
 					</ListItemButton>
 				</ListItem>
 				<ListItem disablePadding>
 					<ListItemButton onClick={()=>{handleLinkClick('createpost')}}>
-						&emsp;&emsp;&emsp;
 						<FaPen></FaPen>
-						&nbsp;&nbsp;
 						<ListItemText primary={"Create Post"} />
 					</ListItemButton>
 				</ListItem>
+				<ListItem disablePadding>
+					<ListItemButton onClick={()=>{handleLinkClick('drafts')}}>
+						<HiOutlineDocumentDuplicate />
+						<ListItemText primary={"Drafts"} />
+					</ListItemButton>
+				</ListItem>
 				{/* <ListItem disablePadding>
-					<ListItemButton>
+					<ListItemButton onClick={handleLogout} className={Styles.logoutItem}>
 						&emsp;&emsp;&emsp;
 						<IoBookmarksOutline></IoBookmarksOutline>
 						&nbsp;&nbsp;
@@ -173,9 +175,7 @@ const SideNavbar = forwardRef((props, ref) => {
 
 				<ListItem disablePadding>
 					<ListItemButton onClick={()=>{handleLinkClick('account')}}>
-						&emsp;&emsp;&emsp;
 						<IoPersonOutline></IoPersonOutline>
-						&nbsp;&nbsp;
 						<ListItemText primary={"Account"} />
 					</ListItemButton>
 				</ListItem>
@@ -192,9 +192,8 @@ const SideNavbar = forwardRef((props, ref) => {
 
 				<ListItem disablePadding>
 					<ListItemButton>
-						&emsp;&emsp;
 						{/* <Link> */}
-							<ListItemText onClick={handleLogout}
+							<ListItemText
 								className={`${Styles.logoutbutton}`}
 								primary={"Logout"}
 							/>
@@ -209,18 +208,23 @@ const SideNavbar = forwardRef((props, ref) => {
 	return (
 		<div className={`${Styles.navbar}`}>
 			
-			<MenuIcon className={Styles.menuIcon} onClick={toggleDrawer("left", true)} />
+			<IconButton className={Styles.menuButton} onClick={toggleDrawer("left", true)} aria-label="Open navigation menu">
+				<MenuIcon className={Styles.menuIcon} />
+			</IconButton>
 
 			<Drawer
 				className={Styles.drawer}
 				anchor={"left"}
 				open={state["left"]}
 				onClose={toggleDrawer("left", false)}
+				PaperProps={{ className: Styles.drawerPaper }}
 			>
 				{list("left")}
 			</Drawer>
 		</div>
 	);
 });
+
+SideNavbar.displayName = "SideNavbar";
 
 export default SideNavbar;

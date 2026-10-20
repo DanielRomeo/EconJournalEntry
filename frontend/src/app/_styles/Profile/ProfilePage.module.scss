@@ -12,10 +12,9 @@
   gap: 2.5rem;
   align-items: flex-start;
   padding: 2.5rem;
-  background: #fff;
+  background: theme.$color-white;
   border: 1px solid theme.$color-border;
-  border-radius: theme.$radius-lg;
-  box-shadow: theme.$shadow-card;
+  border-radius: 2px;
   margin-bottom: 3rem;
   position: relative;
 
@@ -23,9 +22,8 @@
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 6px;
-    background: linear-gradient(90deg, theme.$color-primary, theme.$color-primary-light);
-    border-radius: theme.$radius-lg theme.$radius-lg 0 0;
+    height: 3px;
+    background: theme.$color-primary;
   }
 
   @media(max-width: 600px) {
@@ -59,9 +57,8 @@
   flex: 1;
 
   h1 {
-    font-family: 'Playfair Display', serif;
     font-size: clamp(1.5rem, 3vw, 2rem);
-    font-weight: 900;
+    font-weight: 500;
     color: theme.$color-dark;
     margin-bottom: 0.4rem;
   }
@@ -76,7 +73,7 @@
   text-transform: uppercase;
   letter-spacing: 0.1em;
   padding: 0.3rem 0.9rem;
-  border-radius: theme.$radius-pill;
+  border-radius: 2px;
   border: 1px solid theme.$color-border;
   margin-bottom: 0.9rem;
 }
@@ -123,27 +120,26 @@
 .postsSection {}
 
 .sectionTitle {
-  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  font-weight: 900;
+  font-weight: 500;
   color: theme.$color-dark;
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
-  border-bottom: 3px solid theme.$color-primary;
+  border-bottom: 1px solid theme.$color-dark;
   display: inline-block;
 }
 
 .postCard {
   border: 1px solid theme.$color-border;
-  border-radius: theme.$radius-md;
+  border-radius: 2px;
   overflow: hidden;
-  box-shadow: theme.$shadow-card;
+  box-shadow: none;
   height: 100%;
   transition: transform 0.2s, box-shadow 0.2s;
 
   &:hover {
     transform: translateY(-4px);
-    box-shadow: theme.$shadow-strong;
+    box-shadow: 7px 7px 0 theme.$color-primary-soft;
   }
 }
 
@@ -180,17 +176,18 @@
 }
 
 .readBtn {
-  background: theme.$color-dark;
-  border: none;
-  color: #fff;
+  background: theme.$color-primary;
+  border: 1px solid theme.$color-primary;
+  color: theme.$color-bg;
   font-weight: 600;
-  border-radius: theme.$radius-pill;
+  border-radius: 2px;
   padding: 0.45rem 1.2rem;
   font-size: 0.9rem;
   transition: all 0.2s;
 
   &:hover {
-    background: theme.$color-primary;
-    color: theme.$color-dark;
+    border-color: theme.$color-primary-dark;
+    background: theme.$color-primary-dark;
+    color: theme.$color-bg;
   }
 }

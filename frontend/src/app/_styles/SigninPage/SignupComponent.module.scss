@@ -2,9 +2,8 @@
 
 .mainContainer {
   .heading {
-    font-family: 'Playfair Display', serif;
     font-size: 1.6rem;
-    font-weight: 900;
+	font-weight: 700;
     color: theme.$color-dark;
     margin-bottom: 0.4rem;
   }
@@ -17,18 +16,18 @@
 
   .createButton {
     width: 100%;
-    background: theme.$color-dark;
-    border: none;
+    background: theme.$color-primary;
+    border: 1px solid theme.$color-primary;
     color: #fff;
     font-weight: 700;
     padding: 0.85rem;
-    border-radius: theme.$radius-pill;
+    border-radius: theme.$radius-sm;
     font-size: 1rem;
     transition: all 0.2s;
 
     &:hover {
-      background: theme.$color-primary;
-      color: theme.$color-dark;
+      background: theme.$color-primary-dark;
+      color: #fff;
       transform: translateY(-1px);
     }
 
@@ -55,12 +54,12 @@
 
   .GoogleButton {
     width: 100%;
-    background: #fff;
+    background: var(--surface-2);
     color: theme.$color-dark;
     border: 1.5px solid theme.$color-border;
     font-weight: 600;
     padding: 0.75rem;
-    border-radius: theme.$radius-pill;
+    border-radius: theme.$radius-sm;
     transition: all 0.2s;
     margin-bottom: 0.6rem;
     display: flex;

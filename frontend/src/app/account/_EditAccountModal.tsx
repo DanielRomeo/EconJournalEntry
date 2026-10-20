@@ -7,6 +7,8 @@ import { uploadImageToCloudinary } from "../_components/cloudinaryUpload";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Styles from "../_styles/Account/EditAccountModal.module.scss";
+import { HiOutlineCamera, HiOutlineUserCircle } from "react-icons/hi2";
 
 const schema = yup.object().shape({
 	email: yup.string().email("Invalid email").required("Email is required"),
@@ -110,18 +112,23 @@ const EditAccountModal = (props: any) => {
 			{...props}
 			size="lg"
 			backdrop="static"
+			centered
+			dialogClassName={Styles.dialog}
+			contentClassName={Styles.modalContent}
 			aria-labelledby="contained-modal-title-vcenter"
 		>
-			<Modal.Header closeButton>
-				<Modal.Title>Edit your profile</Modal.Title>
+			<Modal.Header closeButton className={Styles.header}>
+				<div className={Styles.titleIcon}><HiOutlineUserCircle /></div>
+				<div><Modal.Title>Edit your profile</Modal.Title><p>Update how readers see you across Journal Entry.</p></div>
 			</Modal.Header>
 
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<Modal.Body>
-					<FormGroup className="mb-3">
-						<Form.Label htmlFor="profileImage">Profile image</Form.Label>
+				<Modal.Body className={Styles.body}>
+					<FormGroup className={`mb-4 ${Styles.uploadGroup}`}>
+						<div className={Styles.uploadIcon}><HiOutlineCamera /></div>
+						<div><Form.Label htmlFor="profileImage">Profile image</Form.Label><p>Choose a clear square image for the best result.</p></div>
 						<input
-							className="form-control"
+							className={`${Styles.fileInput} form-control`}
 							type="file"
 							id="profileImage"
 							accept="image/*"
@@ -231,18 +238,18 @@ const EditAccountModal = (props: any) => {
 					</Row>
 				</Modal.Body>
 
-				<Modal.Footer>
+				<Modal.Footer className={Styles.footer}>
 					{isLoading ? (
-						<Button variant="primary" disabled type="submit">
+						<Button className={Styles.saveButton} variant="primary" disabled type="submit">
 							Loading...
 						</Button>
 					) : (
-						<Button variant="primary" type="submit">
+						<Button className={Styles.saveButton} variant="primary" type="submit">
 							Save Changes
 						</Button>
 					)}
 
-					<Button variant="secondary" onClick={handleClose}>
+					<Button className={Styles.closeButton} variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
 				</Modal.Footer>
