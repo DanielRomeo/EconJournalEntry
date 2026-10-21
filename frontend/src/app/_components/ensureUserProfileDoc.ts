@@ -2,7 +2,11 @@ import { User } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 
-export const ensureUserProfileDoc = async (user: User) => {
+type ProfileDefaults = {
+	defaultType?: "reader" | "writer";
+};
+
+export const ensureUserProfileDoc = async (user: User, defaults: ProfileDefaults = {}) => {
 	const userRef = doc(db, "users", user.uid);
 	const userDoc = await getDoc(userRef);
 
@@ -15,9 +19,9 @@ export const ensureUserProfileDoc = async (user: User) => {
 				email: user.email || "",
 				firstname: names[0] || "Guest",
 				lastname: names.slice(1).join(" ") || "Writer",
-				type: "writer",
+				type: defaults.defaultType || "writer",
 				bio: "",
-				image: "",
+				image: user.photoURL || "",
 				facebook: "",
 				instagram: "",
 				x: "",

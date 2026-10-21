@@ -7,13 +7,14 @@ import {
 } from "react-bootstrap";
 import Styles from "../_styles/SigninPage/SigninComponent.module.scss";
 import { useRouter } from "next/navigation";
-import { auth, db , provider } from "../_components/firebaseConfig";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { useState, useEffect } from "react";
+import { auth, provider } from "../_components/firebaseConfig";
+import { signInWithPopup } from "firebase/auth";
+import { useState } from "react";
 import { SetLocalStorage } from "../_components/localStorage";
 import { FcGoogle } from "react-icons/fc";
 import {  signInWithEmailAndPassword } from "firebase/auth";
 import { ensureUserProfileDoc } from "../_components/ensureUserProfileDoc";
+import { firebaseAuthErrorMessage } from "../_components/firebaseAuthError";
 
 
 // validator libs
@@ -26,73 +27,51 @@ const schema = yup.object().shape({
 	password: yup.string().required("Password is required"),
 }); // end of schema
 
-interface User {
-	displayName: string | null;
-	email: string | null;
-	uid: string;
-}
-
 const SigninComponent = () => {
 	const router = useRouter();
-	const [isAuth, setIsAuth] = useState<boolean>(false);
-	const [user, setUser] = useState<User | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
+	const [authError, setAuthError] = useState("");
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(schema) });
 
-	// useEffect:
-	useEffect(() => {
-		const storedAuth = localStorage.getItem("isAuth");
-		if (storedAuth) {
-			setIsAuth(JSON.parse(storedAuth));
-		}
-		// I should call the isAuthenticated function here and use its logic instead of creating my own new one
-	}, []);
-
-
 	// Login function: for google functionality
 	const handleLogin = async () => {
+		setAuthError("");
+		setIsGoogleLoading(true);
 		try {
 			const result = await signInWithPopup(auth, provider);
-			const credential = GoogleAuthProvider.credentialFromResult(result);
 			const user = result.user;
 			// set the local storage
 			SetLocalStorage("isAuth", JSON.stringify(true));
-			setIsAuth(true);
-			setUser(user); // Update user state
 			await ensureUserProfileDoc(user);
 			router.push("/feed");
 		} catch (error) {
 			console.error("Login error:", error);
+			setAuthError(firebaseAuthErrorMessage(error, "Google sign-in could not be completed. Please try again."));
+		} finally {
+			setIsGoogleLoading(false);
 		}
 	};
 
 	// form submit:
-	const onSubmit = (data: any) => {
+	const onSubmit = async (data: any) => {
+		setAuthError("");
 		setIsLoading(true);
-		console.log(data);
-
-		signInWithEmailAndPassword(auth, data.email, data.password)
-		.then( async (userCredential: any) => {
-			// Signed in
-			try {
-				// After successful signup, extract user information from the auth object (excluding password)
-				const user = userCredential.user;
-				await ensureUserProfileDoc(user);
-				router.push('/feed');
-			} catch (error: unknown) {
-				console.log(error);
-			} finally {
-				setIsLoading(false);
-			}
-
-		}).catch((error: any) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+		try {
+			const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+			await ensureUserProfileDoc(userCredential.user);
+			SetLocalStorage("isAuth", JSON.stringify(true));
+			router.push('/feed');
+		} catch (error: unknown) {
+			console.error("Email login error:", error);
+			setAuthError(firebaseAuthErrorMessage(error, "Sign-in could not be completed. Please try again."));
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -103,6 +82,7 @@ const SigninComponent = () => {
 			</Row>
 
 			<Row className={`${Styles.signinRow}`}>
+				{authError && <div className={Styles.authError} role="alert">{authError}</div>}
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<FormGroup className="mb-3">
 						<Form.Label htmlFor="email">Email address</Form.Label>
@@ -148,11 +128,13 @@ const SigninComponent = () => {
 
 				<FormGroup className="mb-3">
 					<Button
+						type="button"
 						className={`${Styles.GoogleButton}`}
 						onClick={handleLogin}
+						disabled={isGoogleLoading || isLoading}
 					>
 						<FcGoogle></FcGoogle>
-						&nbsp; Login with Google
+						&nbsp; {isGoogleLoading ? "Opening Google…" : "Login with Google"}
 					</Button>
 				</FormGroup>
 

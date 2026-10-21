@@ -1,6 +1,17 @@
 @use "../../_styles/theme" as theme;
 
 .mainContainer {
+	.authError {
+		margin-bottom: 1rem;
+		padding: 0.8rem 1rem;
+		border: 1px solid color-mix(in srgb, var(--danger) 38%, transparent);
+		border-radius: theme.$radius-sm;
+		background: color-mix(in srgb, var(--danger) 10%, var(--surface));
+		color: var(--danger);
+		font-size: 0.9rem;
+		line-height: 1.45;
+	}
+
   .heading {
     font-size: 1.6rem;
 	font-weight: 700;
@@ -71,5 +82,7 @@
       border-color: theme.$color-primary;
       background: theme.$color-primary-soft;
     }
+
+	&:disabled { opacity: 0.6; cursor: not-allowed; }
   }
 }

@@ -7,19 +7,21 @@ import {
 	Row,
 } from "react-bootstrap";
 import { auth, provider } from "../_components/firebaseConfig";
-import { getFirestore, collection, addDoc , doc, setDoc} from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 import { db } from "../_components/firebaseConfig";
 import Styles from "../_styles/SigninPage/SignupComponent.module.scss";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
-import { FaFacebookF } from "react-icons/fa";
 import { useState } from "react";
+import { ensureUserProfileDoc } from "../_components/ensureUserProfileDoc";
+import { firebaseAuthErrorMessage } from "../_components/firebaseAuthError";
+import { SetLocalStorage } from "../_components/localStorage";
 
 // validator libs
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 
 
 const schema = yup.object().shape({
@@ -32,16 +34,22 @@ const schema = yup.object().shape({
 	lastname: yup.string().required("Last name is required"),
 	bio: yup.string().max(280, "Bio should be under 280 characters"),
 	joiningas: yup.string().required("Who do you want to join as"),
-	confirmpassword: yup.string().required("Please confirm your password"),
+	confirmpassword: yup
+		.string()
+		.oneOf([yup.ref("password")], "Passwords must match")
+		.required("Please confirm your password"),
 }); // end of schema
 
 // start of main function:
 const SignupComponent: React.FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(false);
+	const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false);
+	const [authError, setAuthError] = useState("");
 
 	const {
 		register,
 		handleSubmit,
+		watch,
 		formState: { errors },
 	} = useForm({ resolver: yupResolver(schema) });
 
@@ -49,43 +57,49 @@ const SignupComponent: React.FC = () => {
 
 	// Submission function:
 	const onSubmit = async (data: any) => {
+		setAuthError("");
 		setIsLoading(true);
+		try {
+			const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+			const user = userCredential.user;
+			await setDoc(doc(db, 'users', user.uid), {
+				uid: user.uid,
+				email: user.email,
+				firstname: data.firstname,
+				lastname: data.lastname,
+				type: data.joiningas,
+				bio: data.bio || "",
+				image: "",
+				facebook: "",
+				instagram: "",
+				x: "",
+				linkedin: ""
+			});
+			SetLocalStorage("isAuth", JSON.stringify(true));
+			router.push('/feed');
+		} catch (error: unknown) {
+			console.error("Account creation error:", error);
+			setAuthError(firebaseAuthErrorMessage(error, "Your account could not be created. Please try again."));
+		} finally {
+			setIsLoading(false);
+		}
+	};
 
-		createUserWithEmailAndPassword(auth, data.email, data.password)
-		.then( async (userCredential: any) => {
-			// Signed up 
-
-			try {
-				// After successful signup, extract user information from the auth object (excluding password)
-				const user = userCredential.user;
-				const userData = {
-					uid: user.uid,
-					email: user.email,
-					firstname: data.firstname,
-					lastname: data.lastname,
-					type: data.joiningas,
-					bio: data.bio || "",
-					image: "",
-					facebook: "",
-					instagram: "",
-					x: "",
-					linkedin: ""
-				};
-
-				const userRef = doc(db, 'users', userData.uid); // Use doc() for a single document
-				await setDoc(userRef, userData);
-				router.push('/feed');
-
-			} catch (error: unknown) {
-				console.log(error);
-			} finally {
-				setIsLoading(false);
-			}
-
-		}).catch((error: any) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+	const handleGoogleSignup = async () => {
+		setAuthError("");
+		setIsGoogleLoading(true);
+		try {
+			const result = await signInWithPopup(auth, provider);
+			const selectedType = watch("joiningas") === "writer" ? "writer" : "reader";
+			await ensureUserProfileDoc(result.user, { defaultType: selectedType });
+			SetLocalStorage("isAuth", JSON.stringify(true));
+			router.push('/feed');
+		} catch (error: unknown) {
+			console.error("Google signup error:", error);
+			setAuthError(firebaseAuthErrorMessage(error, "Google signup could not be completed. Please try again."));
+		} finally {
+			setIsGoogleLoading(false);
+		}
 	};
 
 	return (
@@ -94,6 +108,7 @@ const SignupComponent: React.FC = () => {
 				<h3 className={Styles.heading}>Create your account</h3>
 				<p className={Styles.subheading}>Join as a reader or writer. You can update your profile at any time.</p>
 			</Row>
+			{authError && <div className={Styles.authError} role="alert">{authError}</div>}
 
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<Row>
@@ -229,9 +244,14 @@ const SignupComponent: React.FC = () => {
 			</form>
 
 			<Row className={`${Styles.SocialButtonsRow}`}>
-				<Button className={`${Styles.GoogleButton}`}>
+				<Button
+					type="button"
+					className={`${Styles.GoogleButton}`}
+					onClick={handleGoogleSignup}
+					disabled={isGoogleLoading || isLoading}
+				>
 					<FcGoogle />
-					&nbsp; Sign up with Google
+					&nbsp; {isGoogleLoading ? "Opening Google…" : "Sign up with Google"}
 				</Button>
 
 				
