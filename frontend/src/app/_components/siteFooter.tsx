@@ -22,6 +22,7 @@ const SiteFooter = () => (
 						<Link href="/community">Community</Link>
 						<Link href="/trending">Trending Posts</Link>
 						<Link href="/topics">All Topics</Link>
+						<Link href="/portfolio">Daniel’s Portfolio</Link>
 					</div>
 				</Col>
 				<Col lg="2" md="3" sm="6">

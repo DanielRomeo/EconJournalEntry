@@ -16,6 +16,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		{ url: absoluteUrl("/editor-guide"), changeFrequency: "monthly", priority: 0.5 },
 		{ url: absoluteUrl("/documentation"), changeFrequency: "monthly", priority: 0.4 },
 		{ url: absoluteUrl("/contact"), changeFrequency: "yearly", priority: 0.3 },
+		{ url: absoluteUrl("/portfolio"), changeFrequency: "monthly", priority: 0.7 },
+		...(["daniel", "romeo"] as const).flatMap((persona) => [
+			{ url: absoluteUrl(`/portfolio/${persona}`), changeFrequency: "monthly" as const, priority: 0.8 },
+			{ url: absoluteUrl(`/portfolio/${persona}/projects`), changeFrequency: "monthly" as const, priority: 0.7 },
+			{ url: absoluteUrl(`/portfolio/${persona}/writing`), changeFrequency: "weekly" as const, priority: 0.6 },
+		]),
 	];
 	const posts = await getPublicPosts();
 	const postRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
